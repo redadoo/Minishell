@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/24 16:22:46 by edoardo          ###   ########.fr       */
+/*   Created: 2023/09/20 13:37:44 by edoardo           #+#    #+#             */
+/*   Updated: 2023/09/20 13:45:34 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minishell.h"
+#include "../../lib/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void pwd()
 {
-	char		*path;
-	char		*input;
-	t_minishell	minishell;
-
-	input = NULL;
-	minishell.env = envp;
-	while (1)
-	{
-		ignore_signal_for_shell();
-		input = readline(PROMPT);
-		process_input(input, &minishell);
-  	}
-	printf("\33[0;33mlogout\33[0m\n");
+    char cwd[256];
+    printf("%s\n", getcwd(cwd, sizeof(cwd)));
 }

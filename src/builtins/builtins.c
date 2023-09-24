@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/18 17:30:45 by edoardo          ###   ########.fr       */
+/*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
+/*   Updated: 2023/09/24 16:24:46 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minishell.h"
+#include "../../lib/minishell.h"
 
-void free_matrix(char **matrix)
+void builtins(t_minishell *minishell)
 {
-    int     i;
+    pid_t pid;
 
-    i = 0;
-    while (matrix[i])
-    {
-        free(matrix[i]);
-        i++;
-    }
-    free(matrix);
-}
+    pid = fork();
 
-int test()
-{
-    return 1;
+    if (strcmp(minishell->tokens[0], "echo") == 0)
+        pwd();
 }

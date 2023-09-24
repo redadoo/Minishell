@@ -6,13 +6,13 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/09/18 17:56:43 by edoardo          ###   ########.fr        #
+#    Updated: 2023/09/20 13:41:29 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC)
+SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILTINS_SRC)
 
 MAIN_SRC = src/*.c
 
@@ -21,6 +21,10 @@ LIBFT_SRC = ft_libft/*.c
 LEXER_SRC = src/lexer/*.c
 
 SIGNALS_SRC = src/signals/*.c
+
+PIPEX_SRC = src/pipex/*.c
+
+BUILTINS_SRC = src/builtins/*.c
 
 OBJ = *.o
 
