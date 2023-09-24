@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/20 13:40:44 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/09/24 20:09:13 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,20 @@
 
 # define PROMPT "\033[0;35mminishell>\033[0m "
 
+typedef struct	s_token
+{
+	char			*str;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}			t_token;
+
 typedef struct s_minishell
 {
 	char    **env;
-	char    **tokens;
+	t_token *start;
 }   t_minishell;
+
 
 typedef struct s_ppbx
 {
@@ -64,6 +73,8 @@ typedef struct s_pipex
 	char	*cmd2_path;
 }	t_pipex;
 
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t 	len_matrix(char **matrix);
 void	ignore_signal_for_shell();
 void	process_input(char *input,t_minishell *minishell);
@@ -78,7 +89,7 @@ int		ft_token_len(char *str, char c);
 
 /* Pipex */
 
-int		pipex(t_minishell *minishell);
+int		execute_command(t_minishell *minishell);
 char	*return_path(char *cmd, char**env);
 void	exe_cmd_bonus(t_ppbx pipex, int i, char**argv, char **envp);
 void	exit_bonus(t_ppbx pipex, int status);
@@ -129,4 +140,5 @@ void	free_command(char **tab);
 
 void builtins(t_minishell *minishell);
 void pwd();
+void echo(t_minishell *mini, int index);
 #endif

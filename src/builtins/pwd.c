@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:37:44 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/20 13:45:34 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/09/24 16:48:28 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void pwd()
 {
-    char cwd[256];
+    char cwd[4096];
     printf("%s\n", getcwd(cwd, sizeof(cwd)));
 }
