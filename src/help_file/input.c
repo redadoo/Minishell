@@ -13,29 +13,6 @@
 
 #include "../../lib/minishell.h"
 
-static int return_lenght(char **tokens)
-{
-	int		i;
-	int		j;
-	size_t count;
-
-	i = 0;
-	j = 0;
-	count = 0;
-	while (tokens[i])
-	{
-		while (tokens[i][j])
-		{
-			if (tokens[i][j] == '|')
-				count++;
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	return (count + 1);
-}
-
 static bool check_command(t_minishell *mini)
 {
 	int     i;
@@ -55,6 +32,33 @@ static bool check_command(t_minishell *mini)
 	return (false);
 }
 
+static void init_token(t_minishell *minishell, char **tokens)
+{
+	int	i;
+	t_token *token;
+	t_token *tmp;
+	t_token *first_element;
+
+	i = 0;
+	token = (t_token *)malloc(sizeof(t_token));
+	token->str = tokens[i];
+	//type of token function
+	first_element = token;
+	while (tokens[i])
+	{
+		tmp = (t_token *)malloc(sizeof(t_token));
+		tmp->str = tokens[i];
+		//type of token function
+		token->next = tmp;
+		tmp-> prev = token;
+		token = tmp;
+		i++;
+	}
+	token->next = first_element;
+	minishell->start = first_element;
+	minishell->lenght = i;
+}
+
 void process_input(char *input,t_minishell *minishell)
 {
 	int     i;
@@ -64,11 +68,12 @@ void process_input(char *input,t_minishell *minishell)
 	if (input == NULL)
 		return ;
 	tokens = ft_lexer(input);
-	init_token(minishell, tokens);
-	free_tab(tokens);
-	if (!(minishell->tokens[0]))
+	if (!(tokens[0]))
 	{
 		readline(PROMPT);
 		return;
 	}
+	init_token(minishell, tokens);
+	printf("%i\n",minishell->lenght);
+	free_matrix(tokens);
 }

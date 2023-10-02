@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/24 20:09:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/09/24 20:29:39 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_token
 
 typedef struct s_minishell
 {
+	int		lenght;
 	char    **env;
 	t_token *start;
 }   t_minishell;
@@ -89,7 +90,6 @@ int		ft_token_len(char *str, char c);
 
 /* Pipex */
 
-int		execute_command(t_minishell *minishell);
 char	*return_path(char *cmd, char**env);
 void	exe_cmd_bonus(t_ppbx pipex, int i, char**argv, char **envp);
 void	exit_bonus(t_ppbx pipex, int status);
