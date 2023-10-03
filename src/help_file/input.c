@@ -74,6 +74,6 @@ void process_input(char *input,t_minishell *minishell)
 		return;
 	}
 	init_token(minishell, tokens);
-	printf("%i\n",minishell->lenght);
+	execute_command(minishell);
 	free_matrix(tokens);
 }

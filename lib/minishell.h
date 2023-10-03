@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/24 20:29:39 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:25:54 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_minishell
 {
 	int		lenght;
 	char    **env;
+	t_token *env_start;
 	t_token *start;
 }   t_minishell;
 
@@ -75,12 +76,12 @@ typedef struct s_pipex
 }	t_pipex;
 
 
+void	make_env(t_minishell *minishell, char **env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t 	len_matrix(char **matrix);
 void	ignore_signal_for_shell();
 void	process_input(char *input,t_minishell *minishell);
 void    free_matrix(char **matrix);
-int     test();
 char	**ft_lexer(char *str);
 void	ft_error_lexer(char *str);
 int		ft_quote(char *str);
@@ -114,7 +115,7 @@ void	free_pipex(char **cmd, char *path);
 t_pipex	*init_pipex(char **argv, char **envp);
 void	check_args(t_pipex *p);
 void	exit_program(t_pipex *p, int status);
-void	execute_command(t_pipex *p, char **env);
+int		execute_command(t_minishell *minishell);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(const char *s, char c);

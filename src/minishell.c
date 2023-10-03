@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/02 22:19:11 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:28:48 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	input = NULL;
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
 	minishell->env = envp;
+	make_env(minishell, envp);
+	printf("%s\n", minishell->env_start->str);
 	while (1)
 	{
 		ignore_signal_for_shell();
@@ -28,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 		process_input(input, minishell);
   	}
 	printf("\33[0;33mlogout\33[0m\n");
+	
 	//TODO:
 	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
 	//2) parse tokens (with flag ?) command which
