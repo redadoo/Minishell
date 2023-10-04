@@ -34,29 +34,30 @@ static bool check_command(t_minishell *mini)
 
 static void init_token(t_minishell *minishell, char **tokens)
 {
-	int	i;
-	t_token *token;
+	int     i;
 	t_token *tmp;
-	t_token *first_element;
 
-	i = 0;
-	token = (t_token *)malloc(sizeof(t_token));
-	token->str = tokens[i];
-	//type of token function
-	first_element = token;
-	while (tokens[i])
+	i = -1;
+	while (tokens[++i])
 	{
-		tmp = (t_token *)malloc(sizeof(t_token));
-		tmp->str = tokens[i];
-		//type of token function
-		token->next = tmp;
-		tmp-> prev = token;
-		token = tmp;
-		i++;
+		if (minishell->start == NULL)
+		{
+			minishell->start = (t_token *)malloc(sizeof(t_token));
+			minishell->start->str = tokens[i];
+			minishell->start->next = NULL;
+			minishell->start->prev = NULL;
+			minishell->start->type = 0;
+		}
+		else
+		{
+			tmp = (t_token *)malloc(sizeof(t_token));
+			tmp->str = tokens[i];
+			tmp->next = NULL;
+			tmp->prev = NULL;
+			tmp->type = 0;
+			last_element(minishell->start)->next = tmp;
+		}
 	}
-	token->next = first_element;
-	minishell->start = first_element;
-	minishell->lenght = i;
 }
 
 void process_input(char *input,t_minishell *minishell)
@@ -74,6 +75,6 @@ void process_input(char *input,t_minishell *minishell)
 		return;
 	}
 	init_token(minishell, tokens);
-	execute_command(minishell);
-	free_matrix(tokens);
+/* 	execute_command(minishell);
+ */	free_matrix(tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 15:25:34 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:27:35 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,28 @@
 
 void make_env(t_minishell *minishell,  char **env)
 {
-    t_token *tmp;
+	int     i;
+	t_token *tmp;
 
-    tmp->str = minishell->env[0];
-
-    printf("%s\n", env[0]);
-
-
-
-    minishell->env_start = tmp;
+	i = -1;
+	while (env[++i])
+	{
+		if (minishell->env_start == NULL)
+		{
+			minishell->env_start = (t_token *)malloc(sizeof(t_token));
+			minishell->env_start->str = env[i];
+			minishell->env_start->next = NULL;
+			minishell->env_start->prev = NULL;
+			minishell->env_start->type = 0;
+		}
+		else
+		{
+			tmp = (t_token *)malloc(sizeof(t_token));
+			tmp->str = env[i];
+			tmp->next = NULL;
+			tmp->prev = NULL;
+			tmp->type = 0;
+			last_element(minishell->env_start)->next = tmp;
+		}
+	}
 }

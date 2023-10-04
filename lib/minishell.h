@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 15:25:54 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/03 17:30:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,47 +41,35 @@ typedef struct	s_token
 typedef struct s_minishell
 {
 	int		lenght;
-	char    **env;
 	t_token *env_start;
 	t_token *start;
 }   t_minishell;
 
-
-typedef struct s_ppbx
+typedef struct	s_sig
 {
-	int		in_fd;
-	int		out_fd;
-	int		cmd_number;
-	pid_t	pid;
-	int		*pipe;
-	char	*filein;
-	char	*fileout;
-	char	**cmd;
-	char	*cmd_path;
-}	t_ppbx;
+	int				sigint;
+	int				sigquit;
+	int				exit_status;
+	pid_t			pid;
+}				t_sig;
 
-typedef struct s_pipex
-{
-	int		in_fd;
-	int		out_fd;
-	int		pipe[2];
-	pid_t	pid1;
-	pid_t	pid2;
-	char	*filein;
-	char	*fileout;
-	char	**cmd1;
-	char	**cmd2;
-	char	*cmd1_path;
-	char	*cmd2_path;
-}	t_pipex;
+
+/* utils */
+size_t 	len_matrix(char **matrix);
+void    free_matrix(char **matrix);
+void 	free_token(t_token **token);
+void	print_token(t_token *token);
+t_token *last_element(t_token *token);
+
+/* signal */
+void  INThandler(int sig);
+void init_signal(t_sig	g_sig);
 
 
 void	make_env(t_minishell *minishell, char **env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t 	len_matrix(char **matrix);
-void	ignore_signal_for_shell();
+void	ignore_signal_for_shell(t_sig	g_sig);
 void	process_input(char *input,t_minishell *minishell);
-void    free_matrix(char **matrix);
 char	**ft_lexer(char *str);
 void	ft_error_lexer(char *str);
 int		ft_quote(char *str);
@@ -92,8 +80,6 @@ int		ft_token_len(char *str, char c);
 /* Pipex */
 
 char	*return_path(char *cmd, char**env);
-void	exe_cmd_bonus(t_ppbx pipex, int i, char**argv, char **envp);
-void	exit_bonus(t_ppbx pipex, int status);
 char	**ft_split(const char *s, char c);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*acces_command(char *cmd_name, char **paths);
@@ -108,13 +94,8 @@ char	*ft_get_line(char *backup);
 char	*ft_backup(char *backup);
 char	*ft_strchr(const char *s, int c);
 char	*ft_statstr(int fd, char *statstr);
-void	close_pipes(t_ppbx pipex);
-void	creat_pipes(t_ppbx pipex);
 void	free_pipex(char **cmd, char *path);
 
-t_pipex	*init_pipex(char **argv, char **envp);
-void	check_args(t_pipex *p);
-void	exit_program(t_pipex *p, int status);
 int		execute_command(t_minishell *minishell);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
@@ -130,8 +111,6 @@ char	*ft_strchr(const char *str, int ch);
 char	*ft_backup(char *backup);
 char	*ft_get_line(char *backup);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	first_child(t_pipex *p, char **env);
-void	second_child(t_pipex *p, char **env);
 char	*acces_command(char *cmd_name, char **paths);
 char	*my_getenv(char *name, char **env);
 void	free_command(char **tab);

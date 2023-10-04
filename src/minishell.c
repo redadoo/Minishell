@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 15:28:48 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/03 17:32:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,32 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	int			i;
 	char		*path;
 	char		*input;
+	t_sig		g_sig;
 	t_minishell	*minishell;
 
 	input = NULL;
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
-	minishell->env = envp;
+	minishell->env_start = NULL;
+	minishell->start = NULL;
 	make_env(minishell, envp);
-	printf("%s\n", minishell->env_start->str);
-	while (1)
+	i = 0;
+	while (i != 4)
 	{
-		ignore_signal_for_shell();
+		init_signal(g_sig);
+		ignore_signal_for_shell(g_sig);
 		input = readline(PROMPT);
 		process_input(input, minishell);
+		i++;
   	}
 	printf("\33[0;33mlogout\33[0m\n");
+	free_token(&minishell->env_start);
+	free_token(&minishell->start);
+	free(minishell);
+	exit(0);
+}
 	
 	//TODO:
 	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
@@ -38,4 +48,3 @@ int	main(int argc, char **argv, char **envp)
 	//4) Handle $? 
 	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
 
-}
