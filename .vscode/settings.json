@@ -1,15 +1,5 @@
 {
-    "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "minishell.h": "c",
-        "libft.h": "c",
-        "wait.h": "c",
-        "stdlib.h": "c",
-        "array": "c",
-        "string_view": "c",
-        "initializer_list": "c",
-        "utility": "c",
-        "type_traits": "c",
-        "*.tcc": "c"
+        "minishell.h": "c"
     }
 }

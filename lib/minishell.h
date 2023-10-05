@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 17:30:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/05 19:41:23 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,22 @@
 
 # define PROMPT "\033[0;35mminishell>\033[0m "
 
+typedef enum TYPE
+{
+	EMPTY = 0,
+	CMD = 1,
+	ARG = 2,
+	TRUNC = 3,
+	APPEND = 4,
+	INPUT = 5,
+	PIPE = 6,
+	END = 7
+} TYPE;
+
 typedef struct	s_token
 {
 	char			*str;
-	int				type;
+	int			type;
 	struct s_token	*prev;
 	struct s_token	*next;
 }			t_token;
@@ -76,6 +88,7 @@ int		ft_quote(char *str);
 int		ft_token_counter(char *str);
 int		ft_token_start(char *str, char c);
 int		ft_token_len(char *str, char c);
+void	parser(t_minishell *minishell);
 
 /* Pipex */
 
