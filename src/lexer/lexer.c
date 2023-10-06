@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:51 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/18 17:00:52 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/06 11:02:45 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+
+void	ft_error_lexer(char *str)
+{
+	printf("%s\n", str);
+	exit(0);
+}
 
 char	**ft_lexer(char *str)
 {

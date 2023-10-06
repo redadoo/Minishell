@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
+#    By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/03 15:20:41 by edoardo          ###   ########.fr        #
+#    Updated: 2023/10/05 19:36:03 by fborroto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILTINS_SRC) $(HELP_SRC) $(ENV_SRC)
+SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILTINS_SRC) $(HELP_SRC) $(ENV_SRC) $(PARSER_SRC)
 
 MAIN_SRC = src/*.c
 
@@ -22,9 +22,11 @@ ENV_SRC = src/env/*.c
 
 LEXER_SRC = src/lexer/*.c
 
+PARSER_SRC = src/parser/*.c
+
 SIGNALS_SRC = src/signals/*.c
 
-PIPEX_SRC = src/pipex/*.c
+#PIPEX_SRC = src/pipex/*.c
 
 BUILTINS_SRC = src/builtins/*.c
 

@@ -25,11 +25,23 @@ static bool check_command(t_minishell *mini)
 	list[1] = "cd";
 	list[2] = "cd";
 	list[3] = "pwd";
-	list[4] = "export";    
+	list[4] = "export";
 	list[5] = "unset";
 	list[6] = "env";
 	list[7] = "exit";	
 	return (false);
+}
+
+static void init_util(t_minishell *minishell, char *tokens)
+{
+	t_token *tmp;
+
+	tmp = (t_token *)malloc(sizeof(t_token));
+	tmp->str = tokens;
+	tmp->next = NULL;
+	tmp->prev = last_element(minishell->start);
+	tmp->type = 0;
+	last_element(minishell->start)->next = tmp;
 }
 
 static void init_token(t_minishell *minishell, char **tokens)
@@ -50,17 +62,29 @@ static void init_token(t_minishell *minishell, char **tokens)
 		}
 		else
 		{
-			tmp = (t_token *)malloc(sizeof(t_token));
-			tmp->str = tokens[i];
-			tmp->next = NULL;
-			tmp->prev = NULL;
-			tmp->type = 0;
-			last_element(minishell->start)->next = tmp;
+			init_util(minishell, tokens[i]);
+			// tmp = (t_token *)malloc(sizeof(t_token));
+			// tmp->str = tokens[i];
+			// tmp->next = NULL;
+			// tmp->prev = NULL;
+			// tmp->type = 0;
+			// last_element(minishell->start)->next = tmp;
 		}
 	}
 }
 
-void process_input(char *input,t_minishell *minishell)
+static void print_list(t_token *token)
+{
+
+	while(token->next)
+	{
+		printf("%s %d\n", token->str, token->type);
+		token = token->next;
+	}
+	printf("%s %d\n", token->str, token->type);
+}
+
+void process_input(char *input, t_minishell *minishell)
 {
 	int     i;
 	char    **tokens;
@@ -75,6 +99,7 @@ void process_input(char *input,t_minishell *minishell)
 		return;
 	}
 	init_token(minishell, tokens);
-/* 	execute_command(minishell);
- */	free_matrix(tokens);
+	parser(minishell);
+	print_list(minishell->start);
+	free_token(&minishell->start);
 }

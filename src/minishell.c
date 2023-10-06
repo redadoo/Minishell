@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 17:32:53 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/04 20:16:24 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	main(int argc, char **argv, char **envp)
 	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
 	//2) parse tokens (with flag ?) command which
 	//3) Handle environment variables
-	//4) Handle $? 
+	//4) Handle $?
 	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
 
