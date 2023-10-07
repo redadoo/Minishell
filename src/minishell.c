@@ -6,11 +6,22 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/06 19:16:57 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/07 18:29:41 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+static void print_list(t_token *token)
+{
+
+	while(token->next)
+	{
+		printf("%s\n", token->str);
+		token = token->next;
+	}
+	printf("%s\n", token->str);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -19,15 +30,8 @@ int	main(int argc, char **argv, char **envp)
 	t_sig		g_sig;
 	t_minishell	*minishell;
 
-
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n",envp[i]);
-		i++;
-	}
 	
-/* 	(void)argc;
+	(void)argc;
 	(void)argv;
 	input = NULL;
 	
@@ -36,8 +40,12 @@ int	main(int argc, char **argv, char **envp)
 	minishell->env_start = NULL;
 	minishell->start = NULL;
 	
-	make_env(minishell, envp);
-	minishell->stdin = dup(0);
+	make_list(minishell, envp);
+	
+	init_env(&minishell->env_start, envp);
+
+	//print_list(minishell->env_start);
+/* 	minishell->stdin = dup(0);
 	minishell->stdout = dup(1);
 
 	i = 0;

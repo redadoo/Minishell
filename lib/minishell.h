@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/06 17:11:01 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/07 18:06:01 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,14 @@ void    free_matrix(char **matrix);
 void 	free_token(t_token **token);
 void	print_token(t_token *token);
 t_token *last_element(t_token *token);
+void	init_env(t_token **list, char **env);
 
 /* signal */
 void  INThandler(int sig);
 void init_signal(t_sig	g_sig);
 
 
-void	make_env(t_minishell *minishell, char **env);
+void	make_list(t_minishell *minishell, char **env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ignore_signal_for_shell();
 void	process_input(char *input,t_minishell *minishell);

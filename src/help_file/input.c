@@ -111,7 +111,6 @@ void process_input(char *input, t_minishell *minishell)
 	init_token(minishell, tokens);
 	parser(minishell);
 
-	print_list(minishell->env_start);
 	
 	free_token(&minishell->start);
 	free_matrix(tokens);
