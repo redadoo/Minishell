@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/05 19:41:23 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:11:01 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@
 # include <dirent.h>
 # include <fcntl.h>
 # include <string.h>
+# include <signal.h>
 
-# define PROMPT "\033[0;35mminishell>\033[0m "
+
+# define PROMPT "\033[0;35m  minishell>\033[0m "
 
 typedef enum TYPE
 {
@@ -53,6 +55,8 @@ typedef struct	s_token
 typedef struct s_minishell
 {
 	int		lenght;
+	int		stdout;
+	int		stdin;
 	t_token *env_start;
 	t_token *start;
 }   t_minishell;
@@ -80,7 +84,7 @@ void init_signal(t_sig	g_sig);
 
 void	make_env(t_minishell *minishell, char **env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	ignore_signal_for_shell(t_sig	g_sig);
+void	ignore_signal_for_shell();
 void	process_input(char *input,t_minishell *minishell);
 char	**ft_lexer(char *str);
 void	ft_error_lexer(char *str);
@@ -127,6 +131,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*acces_command(char *cmd_name, char **paths);
 char	*my_getenv(char *name, char **env);
 void	free_command(char **tab);
+int		ft_strcmp(const char *s1, const char *s2);
 
 /* builtins command */
 
@@ -134,4 +139,5 @@ void	free_command(char **tab);
 void builtins(t_minishell *minishell);
 void pwd();
 void echo(t_minishell *mini, int index);
+
 #endif

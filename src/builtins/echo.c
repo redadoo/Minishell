@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/09/24 19:35:23 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/06 17:00:00 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void echo(t_minishell *mini, int index)
+/* void echo(t_minishell *mini, int index)
 {
 	int i;
-}
+} */

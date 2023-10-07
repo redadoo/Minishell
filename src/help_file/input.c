@@ -13,23 +13,42 @@
 
 #include "../../lib/minishell.h"
 
-static bool check_command(t_minishell *mini)
+static int check_command(t_minishell *mini)
 {
 	int     i;
-	int		j;
+	t_token *tmp;
 	char    *list[8];
 
 	i = 0;
-	j = 0;
+	
 	list[0] = "echo";
 	list[1] = "cd";
-	list[2] = "cd";
-	list[3] = "pwd";
-	list[4] = "export";
-	list[5] = "unset";
-	list[6] = "env";
-	list[7] = "exit";	
-	return (false);
+	list[2] = "pwd";
+	list[3] = "export";
+	list[4] = "unset";
+	list[5] = "env";
+	list[6] = "exit";
+	list[7] = NULL;
+	tmp = mini->start;
+	while (tmp != NULL)
+	{
+		while (list[i])
+		{
+			if (tmp->type != CMD)
+				break ;
+			if (ft_strcmp(tmp->str, list[i]) == 0)
+			{
+				printf("%s\n",list[i]);
+				return (i);
+			}
+			i++;
+		}		
+		i = 0;
+		tmp = tmp->next;	
+	}
+	
+	
+	return (10);
 }
 
 static void init_util(t_minishell *minishell, char *tokens)
@@ -47,7 +66,6 @@ static void init_util(t_minishell *minishell, char *tokens)
 static void init_token(t_minishell *minishell, char **tokens)
 {
 	int     i;
-	t_token *tmp;
 
 	i = -1;
 	while (tokens[++i])
@@ -63,12 +81,6 @@ static void init_token(t_minishell *minishell, char **tokens)
 		else
 		{
 			init_util(minishell, tokens[i]);
-			// tmp = (t_token *)malloc(sizeof(t_token));
-			// tmp->str = tokens[i];
-			// tmp->next = NULL;
-			// tmp->prev = NULL;
-			// tmp->type = 0;
-			// last_element(minishell->start)->next = tmp;
 		}
 	}
 }
@@ -86,10 +98,8 @@ static void print_list(t_token *token)
 
 void process_input(char *input, t_minishell *minishell)
 {
-	int     i;
 	char    **tokens;
 
-	i = 0;
 	if (input == NULL)
 		return ;
 	tokens = ft_lexer(input);
@@ -100,6 +110,9 @@ void process_input(char *input, t_minishell *minishell)
 	}
 	init_token(minishell, tokens);
 	parser(minishell);
-	print_list(minishell->start);
+
+	print_list(minishell->env_start);
+	
 	free_token(&minishell->start);
+	free_matrix(tokens);
 }

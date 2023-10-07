@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+         #
+#    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/05 19:36:03 by fborroto         ###   ########.fr        #
+#    Updated: 2023/10/06 17:44:03 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJ = *.o
 
 CC = gcc
 
-CFLAGS = -lreadline
+CFLAGS = -lreadline #-Wall -Wextra -Werror
 
 RM = rm -rf
 
@@ -64,7 +64,7 @@ exe: all
 
 leaks: all
 	@echo "     - Executing $(NAME) with leaks command..."
-	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --suppressions=readline_leak.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 	@echo "     - Done -"
 
 leaks1: all
