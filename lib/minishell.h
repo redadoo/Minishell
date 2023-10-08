@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 19:52:38 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:10:39 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_minishell
 	int		lenght;
 	int		stdout;
 	int		stdin;
+	char	**env;
 	t_token *env_start;
 	t_token *start;
 }   t_minishell;
@@ -76,7 +77,7 @@ void    free_matrix(char **matrix);
 void 	free_token(t_token **token);
 void	print_token(t_token *token);
 t_token *last_element(t_token *token);
-void	init_env(t_token **list, char **env);
+char	**init_env(char **env);
 
 /* signal */
 void  INThandler(int sig);

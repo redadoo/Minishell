@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 19:36:05 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:11:12 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 static char	*set_shlvl(char **env, int i)
 {
 	char	*str;
+	char	*str1;
 
 	str = ft_itoa(ft_atoi(&env[i][6]) + 1);
-	return (ft_strjoin("SHLVL=", str));
+	str1 = ft_strjoin("SHLVL=", str);
+	free(str);
+	return (str1);
 }
 
 void	make_list(t_minishell *minishell, char **env)
@@ -25,7 +28,7 @@ void	make_list(t_minishell *minishell, char **env)
 	int		i;
 	t_token	*tmp;
 
-	i = -1;
+	i = 0;
 
 	while (env[++i])
 	{
@@ -49,12 +52,10 @@ void	make_list(t_minishell *minishell, char **env)
 	}
 }
 
-void	init_env(t_token **list, char **envp)
+char	**init_env(char **envp)
 {
 	int		i;
-	t_token	*tmp;
-	char	**env;
-
+	char **env;
 	i = 0;
 	while (envp[i])
 		i++;
@@ -76,4 +77,5 @@ void	init_env(t_token **list, char **envp)
 		}
 	}
 	env[i] = 0;
+	return (env);
 }
