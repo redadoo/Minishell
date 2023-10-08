@@ -105,13 +105,15 @@ void process_input(char *input, t_minishell *minishell)
 	tokens = ft_lexer(input);
 	if (!(tokens[0]))
 	{
-		readline(PROMPT);
+		free_matrix(tokens);
+		ft_putstr_fd(PROMPT,1);
 		return;
 	}
+
 	init_token(minishell, tokens);
 	parser(minishell);
 
-	
 	free_token(&minishell->start);
+	
 	free_matrix(tokens);
 }

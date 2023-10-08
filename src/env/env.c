@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/07 18:43:06 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 19:36:05 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,8 @@ void	init_env(t_token **list, char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-
 	env = (char **)malloc(sizeof(char *) * (i + 1));
-	
 	i = -1;
- 	tmp = (*list);
 	while (envp[++i])
 	{
 		if (!(ft_strncmp("SHLVL=", envp[i], 6)))
@@ -79,10 +76,4 @@ void	init_env(t_token **list, char **envp)
 		}
 	}
 	env[i] = 0;
-	i = -1;
-	while (env[++i])
-	{
-		printf("%s\n",env[i]);
-	}
-	
 }

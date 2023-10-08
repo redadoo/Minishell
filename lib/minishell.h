@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/07 18:06:01 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 19:52:38 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef enum TYPE
 typedef struct	s_token
 {
 	char			*str;
-	int			type;
+	int				type;
 	struct s_token	*prev;
 	struct s_token	*next;
 }			t_token;

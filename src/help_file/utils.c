@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/03 16:29:34 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 19:47:58 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ void free_token(t_token **token)
 
 void free_matrix(char **matrix)
 {
-	int     i;
+	int	i;
 
 	i = 0;
+	if (!matrix)
+		return ;
 	while (matrix[i])
 	{
-		free(matrix[i]);
+		if (matrix[i])
+			free(matrix[i]);
 		i++;
 	}
 	free(matrix);
