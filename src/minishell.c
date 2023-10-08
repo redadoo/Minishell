@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:12:11 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:19:15 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		init_signal(g_sig);
 		ignore_signal_for_shell();
-/* 		input = readline(PROMPT);
- */		process_input(input, minishell);
+		input = readline(PROMPT);
+		process_input(input, minishell);
 		i++;
   	}
 	
