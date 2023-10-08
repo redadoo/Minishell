@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:10:39 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:52:50 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	free_command(char **tab);
 int		ft_strcmp(const char *s1, const char *s2);
 
 /* builtins command */
+void	env_command(char **mini);
 
 
 void builtins(t_minishell *minishell);

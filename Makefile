@@ -6,7 +6,7 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/06 17:44:03 by edoardo          ###   ########.fr        #
+#    Updated: 2023/10/08 20:37:47 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,6 @@ LEXER_SRC = src/lexer/*.c
 PARSER_SRC = src/parser/*.c
 
 SIGNALS_SRC = src/signals/*.c
-
-#PIPEX_SRC = src/pipex/*.c
 
 BUILTINS_SRC = src/builtins/*.c
 
