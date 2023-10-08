@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/06 17:00:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:55:24 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-/* void echo(t_minishell *mini, int index)
+void echo(t_token **token)
 {
-	int i;
-} */
+	t_token *tmp;
+	int option;
+	
+	option = 0;
+	tmp = (*token)->next;
+	if (tmp && ft_strcmp(tmp->str, "-n") == 0)
+	{
+		option = 1;
+		tmp = tmp->next;
+	}
+	while (tmp && tmp->type == 2)
+	{
+		ft_putstr_fd(tmp->str, 1);
+		if (tmp->next && tmp->next->str != NULL)
+			write(1, " ", 1);
+		tmp = tmp->next;
+	}
+	if(option == 0)
+		write(1, "\n", 1);
+} 

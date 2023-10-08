@@ -112,8 +112,14 @@ void process_input(char *input, t_minishell *minishell)
 
 	init_token(minishell, tokens);
 	parser(minishell);
+	t_token *tmp = minishell->start;
+	while(tmp)
+	{
+		if(ft_strcmp(tmp->str, "echo") == 0 && tmp->type == 1)
+			echo(&tmp);
+		tmp = tmp->next;
+	}
 
-	free_token(&minishell->start);
-	
+	free_token(&minishell->start);	
 	free_matrix(tokens);
 }
