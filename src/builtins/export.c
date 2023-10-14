@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 13:01:31 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:10:41 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,12 @@ void	print_sorted_env(t_minishell *mini)
 
 void export(t_minishell *mini)
 {
-		int	i;
+	int	i;
+	extern t_sig	g_sig;
 
 	i = 1;
 	mini->pipe = ft_strdup("");
 	if (i == 1)
 		print_sorted_env(mini);
-	mini->exit_code = 0;
+	g_sig.exit_status = 0;
 }

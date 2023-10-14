@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 15:33:41 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:10:03 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-static void print_list(t_token *token)
+/* static void print_list(t_token *token)
 {
 
 	while(token->next)
@@ -21,13 +21,13 @@ static void print_list(t_token *token)
 		token = token->next;
 	}
 	printf("%s\n", token->str);
-}
+} */
+t_sig		g_sig;
 
 int	main(int argc, char **argv, char **envp)
 {
 	int			i;
 	char		*input;
-	t_sig		g_sig;
 	t_minishell	*minishell;
 
 	
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	
 	while (true)
 	{
-		init_signal(g_sig);
+		init_signal();
 		ignore_signal_for_shell();
 		input = readline(PROMPT);
 		process_input(input, minishell);

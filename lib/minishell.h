@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 13:06:42 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:09:59 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_minishell
 	int		lenght;
 	int		stdout;
 	int		stdin;
-	int		exit_code;
 	char	**env;
 	char    *pipe;
 	t_token *env_start;
@@ -72,8 +71,12 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
-
+/* extern t_sig	g_sig;
+ */
 /* utils */
+
+
+
 size_t 	len_matrix(char **matrix);
 void    free_matrix(char **matrix);
 void 	free_token(t_token **token);
@@ -83,7 +86,7 @@ char	**init_env(char **env);
 
 /* signal */
 void  INThandler(int sig);
-void init_signal(t_sig	g_sig);
+void init_signal();
 
 
 void	make_list(t_minishell *minishell, char **env);

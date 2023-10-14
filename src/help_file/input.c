@@ -98,6 +98,8 @@ static void print_list(t_token *token)
 
 void process_input(char *input, t_minishell *minishell)
 {
+	extern t_sig	g_sig;
+
 	char    **tokens;
 
 	if (input == NULL)
@@ -114,7 +116,9 @@ void process_input(char *input, t_minishell *minishell)
 	parser(minishell);
 
 	builtins(minishell);
-			
+	
+	printf("%i\n",g_sig.exit_status);
+
 	free_token(&minishell->start);
 	
 	free_matrix(tokens);
