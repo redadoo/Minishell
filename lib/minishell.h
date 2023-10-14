@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 16:09:59 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:32:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
-/* extern t_sig	g_sig;
- */
 /* utils */
 
 
-
+bool	check_var(t_minishell *mini, char *str);
 size_t 	len_matrix(char **matrix);
 void    free_matrix(char **matrix);
 void 	free_token(t_token **token);

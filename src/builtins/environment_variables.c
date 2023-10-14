@@ -6,12 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 14:33:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:32:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 #include <string.h>
+
 
 char *print_var(char *str)
 {

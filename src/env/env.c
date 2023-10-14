@@ -6,11 +6,38 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/13 13:30:42 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:32:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+bool check_var(t_minishell *mini, char *str)
+{
+	int		i;
+	char	*var;
+	
+	i = 1;
+	var = (char *)malloc(sizeof(char) * (ft_strlen(mini->start->str) - 1));
+	
+	while (mini->start->str[i])
+	{
+		var[i - 1] = mini->start->str[i];
+		i++;
+	}
+	var[i - 1] = '\0';
+	i = -1;
+	while (mini->env[++i])
+	{
+		if (strncmp(mini->env[i],var,ft_strlen(var)) == 0)
+		{
+			free(var);
+			return (true);
+		}
+	}    
+	free(var);
+	return (false);
+}
 
 static char	*set_shlvl(char **env, int i)
 {

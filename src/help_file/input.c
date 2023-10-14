@@ -13,47 +13,9 @@
 
 #include "../../lib/minishell.h"
 
-static int check_command(t_minishell *mini)
+static void	init_util(t_minishell *minishell, char *tokens)
 {
-	int     i;
-	t_token *tmp;
-	char    *list[8];
-
-	i = 0;
-	
-	list[0] = "echo";
-	list[1] = "cd";
-	list[2] = "pwd";
-	list[3] = "export";
-	list[4] = "unset";
-	list[5] = "env";
-	list[6] = "exit";
-	list[7] = NULL;
-	tmp = mini->start;
-	while (tmp != NULL)
-	{
-		while (list[i])
-		{
-			if (tmp->type != CMD)
-				break ;
-			if (ft_strcmp(tmp->str, list[i]) == 0)
-			{
-				printf("%s\n",list[i]);
-				return (i);
-			}
-			i++;
-		}		
-		i = 0;
-		tmp = tmp->next;	
-	}
-	
-	
-	return (10);
-}
-
-static void init_util(t_minishell *minishell, char *tokens)
-{
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = (t_token *)malloc(sizeof(t_token));
 	tmp->str = tokens;
@@ -63,9 +25,9 @@ static void init_util(t_minishell *minishell, char *tokens)
 	last_element(minishell->start)->next = tmp;
 }
 
-static void init_token(t_minishell *minishell, char **tokens)
+static void	init_token(t_minishell *minishell, char **tokens)
 {
-	int     i;
+	int	i;
 
 	i = -1;
 	while (tokens[++i])
@@ -85,10 +47,9 @@ static void init_token(t_minishell *minishell, char **tokens)
 	}
 }
 
-static void print_list(t_token *token)
+static void	print_list(t_token *token)
 {
-
-	while(token->next)
+	while (token->next)
 	{
 		printf("%s %d\n", token->str, token->type);
 		token = token->next;
@@ -96,11 +57,10 @@ static void print_list(t_token *token)
 	printf("%s %d\n", token->str, token->type);
 }
 
-void process_input(char *input, t_minishell *minishell)
+void	process_input(char *input, t_minishell *minishell)
 {
 	extern t_sig	g_sig;
-
-	char    **tokens;
+	char			**tokens;
 
 	if (input == NULL)
 		return ;
@@ -108,18 +68,12 @@ void process_input(char *input, t_minishell *minishell)
 	if (!(tokens[0]))
 	{
 		free_matrix(tokens);
-		return;
+		return ;
 	}
-
 	init_token(minishell, tokens);
-	
 	parser(minishell);
-
 	builtins(minishell);
-	
-	printf("%i\n",g_sig.exit_status);
-
+	printf("%i\n", g_sig.exit_status);
 	free_token(&minishell->start);
-	
 	free_matrix(tokens);
 }
