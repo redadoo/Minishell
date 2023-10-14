@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:52:50 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 13:06:42 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ typedef struct s_minishell
 	int		lenght;
 	int		stdout;
 	int		stdin;
+	int		exit_code;
 	char	**env;
+	char    *pipe;
 	t_token *env_start;
 	t_token *start;
 }   t_minishell;
@@ -139,8 +141,10 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	env_command(char **mini);
 
 
-void builtins(t_minishell *minishell);
-void pwd();
-void echo(t_minishell *mini, int index);
+bool	builtins(t_minishell *minishell);
+void	pwd();
+void	echo(t_minishell *mini, int index);
+void	export(t_minishell *mini);
+void	env_var(t_minishell *mini);
 
 #endif

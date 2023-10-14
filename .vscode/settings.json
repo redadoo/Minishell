@@ -5,7 +5,8 @@
         "typeinfo": "c",
         "history.h": "c",
         "readline.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "algorithm": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

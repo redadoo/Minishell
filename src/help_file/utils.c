@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:09:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/13 13:32:13 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void free_matrix(char **matrix)
 	i = 0;
 	while (matrix[i])
 	{
-		if (matrix[i])
-			free(matrix[i]);
+		free(matrix[i]);
 		i++;
 	}
 	free(matrix);

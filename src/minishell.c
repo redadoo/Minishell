@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:30:54 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:33:41 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv, char **envp)
 	minishell->stdout = dup(1);
 
 	i = 0;
-	while (i != 4)
+	
+	while (true)
 	{
 		init_signal(g_sig);
 		ignore_signal_for_shell();
@@ -70,13 +71,14 @@ int	main(int argc, char **argv, char **envp)
 	
 	//TODO:
 	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
+	//2) make history 
 	//3) Handle environment variables
 	//4) Handle $?
 	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
-
+	//6) exe command
 
 	//TODO:
-	//EDOARDO : env export
-	//FRA : echo cd unset
+	//EDOARDO :  export
+	//FRA : cd unset
 	//exit
 

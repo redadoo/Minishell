@@ -13,21 +13,6 @@
 
 #include "../../lib/minishell.h"
 
-void env_command(char **mini)
-{
-	int i;
-
-	i = 0;
-
-	while (mini[i])
-	{
-		ft_putstr_fd(mini[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
-	}
-	
-}
-
 static int check_command(t_minishell *mini)
 {
 	int     i;
@@ -121,16 +106,15 @@ void process_input(char *input, t_minishell *minishell)
 	if (!(tokens[0]))
 	{
 		free_matrix(tokens);
-		ft_putstr_fd(PROMPT,1);
 		return;
 	}
 
 	init_token(minishell, tokens);
+	
 	parser(minishell);
 
-	if (ft_strcmp("env",minishell->start->str) == 0)
-		env_command(minishell->env);
-
+	builtins(minishell);
+			
 	free_token(&minishell->start);
 	
 	free_matrix(tokens);
