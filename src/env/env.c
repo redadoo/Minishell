@@ -6,20 +6,19 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 18:32:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:15:27 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-bool check_var(t_minishell *mini, char *str)
+bool	check_var(t_minishell *mini, char *str)
 {
 	int		i;
 	char	*var;
-	
+
 	i = 1;
 	var = (char *)malloc(sizeof(char) * (ft_strlen(mini->start->str) - 1));
-	
 	while (mini->start->str[i])
 	{
 		var[i - 1] = mini->start->str[i];
@@ -29,12 +28,12 @@ bool check_var(t_minishell *mini, char *str)
 	i = -1;
 	while (mini->env[++i])
 	{
-		if (strncmp(mini->env[i],var,ft_strlen(var)) == 0)
+		if (strncmp(mini->env[i], var, ft_strlen(var)) == 0)
 		{
 			free(var);
 			return (true);
 		}
-	}    
+	}
 	free(var);
 	return (false);
 }
@@ -56,7 +55,6 @@ void	make_list(t_minishell *minishell, char **env)
 	t_token	*tmp;
 
 	i = 0;
-
 	while (env[++i])
 	{
 		if (minishell->env_start == NULL)
@@ -82,7 +80,8 @@ void	make_list(t_minishell *minishell, char **env)
 char	**init_env(char **envp)
 {
 	int		i;
-	char **env;
+	char	**env;
+
 	i = 0;
 	while (envp[i])
 		i++;

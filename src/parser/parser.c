@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:50:54 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/14 18:58:01 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:07:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	type_arg(t_token *token)
 
 void	parser(t_minishell *minishell)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = minishell->start;
 	while (token)

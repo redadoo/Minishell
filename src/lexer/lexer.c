@@ -6,12 +6,11 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:51 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 19:44:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:06:24 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
-
 
 void	ft_error_lexer(char *str)
 {

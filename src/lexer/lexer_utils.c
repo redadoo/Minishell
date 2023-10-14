@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:57 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/06 12:54:20 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:07:00 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	ft_sep(char *line, int i)
 		return (1);
 	else if (line[i - 1] && line[i - 1] != '\\' && line[i] == '|')
 		return (1);
-	else if (line[i - 1] && line[i - 1] != '\\' && line[i] == '>' && line[i + 1]
+	else if (line[i - 1] && line[i - 1] != '\\'
+		&& line[i] == '>' && line[i + 1]
 		&& line[i + 1] == '>')
 		return (2);
 	else if (line[i - 1] && line[i - 1] != '\\' && line[i] == '>')

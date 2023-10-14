@@ -6,18 +6,17 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:32:07 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 12:44:47 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:14:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void env_command(char **mini)
+void	env_command(char **mini)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (mini[i])
 	{
 		ft_putstr_fd(mini[i], 1);

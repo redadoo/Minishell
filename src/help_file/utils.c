@@ -6,15 +6,15 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/13 13:32:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:06:12 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void free_token(t_token **token)
+void	free_token(t_token **token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = (*token);
 	while ((*token))
@@ -26,7 +26,7 @@ void free_token(t_token **token)
 	free((*token));
 }
 
-void free_matrix(char **matrix)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
@@ -39,9 +39,9 @@ void free_matrix(char **matrix)
 	free(matrix);
 }
 
-size_t len_matrix(char **matrix)
+size_t	len_matrix(char **matrix)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (matrix)
@@ -49,23 +49,23 @@ size_t len_matrix(char **matrix)
 		while (matrix[i])
 			i++;
 	}
-	return i;
+	return (i);
 }
 
-void print_token(t_token *token)
+void	print_token(t_token *token)
 {
 	while (token)
 	{
-		printf("%s\n",token->str);
+		printf("%s\n", token->str);
 		token = token->next;
 	}
 }
 
-t_token *last_element(t_token *token)
+t_token	*last_element(t_token *token)
 {
 	while (token->next)
 	{
 		token = token->next;
 	}
-	return token;
+	return (token);
 }

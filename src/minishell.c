@@ -6,25 +6,21 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:03:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:15:48 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-t_sig		g_sig;
+t_sig	g_sig;
 
-void free_all(t_minishell *minishell)
+void	free_all(t_minishell *minishell)
 {
 	printf("\33[0;33mlogout\33[0m\n");
-
 	free_matrix(minishell->env);
-	
 	free_token(&minishell->start);
 	free_token(&minishell->env_start);
-
 	free(minishell);
-	
 	exit(0);
 }
 
@@ -52,20 +48,6 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		process_input(input, minishell);
 		i++;
-  	}
+	}
 	free_all(minishell);
 }
-	
-	//TODO:
-	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
-	//2) make history 
-	//3) Handle environment variables
-	//4) Handle $?
-	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
-	//6) exe command
-
-	//TODO:
-	//EDOARDO :  export
-	//FRA : cd unset
-	//exit
-

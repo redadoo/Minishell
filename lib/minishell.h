@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 18:32:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:22:59 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include <string.h>
 # include <signal.h>
 
-
 # define PROMPT "\033[0;35m  minishell>\033[0m "
 
 typedef enum TYPE
@@ -42,9 +41,9 @@ typedef enum TYPE
 	INPUT = 5,
 	PIPE = 6,
 	END = 7
-} TYPE;
+}	t_type;
 
-typedef struct	s_token
+typedef struct s_token
 {
 	char			*str;
 	int				type;
@@ -58,12 +57,12 @@ typedef struct s_minishell
 	int		stdout;
 	int		stdin;
 	char	**env;
-	char    *pipe;
-	t_token *env_start;
-	t_token *start;
-}   t_minishell;
+	char	*pipe;
+	t_token	*env_start;
+	t_token	*start;
+}	t_minishell;
 
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sigint;
 	int				sigquit;
@@ -71,26 +70,19 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
-/* utils */
-
-
 bool	check_var(t_minishell *mini, char *str);
-size_t 	len_matrix(char **matrix);
-void    free_matrix(char **matrix);
-void 	free_token(t_token **token);
+size_t	len_matrix(char	**matrix);
+void	free_matrix(char	**matrix);
+void	free_token(t_token	**token);
 void	print_token(t_token *token);
-t_token *last_element(t_token *token);
+t_token	*last_element(t_token	*token);
 char	**init_env(char **env);
-
-/* signal */
-void  INThandler(int sig);
-void init_signal();
-
-
+void	inthandler(int sig);
+void	init_signal(void);
 void	make_list(t_minishell *minishell, char **env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	ignore_signal_for_shell();
-void	process_input(char *input,t_minishell *minishell);
+void	ignore_signal_for_shell(void);
+void	process_input(char	*input, t_minishell	*minishell);
 char	**ft_lexer(char *str);
 void	ft_error_lexer(char *str);
 int		ft_quote(char *str);
@@ -98,9 +90,6 @@ int		ft_token_counter(char *str);
 int		ft_token_start(char *str, char c);
 int		ft_token_len(char *str, char c);
 void	parser(t_minishell *minishell);
-
-/* Pipex */
-
 char	*return_path(char *cmd, char**env);
 char	**ft_split(const char *s, char c);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
@@ -117,7 +106,6 @@ char	*ft_backup(char *backup);
 char	*ft_strchr(const char *s, int c);
 char	*ft_statstr(int fd, char *statstr);
 void	free_pipex(char **cmd, char *path);
-
 int		execute_command(t_minishell *minishell);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
@@ -137,13 +125,9 @@ char	*acces_command(char *cmd_name, char **paths);
 char	*my_getenv(char *name, char **env);
 void	free_command(char **tab);
 int		ft_strcmp(const char *s1, const char *s2);
-
-/* builtins command */
 void	env_command(char **mini);
-
-
 bool	builtins(t_minishell *minishell);
-void	pwd();
+void	pwd(void);
 void	echo(t_minishell *mini, int index);
 void	export(t_minishell *mini);
 void	env_var(t_minishell *mini);
