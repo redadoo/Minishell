@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:10:39 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:47:00 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 void builtins(t_minishell *minishell);
 void pwd();
-void echo(t_minishell *mini, int index);
+void echo(t_token **token);
 
 #endif

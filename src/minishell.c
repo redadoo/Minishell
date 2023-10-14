@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/08 20:19:15 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:42:16 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 
 
 	//TODO:
-	//EDOARDO : pwd env export
-	//FRA : echo cd unset
+	//EDOARDO : pwd env export cd?
+	//FRA : echo cd? unset exit?
 	//exit
 
