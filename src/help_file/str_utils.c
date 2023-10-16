@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 17:54:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:23:47 by edoardo          ###   ########.fr       */
+/*   Created: 2023/10/16 18:07:33 by edoardo           #+#    #+#             */
+/*   Updated: 2023/10/16 18:23:29 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void	ignore_signal_for_shell(void)
+char *add_quote(char *str)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, inthandler);
-}
+	int		i;
+	int		j;
+	char	*val;
 
-void	inthandler(int sig)
-{
-	extern t_sig	g_sig;
-
-	(void)sig;
-	ft_putstr_fd("\b\b  ", 2);
-	ft_putstr_fd("\n", 2);
-	ft_putstr_fd(PROMPT, 2);
-	g_sig.exit_status = 130;
-}
-
-void	init_signal(void)
-{
-	extern t_sig	g_sig;
-
-	(void)g_sig;
-	g_sig.sigint = 0;
-	g_sig.sigquit = 0;
-	g_sig.exit_status = 0;
+	j = 0;
+	i = 0;
+	val = (char *)malloc(sizeof(char) * ft_strlen(str) + 2);
+	while (str[i])
+	{
+		val[j] = str[i]; 
+		if (str[i] == '=')
+		{
+			val[j + 1] = '"';
+			j++;
+		}
+		if (str[i+1] == '\0')
+		{
+			val[j + 1] = '"';
+			j++;
+			val[j + 1] = 0;
+			break ;
+		}
+		i++;
+		j++;
+	}
+	return (val);
 }

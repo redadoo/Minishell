@@ -6,36 +6,54 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:15:27 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/16 19:00:07 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-bool	check_var(t_minishell *mini, char *str)
+void modify_var(t_token *list, char *str)
 {
 	int		i;
-	char	*var;
+	char	*tmp;
 
-	i = 1;
-	var = (char *)malloc(sizeof(char) * (ft_strlen(mini->start->str) - 1));
-	while (mini->start->str[i])
+	while (list->next)
 	{
-		var[i - 1] = mini->start->str[i];
+		
+	}
+	
+}
+
+int	check_var(t_minishell *mini, char *str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	t_token *token;
+
+	j = 0;
+	i = 0;
+	token = mini->env_start;
+	while (str[i])
+	{
+		if (str[i] == '=')
+		{
+			j = 1;
+			break ;
+		}
 		i++;
 	}
-	var[i - 1] = '\0';
-	i = -1;
-	while (mini->env[++i])
+	if (j == 0)
+		return (2);
+	while (token)
 	{
-		if (strncmp(mini->env[i], var, ft_strlen(var)) == 0)
+		if (strncmp(token->str,str,i) == 0)
 		{
-			free(var);
-			return (true);
+			return (1);
 		}
+		token = token->next;
 	}
-	free(var);
-	return (false);
+	return (0);
 }
 
 static char	*set_shlvl(char **env, int i)
@@ -54,13 +72,13 @@ void	make_list(t_minishell *minishell, char **env)
 	int		i;
 	t_token	*tmp;
 
-	i = 0;
+	i = -1;
 	while (env[++i])
 	{
 		if (minishell->env_start == NULL)
 		{
 			minishell->env_start = (t_token *)malloc(sizeof(t_token));
-			minishell->env_start->str = NULL;
+			minishell->env_start->str = env[i];
 			minishell->env_start->next = NULL;
 			minishell->env_start->prev = NULL;
 			minishell->env_start->type = 0;
@@ -68,7 +86,7 @@ void	make_list(t_minishell *minishell, char **env)
 		else
 		{
 			tmp = (t_token *)malloc(sizeof(t_token));
-			tmp->str = NULL;
+			tmp->str = env[i];
 			tmp->next = NULL;
 			tmp->prev = NULL;
 			tmp->type = 0;

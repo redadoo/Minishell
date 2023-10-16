@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:22:59 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/16 18:08:57 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_sig
 	pid_t			pid;
 }				t_sig;
 
-bool	check_var(t_minishell *mini, char *str);
+int	check_var(t_minishell *mini, char *str);
 size_t	len_matrix(char	**matrix);
 void	free_matrix(char	**matrix);
 void	free_token(t_token	**token);
@@ -126,10 +126,13 @@ char	*my_getenv(char *name, char **env);
 void	free_command(char **tab);
 int		ft_strcmp(const char *s1, const char *s2);
 void	env_command(char **mini);
-bool	builtins(t_minishell *minishell);
+bool	builtins(t_minishell *mini,t_token *token);
 void	pwd(void);
 void	echo(t_minishell *mini, int index);
-void	export(t_minishell *mini);
+void	export(t_minishell *mini, t_token *token);
 void	env_var(t_minishell *mini);
-
+void	exe_command(t_minishell *mini);
+int		len_var_name(char *str);
+int		is_in_env(t_token *env_start, char *name);
+char	*add_quote(char *str);
 #endif
