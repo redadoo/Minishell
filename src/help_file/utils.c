@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 14:29:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:02:09 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void	free_token(t_token **token)
+void	free_token(t_token **token, int flag)
 {
 	t_token	*tmp;
 
@@ -21,6 +21,8 @@ void	free_token(t_token **token)
 	{
 		tmp = (*token);
 		(*token) = (*token)->next;
+		if (flag == 1)
+			free(tmp->str);
 		free(tmp);
 	}
 	free((*token));

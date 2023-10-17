@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 13:29:14 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:02:24 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	make_list(t_minishell *minishell, char **env)
 		if (minishell->env_start == NULL)
 		{
 			minishell->env_start = (t_token *)malloc(sizeof(t_token));
-			minishell->env_start->str = env[i];
+			minishell->env_start->str = ft_strdup(env[i]);
 			minishell->env_start->next = NULL;
 			minishell->env_start->prev = NULL;
 			minishell->env_start->type = 0;
@@ -97,7 +97,7 @@ void	make_list(t_minishell *minishell, char **env)
 		else
 		{
 			tmp = (t_token *)malloc(sizeof(t_token));
-			tmp->str = env[i];
+			tmp->str = ft_strdup(env[i]);
 			tmp->next = NULL;
 			tmp->prev = NULL;
 			tmp->type = 0;

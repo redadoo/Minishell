@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:57 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:07:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:10:47 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	ft_sep(char *line, int i)
 {
+	if (i == 0) return(0);
+	
 	if (line[i - 1] && line[i - 1] != '\\' && line[i] == ';')
 		return (1);
 	else if (line[i - 1] && line[i - 1] != '\\' && line[i] == '|')
@@ -52,7 +54,7 @@ int	ft_quote(char *str)
 			if (str[i] != '"' && str[i + 1] == 0)
 				ft_error_lexer("Error: unclosed double quotes");
 		}
-		return (i);
+		return (i + 1);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 13:02:08 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:22:15 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ typedef struct s_token
 typedef struct s_minishell
 {
 	int				lenght;
-	int				stdout;
-	int				stdin;
 	char			**env;
 	char			*pipe;
 	t_token			*env_start;
 	t_token			*start;
+	t_ppbx			*exe;
 }					t_minishell;
 
 typedef struct s_sig
@@ -69,10 +68,23 @@ typedef struct s_sig
 	pid_t			pid;
 }					t_sig;
 
+typedef struct s_ppbx
+{
+	int		in_fd;
+	int		out_fd;
+	int		cmd_number;
+	pid_t	pid;
+	int		*pipe;
+	char	*filein;
+	char	*fileout;
+	char	**cmd;
+	char	*cmd_path;
+}	t_ppbx;
+
 int					check_var(t_minishell *mini, char *str);
 size_t				len_matrix(char **matrix);
 void				free_matrix(char **matrix);
-void				free_token(t_token **token);
+void				free_token(t_token **token, int flag);
 t_token				*last_element(t_token *token);
 char				**init_env(char **env);
 void				inthandler(int sig);

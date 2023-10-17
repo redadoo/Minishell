@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 14:26:19 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:24:54 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	free_all(t_minishell *minishell)
 {
 	printf("\33[0;33mlogout\33[0m\n");
 	free_matrix(minishell->env);
-	free_token(&minishell->start);
-	free_token(&minishell->env_start);
+	free_token(&minishell->start, 0);
+	free_token(&minishell->env_start, 1);
+	free(minishell->exe);
 	free(minishell);
 	exit(0);
 }
@@ -47,15 +48,15 @@ int	main(int argc, char **argv, char **envp)
 	minishell->start = NULL;
 	minishell->env = init_env(envp);
 	make_list(minishell, minishell->env);
-	minishell->stdin = dup(0);
-	minishell->stdout = dup(1);
+	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
 	i = 0;
-	while (i != 2)
+	while (i != 4)
 	{
 		init_signal();
 		ignore_signal_for_shell();
 		input = readline(PROMPT);
 		process_input(input, minishell);
+		free(input);
 		i++;
 	}
 	free_all(minishell);

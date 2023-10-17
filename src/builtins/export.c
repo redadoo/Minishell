@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 13:45:07 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:04:02 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	print_sorted_env(t_minishell *mini)
 
 void	export(t_minishell *mini, t_token *token)
 {
-	extern t_sig	g_sig;
-
 	if (count_arg(token) == 0)
 		print_sorted_env(mini);
 	else
@@ -104,6 +102,5 @@ void	export(t_minishell *mini, t_token *token)
 			}
 			token = token->next;
 		}
-		g_sig.exit_status = 0;
 	}
 }

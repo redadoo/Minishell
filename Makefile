@@ -6,13 +6,13 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/08 20:37:47 by edoardo          ###   ########.fr        #
+#    Updated: 2023/10/17 16:40:27 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILTINS_SRC) $(HELP_SRC) $(ENV_SRC) $(PARSER_SRC)
+SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILTINS_SRC) $(HELP_SRC) $(ENV_SRC) $(PARSER_SRC) $(EXE_SRC)
 
 MAIN_SRC = src/*.c
 
@@ -29,6 +29,8 @@ SIGNALS_SRC = src/signals/*.c
 BUILTINS_SRC = src/builtins/*.c
 
 HELP_SRC = src/help_file/*.c
+
+EXE_SRC = src/exe/*.c
 
 OBJ = *.o
 
@@ -62,7 +64,7 @@ exe: all
 
 leaks: all
 	@echo "     - Executing $(NAME) with leaks command..."
-	@valgrind --suppressions=readline_leak.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --log-file="leak.txt" --leak-check=full --show-leak-kinds=all ./$(NAME)
 	@echo "     - Done -"
 
 leaks1: all
