@@ -6,31 +6,21 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 00:52:11 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:40:40 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-static void change_env(t_token **env, char *str)
+static void change_env(t_minishell *mini, char *str)
 {
-	t_token *tmp;
+	t_token			*tmp;
 	
-	tmp = (*env);
-	while (tmp)
-	{
-		if (strncmp(tmp->str, str, len_var_name(str)) == 0)
-		{
-			printf("demiugro\n");
-			printf("%s\n", tmp->str);
-			printf("%s\n", str);
-			free(tmp->str);
-			tmp->str = NULL;
-			tmp->str = add_quote(str);
-			return ;
-		}
-		tmp = tmp->next;
-	}
+	tmp = find_var(mini->env_start, str);
+	if (tmp == NULL)
+		return;
+	free(tmp->str);
+	tmp->str = ft_strdup(add_quote(str));
 }
 
 static void add_to_env(t_token **env, char *str, int flag)
@@ -39,17 +29,21 @@ static void add_to_env(t_token **env, char *str, int flag)
 	char	*val;
 	t_token *tmp;
 
-	/* 	check_var(mini, token->str)*/	
-	/* add check var for same variable */
-	tmp = (t_token *)malloc(sizeof(t_token));	
-	tmp->next = NULL;
-	tmp->prev = NULL;
+
 	if (flag == 2)
 	{
+		if(find_var((*env), str) != NULL)
+			return;
+		tmp = (t_token *)malloc(sizeof(t_token));	
+		tmp->next = NULL;
+		tmp->prev = NULL;
 		tmp->str = ft_strdup(str);
 	}
 	else
 	{
+		tmp = (t_token *)malloc(sizeof(t_token));	
+		tmp->next = NULL;
+		tmp->prev = NULL;
 		val = add_quote(str);
 		tmp->str = val;
 	}
@@ -117,11 +111,9 @@ void	print_sorted_env(t_minishell *mini)
 
 void	export(t_minishell *mini, t_token *token)
 {
-	int				i;
 	extern t_sig	g_sig;
 
-	i = count_arg(token);	
-	if (i == 0)
+	if (count_arg(token) == 0)
 		print_sorted_env(mini);
 	else
 	{
@@ -129,13 +121,9 @@ void	export(t_minishell *mini, t_token *token)
 		while (token)
 		{
 			if (check_var(mini, token->str) == 2)
-			{
 				add_to_env(&mini->env_start, token->str, 2);
-			}
 			else if (check_var(mini, token->str) == 1)
-			{
-				change_env(&mini->env_start, token->str);
-			}
+				change_env(mini, token->str);
 			else
 			{
 				add_to_env(&mini->env_start, token->str,1);

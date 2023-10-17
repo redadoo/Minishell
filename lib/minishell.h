@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 18:08:57 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:16:44 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,5 @@ void	exe_command(t_minishell *mini);
 int		len_var_name(char *str);
 int		is_in_env(t_token *env_start, char *name);
 char	*add_quote(char *str);
+t_token	*find_var(t_token *token, char *str);
 #endif

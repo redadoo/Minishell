@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 00:47:16 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:46:27 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int len_var_name(char *str)
 			return (i);
 		i++;
 	}
+	return (i);
 }
 
 char	*print_var(char *str)

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:06:12 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:47:16 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ t_token	*last_element(t_token *token)
 		token = token->next;
 	}
 	return (token);
+}
+
+t_token	*find_var(t_token *token, char *str)
+{
+	while (token)
+	{
+		if (strncmp(token->str, str, len_var_name(str)) == 0 && len_var_name(str) == len_var_name(token->str))
+		{
+			printf("dagospia\n");
+			return (token);
+		}
+		token = token->next;
+	}
+	return (NULL);
 }
