@@ -6,61 +6,34 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 12:40:40 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:45:07 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-static void change_env(t_minishell *mini, char *str)
+static void	change_env(t_minishell *mini, char *str)
 {
-	t_token			*tmp;
-	
+	t_token	*tmp;
+
 	tmp = find_var(mini->env_start, str);
 	if (tmp == NULL)
-		return;
+		return ;
 	free(tmp->str);
-	tmp->str = ft_strdup(add_quote(str));
+	tmp->str = (add_quote(str));
 }
 
-static void add_to_env(t_token **env, char *str, int flag)
+static int	count_arg(t_token *token)
 {
-	int		i;
-	char	*val;
-	t_token *tmp;
-
-
-	if (flag == 2)
-	{
-		if(find_var((*env), str) != NULL)
-			return;
-		tmp = (t_token *)malloc(sizeof(t_token));	
-		tmp->next = NULL;
-		tmp->prev = NULL;
-		tmp->str = ft_strdup(str);
-	}
-	else
-	{
-		tmp = (t_token *)malloc(sizeof(t_token));	
-		tmp->next = NULL;
-		tmp->prev = NULL;
-		val = add_quote(str);
-		tmp->str = val;
-	}
-	last_element((*env))->next = tmp;
-}
-
-static int count_arg(t_token *token)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	token = token->next;
 	while (token)
 	{
-		if(token->type == CMD || token->type == PIPE)
+		if (token->type == CMD || token->type == PIPE)
 			return (i);
-		else if(token->type == ARG)
+		else if (token->type == ARG)
 			i++;
 		token = token->next;
 	}
@@ -95,7 +68,7 @@ char	**sort(char **to_sort)
 void	print_sorted_env(t_minishell *mini)
 {
 	int		i;
-	t_token *tmp;
+	t_token	*tmp;
 	char	**sorted;
 
 	sorted = sort(mini->env);
@@ -126,7 +99,7 @@ void	export(t_minishell *mini, t_token *token)
 				change_env(mini, token->str);
 			else
 			{
-				add_to_env(&mini->env_start, token->str,1);
+				add_to_env(&mini->env_start, token->str, 1);
 				break ;
 			}
 			token = token->next;

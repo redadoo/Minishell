@@ -6,27 +6,27 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 12:46:27 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:58:07 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 #include <string.h>
 
-int is_in_env(t_token *env_start, char *name)
+int	is_in_env(t_token *env_start, char *name)
 {
 	while (env_start)
 	{
-		if (strncmp(env_start->str,name,len_var_name(name)))
+		if (strncmp(env_start->str, name, len_var_name(name)))
 			return (1);
-		env_start = env_start->next;	
+		env_start = env_start->next;
 	}
 	return (0);
 }
 
-int len_var_name(char *str)
+int	len_var_name(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[++i])

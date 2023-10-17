@@ -6,22 +6,36 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 19:00:07 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:29:14 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void modify_var(t_token *list, char *str)
+void	add_to_env(t_token **env, char *str, int flag)
 {
 	int		i;
-	char	*tmp;
+	char	*val;
+	t_token	*tmp;
 
-	while (list->next)
+	if (flag == 2)
 	{
-		
+		if (find_var((*env), str) != NULL)
+			return ;
+		tmp = (t_token *)malloc(sizeof(t_token));
+		tmp->next = NULL;
+		tmp->prev = NULL;
+		tmp->str = ft_strdup(str);
 	}
-	
+	else
+	{
+		tmp = (t_token *)malloc(sizeof(t_token));
+		tmp->next = NULL;
+		tmp->prev = NULL;
+		val = add_quote(str);
+		tmp->str = val;
+	}
+	last_element((*env))->next = tmp;
 }
 
 int	check_var(t_minishell *mini, char *str)
@@ -29,28 +43,25 @@ int	check_var(t_minishell *mini, char *str)
 	int		i;
 	int		j;
 	char	*tmp;
-	t_token *token;
+	t_token	*token;
 
 	j = 0;
-	i = 0;
+	i = -1;
 	token = mini->env_start;
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == '=')
 		{
 			j = 1;
 			break ;
 		}
-		i++;
 	}
 	if (j == 0)
 		return (2);
 	while (token)
 	{
-		if (strncmp(token->str,str,i) == 0)
-		{
+		if (strncmp(token->str, str, i) == 0)
 			return (1);
-		}
 		token = token->next;
 	}
 	return (0);

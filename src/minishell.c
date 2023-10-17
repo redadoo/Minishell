@@ -6,18 +6,17 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 17:41:42 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:26:19 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-t_sig	g_sig;
+t_sig		g_sig;
 
-static void print_list(t_token *token)
+static void	print_list(t_token *token)
 {
-
-	while(token)
+	while (token)
 	{
 		printf("%s\n", token->str);
 		token = token->next;
@@ -48,14 +47,10 @@ int	main(int argc, char **argv, char **envp)
 	minishell->start = NULL;
 	minishell->env = init_env(envp);
 	make_list(minishell, minishell->env);
-	
-/* 	print_list(minishell->env_start);
- */	
 	minishell->stdin = dup(0);
 	minishell->stdout = dup(1);
 	i = 0;
-	
-	while (true)
+	while (i != 2)
 	{
 		init_signal();
 		ignore_signal_for_shell();
@@ -63,8 +58,5 @@ int	main(int argc, char **argv, char **envp)
 		process_input(input, minishell);
 		i++;
 	}
-	
-	printf("%i\n",i);
-
 	free_all(minishell);
 }

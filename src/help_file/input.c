@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 14:43:54 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:33:40 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,8 @@ void	process_input(char *input, t_minishell *minishell)
 		return ;
 	}
 	init_token(minishell, tokens);
-
 	parser(minishell);
-
 	exe_command(minishell);
-	
 	free_token(&minishell->start);
-	
 	free_matrix(tokens);
 }

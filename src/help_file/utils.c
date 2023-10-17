@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 12:47:16 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:29:45 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,6 @@ size_t	len_matrix(char **matrix)
 	return (i);
 }
 
-void	print_token(t_token *token)
-{
-	while (token)
-	{
-		printf("%s\n", token->str);
-		token = token->next;
-	}
-}
-
 t_token	*last_element(t_token *token)
 {
 	while (token->next)
@@ -74,9 +65,9 @@ t_token	*find_var(t_token *token, char *str)
 {
 	while (token)
 	{
-		if (strncmp(token->str, str, len_var_name(str)) == 0 && len_var_name(str) == len_var_name(token->str))
+		if (strncmp(token->str, str, len_var_name(str)) == 0
+			&& len_var_name(str) == len_var_name(token->str))
 		{
-			printf("dagospia\n");
 			return (token);
 		}
 		token = token->next;

@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 14:20:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:00:57 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-bool	builtins(t_minishell *mini,t_token *token)
+bool	builtins(t_minishell *mini, t_token *token)
 {
 	if (ft_strcmp("export", token->str) == 0)
 		export(mini, token);
@@ -24,7 +24,6 @@ bool	builtins(t_minishell *mini,t_token *token)
 		pwd();
 	else if (ft_strcmp("echo", token->str) == 0)
 	{
-		
 	}
 	else if (ft_strcmp("cd", token->str) == 0)
 	{
@@ -33,9 +32,7 @@ bool	builtins(t_minishell *mini,t_token *token)
 	{
 	}
 	else if (token->str[0] == '$')
-	{
 		env_var(mini);
-	}
 	else
 		return (false);
 	return (true);

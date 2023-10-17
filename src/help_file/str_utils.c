@@ -6,37 +6,36 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:07:33 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/16 18:23:29 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:46:03 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-char *add_quote(char *str)
+char	*add_quote(char *str)
 {
 	int		i;
 	int		j;
 	char	*val;
 
 	j = 0;
-	i = 0;
+	i = -1;
 	val = (char *)malloc(sizeof(char) * ft_strlen(str) + 2);
-	while (str[i])
+	while (str[++i])
 	{
-		val[j] = str[i]; 
+		val[j] = str[i];
 		if (str[i] == '=')
 		{
 			val[j + 1] = '"';
 			j++;
 		}
-		if (str[i+1] == '\0')
+		if (str[i + 1] == '\0')
 		{
 			val[j + 1] = '"';
 			j++;
-			val[j + 1] = 0;
+			val[j + 1] = '\0';
 			break ;
 		}
-		i++;
 		j++;
 	}
 	return (val);
