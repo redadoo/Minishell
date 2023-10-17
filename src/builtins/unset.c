@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/17 17:26:04 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:29:51 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	ft_unset(t_token *token, t_token **env)
 	token = token->next;
 	while (token && token->type == 2)
 	{
-		(*env) = start;
-		while ((*env))
+		free_node(start, find_var((*env),token->str)->str);
+/* 		while ((*env))
 		{
 			if ((*env) && strncmp(token->str, (*env)->str,
 					env_size((*env))) == 0)
@@ -77,8 +77,8 @@ int	ft_unset(t_token *token, t_token **env)
 				(*env) = tmp;
 			}
 			(*env) = (*env)->next;
-		}
-		token->next;
+		} */
+		token = token->next;
 	}
 	(*env) = start;
 }

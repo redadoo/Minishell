@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:41:54 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:15:50 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <termios.h>
 # include <unistd.h>
 
-# define PROMPT "\033[0;35m  minishell>\033[0m "
+# define PROMPT "\033[0;35mminishell>\033[0m "
 
 typedef enum TYPE
 {
@@ -48,7 +48,20 @@ typedef struct s_token
 	int				type;
 	struct s_token	*prev;
 	struct s_token	*next;
-}					t_token;
+}	t_token;
+
+typedef struct s_ppbx
+{
+	int		in_fd;
+	int		out_fd;
+	int		cmd_number;
+	pid_t	pid;
+	int		*pipe;
+	char	*filein;
+	char	*fileout;
+	char	**cmd;
+	char	*cmd_path;
+}	t_ppbx;
 
 typedef struct s_minishell
 {
@@ -68,18 +81,6 @@ typedef struct s_sig
 	pid_t			pid;
 }					t_sig;
 
-typedef struct s_ppbx
-{
-	int		in_fd;
-	int		out_fd;
-	int		cmd_number;
-	pid_t	pid;
-	int		*pipe;
-	char	*filein;
-	char	*fileout;
-	char	**cmd;
-	char	*cmd_path;
-}	t_ppbx;
 
 int					check_var(t_minishell *mini, char *str);
 size_t				len_matrix(char **matrix);
@@ -140,7 +141,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 void				env_command(char **mini);
 bool				builtins(t_minishell *mini, t_token *token);
 void				pwd(void);
-void				echo(t_minishell *mini, int index);
+void				echo(t_token **token);
 void				export(t_minishell *mini, t_token *token);
 void				env_var(t_minishell *mini);
 void				exe_command(t_minishell *mini);
@@ -149,4 +150,5 @@ int					is_in_env(t_token *env_start, char *name);
 char				*add_quote(char *str);
 t_token				*find_var(t_token *token, char *str);
 void				add_to_env(t_token **env, char *str, int flag);
+int					ft_unset(t_token *token, t_token **env);
 #endif
