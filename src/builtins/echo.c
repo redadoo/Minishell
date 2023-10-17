@@ -6,12 +6,12 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 15:36:28 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:36:46 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
-//prova
+
 void echo(t_token **token)
 {
 	t_token *tmp;
