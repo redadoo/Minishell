@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 18:16:08 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/18 00:33:10 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	builtins(t_minishell *mini, t_token *token)
 	}
 	else if (ft_strcmp("unset", token->str) == 0)
 	{
-		ft_unset(token,&mini->env_start);
+		ft_unset(token, &mini->env_start);
 	}
 	else if (token->str[0] == '$')
 		env_var(mini);

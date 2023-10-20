@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/17 18:29:51 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/20 19:52:44 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	env_size(t_token *env)
 	size_t	i;
 
 	i = 0;
-	while (env->str[i] != '=')
+	while (env->str[i] && env->str[i] != '=')
 		i++;
 	return (i);
 }
@@ -31,21 +31,21 @@ static void	ft_memdel(void *str)
 	}
 }
 
-static void	free_node(t_token *env_start, t_token *env)
+static void	free_node(t_token **env_start, t_token *env)
 {
 	t_token	*tmp;
 
 	tmp = env;
-	if (env_start == env && env->next == NULL)
+	if ((*env_start) == env && env->next == NULL)
 	{
 		ft_memdel(env->str);
 		env->str = NULL;
 		env->next = NULL;
 		return ;
 	}
-	if (env_start == tmp)
+	if ((*env_start) == tmp)
 	{
-		env_start = env->next;
+		(*env_start) = env->next;
 		ft_memdel(env->str);
 		env->str = NULL;
 		env->next = NULL;
@@ -55,30 +55,46 @@ static void	free_node(t_token *env_start, t_token *env)
 	ft_memdel(env);
 }
 
-int	ft_unset(t_token *token, t_token **env)
+static void	setvar(t_token *token, t_token **env)
 {
-	t_token	*tmp;
-	t_token	*start;
+	t_token *tmp;
 
-	start = (*env);
-	if (!(token->next))
-		return (0);
-	token = token->next;
-	while (token && token->type == 2)
+	tmp = NULL;
+	if (find_var((*env), token->str)->next)
 	{
-		free_node(start, find_var((*env),token->str)->str);
-/* 		while ((*env))
+		tmp = find_var((*env), token->str)->next;
+		if (find_var((*env), token->str)->prev)
 		{
-			if ((*env) && strncmp(token->str, (*env)->str,
-					env_size((*env))) == 0)
-			{
-				tmp = (*env)->next;
-				free_node(start, (*env));
-				(*env) = tmp;
-			}
-			(*env) = (*env)->next;
-		} */
-		token = token->next;
+			find_var((*env), token->str)->next->prev = find_var((*env),
+				token->str)->prev;
+		}
 	}
-	(*env) = start;
+	if (find_var((*env), token->str)->prev)
+	{
+		find_var((*env), token->str)->prev->next = tmp;
+	}
 }
+
+	int ft_unset(t_token * token, t_token * *env)
+	{
+		t_token *start;
+		t_token *tmp;
+
+		start = (*env);
+		if (!(token->next))
+			return (0);
+		token = token->next;
+		while (token && token->type == 2)
+		{
+			(*env) = start;
+			tmp = NULL;
+			if (find_var((*env), token->str))
+			{
+				tmp = find_var((*env), token->str);
+				setvar(token, env);
+				free_node(&start, tmp);
+			}
+			token = token->next;
+		}
+		(*env) = start;
+	}
