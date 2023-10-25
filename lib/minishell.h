@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/25 22:49:27 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/25 22:52:19 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ typedef enum TYPE
 	END = 7
 }					t_type;
 
+typedef struct s_ppbx
+{
+	int		in_fd;
+	int		out_fd;
+	int		cmd_number;
+	pid_t	pid;
+	int		*pipe;
+	char	*filein;
+	char	*fileout;
+	char	**cmd;
+	char	*cmd_path;
+}	t_ppbx;
+
 typedef struct s_token
 {
 	char			*str;
@@ -68,18 +81,6 @@ typedef struct s_sig
 	pid_t			pid;
 }					t_sig;
 
-typedef struct s_ppbx
-{
-	int		in_fd;
-	int		out_fd;
-	int		cmd_number;
-	pid_t	pid;
-	int		*pipe;
-	char	*filein;
-	char	*fileout;
-	char	**cmd;
-	char	*cmd_path;
-}	t_ppbx;
 
 int					check_var(t_minishell *mini, char *str);
 size_t				len_matrix(char **matrix);
