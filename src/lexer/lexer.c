@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:51 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:06:24 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/23 20:03:57 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,36 @@ void	ft_error_lexer(char *str)
 	printf("%s\n", str);
 	exit(0);
 }
+
+int	ft_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '\'')
+	{
+		i++;
+		while (str[i] != '\'')
+		{
+			i++;
+			if (str[i] != '\'' && str[i + 1] == 0)
+				ft_error_lexer("Error: unclosed quote");
+		}
+		return (i);
+	}
+	else
+	{
+		i++;
+		while (str[i] != '"')
+		{
+			i++;
+			if (str[i] != '"' && str[i + 1] == 0)
+				ft_error_lexer("Error: unclosed double quotes");
+		}
+		return (i + 1);
+	}
+}
+
 
 char	**ft_lexer(char *str)
 {

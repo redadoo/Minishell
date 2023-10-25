@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 18:15:50 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/23 19:33:49 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ typedef enum TYPE
 	EMPTY = 0,
 	CMD = 1,
 	ARG = 2,
-	TRUNC = 3,
-	APPEND = 4,
-	INPUT = 5,
-	PIPE = 6,
-	END = 7
+	STOP = 3,
+	TRUNC = 4,
+	APPEND = 5,
+	INPUT = 6,
+	PIPE = 7
 }					t_type;
 
 typedef struct s_token
