@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/25 22:52:19 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/25 22:55:46 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@
 # include <termios.h>
 # include <unistd.h>
 
-# define PROMPT "\033[0;35m  minishell>\033[0m "
+# define PROMPT "\033[0;35mminishell>\033[0m "
 
 typedef enum TYPE
 {
 	EMPTY = 0,
 	CMD = 1,
 	ARG = 2,
-	TRUNC = 3,
-	APPEND = 4,
-	INPUT = 5,
-	PIPE = 6,
-	END = 7
+	STOP = 3,
+	TRUNC = 4,
+	APPEND = 5,
+	INPUT = 6,
+	PIPE = 7
 }					t_type;
 
 typedef struct s_ppbx
@@ -61,7 +61,20 @@ typedef struct s_token
 	int				type;
 	struct s_token	*prev;
 	struct s_token	*next;
-}					t_token;
+}	t_token;
+
+typedef struct s_ppbx
+{
+	int		in_fd;
+	int		out_fd;
+	int		cmd_number;
+	pid_t	pid;
+	int		*pipe;
+	char	*filein;
+	char	*fileout;
+	char	**cmd;
+	char	*cmd_path;
+}	t_ppbx;
 
 typedef struct s_minishell
 {
@@ -141,7 +154,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 void				env_command(char **mini);
 bool				builtins(t_minishell *mini, t_token *token);
 void				pwd(void);
-void				echo(t_minishell *mini, int index);
+void				echo(t_token **token);
 void				export(t_minishell *mini, t_token *token);
 void				env_var(t_minishell *mini);
 int					len_var_name(char *str);
@@ -149,6 +162,7 @@ int					is_in_env(t_token *env_start, char *name);
 char				*add_quote(char *str);
 t_token				*find_var(t_token *token, char *str);
 void				add_to_env(t_token **env, char *str, int flag);
+int					ft_unset(t_token *token, t_token **env);
 
 
 /* EXECUTE COMMAND */

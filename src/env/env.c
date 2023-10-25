@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:02:24 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/18 01:27:35 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	add_to_env(t_token **env, char *str, int flag)
 			return ;
 		tmp = (t_token *)malloc(sizeof(t_token));
 		tmp->next = NULL;
-		tmp->prev = NULL;
+		tmp->prev = last_element((*env));
 		tmp->str = ft_strdup(str);
 	}
 	else
 	{
 		tmp = (t_token *)malloc(sizeof(t_token));
 		tmp->next = NULL;
-		tmp->prev = NULL;
+		tmp->prev = last_element((*env));
 		val = add_quote(str);
 		tmp->str = val;
 	}
@@ -99,7 +99,7 @@ void	make_list(t_minishell *minishell, char **env)
 			tmp = (t_token *)malloc(sizeof(t_token));
 			tmp->str = ft_strdup(env[i]);
 			tmp->next = NULL;
-			tmp->prev = NULL;
+			tmp->prev = last_element(minishell->env_start);
 			tmp->type = 0;
 			last_element(minishell->env_start)->next = tmp;
 		}

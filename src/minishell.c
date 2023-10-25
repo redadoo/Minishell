@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:41:27 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:21:54 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_sig		g_sig;
 
-static void	print_list(t_token *token)
+void	print_list(t_token *token)
 {
 	while (token)
 	{
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	make_list(minishell, minishell->env);
 	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
 	i = 0;
-	while (i != 4)
+	while (i != 5)
 	{
 		init_signal();
 		ignore_signal_for_shell();
@@ -61,16 +61,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_all(minishell);
 }
-	
-	//TODO:
-	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
-	//3) Handle environment variables
-	//4) Handle $?
-	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
-
-
-	//TODO:
-	//EDOARDO : pwd env export
-	//FRA : echo cd unset
-	//exit
-
