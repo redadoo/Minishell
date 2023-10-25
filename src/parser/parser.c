@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:50:54 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/25 22:44:39 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:01:38 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	type_arg(t_token *token)
 		token->type = INPUT;
 	else if (ft_strcmp(token->str, "|") == 0)
 		token->type = PIPE;
-	else if (token->prev == NULL || token->prev->type >= PIPE
+	else if (token->prev == NULL || token->prev->type == PIPE
 		|| (token->prev->prev && token->prev->prev->type <= INPUT))
 		token->type = CMD;
 	else

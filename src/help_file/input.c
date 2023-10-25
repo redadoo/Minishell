@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/23 19:26:30 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:03:09 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	print_list(t_token *token)
 		token = token->next;
 	}
 	printf("%s %d\n", token->str, token->type);
+	if (token->prev == NULL)
+		printf("tele\n");
 }
 
 void	process_input(char *input, t_minishell *minishell)
@@ -71,7 +73,8 @@ void	process_input(char *input, t_minishell *minishell)
 	}
 	init_token(minishell, tokens);
 	parser(minishell);
-	exe_command(minishell);
+/* 	exe_command(minishell);
+ */	
 	print_list(minishell->start);
 	free_token(&minishell->start, 0);
 	free_matrix(tokens);

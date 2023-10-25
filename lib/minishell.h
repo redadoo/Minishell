@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/25 22:55:46 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/25 23:06:10 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,14 @@
 typedef enum TYPE
 {
 	EMPTY = 0,
-	CMD = 1,
 	ARG = 2,
 	STOP = 3,
 	TRUNC = 4,
 	APPEND = 5,
 	INPUT = 6,
-	PIPE = 7
+	PIPE = 7,
+	CMD = 8
 }					t_type;
-
-typedef struct s_ppbx
-{
-	int		in_fd;
-	int		out_fd;
-	int		cmd_number;
-	pid_t	pid;
-	int		*pipe;
-	char	*filein;
-	char	*fileout;
-	char	**cmd;
-	char	*cmd_path;
-}	t_ppbx;
 
 typedef struct s_token
 {
