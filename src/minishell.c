@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:24:54 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:41:27 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,16 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_all(minishell);
 }
+	
+	//TODO:
+	//1) Built-in Function : echo with option -n, cd with only a relative or absolute path, pwd, export, unset, env , exit
+	//3) Handle environment variables
+	//4) Handle $?
+	//5) Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.(signals)
+
+
+	//TODO:
+	//EDOARDO : pwd env export
+	//FRA : echo cd unset
+	//exit
+

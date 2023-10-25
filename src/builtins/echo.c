@@ -6,9 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:03:40 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:41:10 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
+/* void echo(t_minishell *mini, int index)
+{
+	int i;
+} */
