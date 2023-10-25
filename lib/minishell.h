@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:22:15 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/25 22:46:18 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,20 @@ void				pwd(void);
 void				echo(t_minishell *mini, int index);
 void				export(t_minishell *mini, t_token *token);
 void				env_var(t_minishell *mini);
-void				exe_command(t_minishell *mini);
 int					len_var_name(char *str);
 int					is_in_env(t_token *env_start, char *name);
 char				*add_quote(char *str);
 t_token				*find_var(t_token *token, char *str);
 void				add_to_env(t_token **env, char *str, int flag);
+
+
+/* EXECUTE COMMAND */
+
+void				exe_command(t_minishell *mini);
+int					find_infile(t_minishell *mini);
+int					find_outfile(t_minishell *mini);
+char				*return_path(char *cmd, char **env);
+char				*acces_command(char *cmd_name, char **paths);
+void				set_exe(t_minishell *mini);
+
 #endif
