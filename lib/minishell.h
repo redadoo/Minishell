@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/25 23:06:10 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 12:29:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@
 typedef enum TYPE
 {
 	EMPTY = 0,
-	ARG = 2,
-	STOP = 3,
-	TRUNC = 4,
-	APPEND = 5,
-	INPUT = 6,
-	PIPE = 7,
-	CMD = 8
+	STOP = 1,
+	TRUNC = 2,
+	APPEND = 3,
+	INPUT = 4,
+	PIPE = 5,
+	CMD = 6,
+	ARG = 7
 }					t_type;
 
 typedef struct s_token
@@ -155,8 +155,8 @@ int					ft_unset(t_token *token, t_token **env);
 /* EXECUTE COMMAND */
 
 void				exe_command(t_minishell *mini);
-int					find_infile(t_minishell *mini);
-int					find_outfile(t_minishell *mini);
+void				find_infile(t_minishell *mini);
+void				find_outfile(t_minishell *mini);
 char				*return_path(char *cmd, char **env);
 char				*acces_command(char *cmd_name, char **paths);
 void				set_exe(t_minishell *mini);

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 18:00:41 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 12:41:44 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	echo(t_token **token)
 		option = 1;
 		tmp = tmp->next;
 	}
-	while (tmp && tmp->type == 2)
+	while (tmp && tmp->type == ARG)
 	{
 		ft_putstr_fd(tmp->str, 1);
 		if (tmp->next && tmp->next->str != NULL)

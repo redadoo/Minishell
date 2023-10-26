@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/20 19:52:44 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:42:13 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	setvar(t_token *token, t_token **env)
 		if (!(token->next))
 			return (0);
 		token = token->next;
-		while (token && token->type == 2)
+		while (token && token->type == ARG)
 		{
 			(*env) = start;
 			tmp = NULL;

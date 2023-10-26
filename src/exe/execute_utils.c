@@ -6,41 +6,46 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/25 22:52:38 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 12:39:08 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-int find_infile(t_minishell *mini)
+void	find_infile(t_minishell *mini)
 {
-	t_token	*tmp;
-
-	tmp = mini->start;
-/* 	while (tmp)
-	{
-		if (tmp->type == CMD)
-		{
-			
-		}
-	} */
-}
-
-int find_outfile(t_minishell *mini)
-{
-    int     fd;
 	t_token	*tmp;
 
 	tmp = mini->start;
 	while (tmp)
 	{
-		if (tmp->type == 3 || tmp->type == APPEND)
+		if (tmp->type == ARG && tmp->prev && tmp->prev->type == INPUT)
 		{
-			fd = open(tmp->next->str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
-            return (fd);
-        }
+			mini->exe->filein = tmp->str;
+			mini->exe->in_fd = open(tmp->str, O_RDONLY);
+			return ;
+		}
+		tmp = tmp->next;
 	}
-	return 0;
+	mini->exe->in_fd = dup(STDIN_FILENO);
+}
+
+void	find_outfile(t_minishell *mini)
+{
+	t_token	*tmp;
+
+	tmp = mini->start;
+	while (tmp)
+	{
+		if (tmp->type == ARG && tmp->prev && tmp->prev->type == TRUNC)
+		{
+			mini->exe->fileout = tmp->str;
+			mini->exe->out_fd = open(tmp->str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	mini->exe->in_fd = dup(STDOUT_FILENO);
 }
 
 char	*return_path(char *cmd, char **env)
