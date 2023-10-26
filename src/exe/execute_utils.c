@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 12:39:08 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:30:37 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	find_infile(t_minishell *mini)
 		}
 		tmp = tmp->next;
 	}
+	mini->exe->filein = ft_strdup("");
 	mini->exe->in_fd = dup(STDIN_FILENO);
 }
 
@@ -45,7 +46,8 @@ void	find_outfile(t_minishell *mini)
 		}
 		tmp = tmp->next;
 	}
-	mini->exe->in_fd = dup(STDOUT_FILENO);
+	mini->exe->fileout = ft_strdup("");
+	mini->exe->out_fd = dup(STDOUT_FILENO);
 }
 
 char	*return_path(char *cmd, char **env)

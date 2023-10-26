@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 12:42:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:37:15 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void	exe_command(t_minishell *mini)
 	i = 0;
 	tmp = mini->start;
 	set_exe(mini);
-/* 	while (tmp)
+	
+/* 	printf("%s\n",mini->exe->filein);
+	printf("%s\n",mini->exe->fileout); */
+	
+	
+	while (tmp)
 	{
 		if (tmp->type == CMD && builtins(mini, tmp))
 		{
@@ -33,7 +38,7 @@ void	exe_command(t_minishell *mini)
 			
 		}
 		tmp = tmp->next;
-	} */
+	}
 }
 
 void set_exe(t_minishell *mini)
