@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 16:30:37 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/26 17:45:56 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,24 @@ char	*acces_command(char *cmd_name, char **paths)
 		i++;
 	}
 	return (cmd_path);
+}
+
+void check_arg(t_minishell *mini)
+{
+/* 	if (access(mini->exe->cmd_path, F_OK) == -1)
+	{
+		p->status = 127;
+		write(2, p->cmd1[0],ft_strlen(p->cmd1[0]));
+		write(2, "command not found\n", 19);
+	}
+	if (access(p->cmd2_path, F_OK) == -1)
+	{
+		p->status = 127;
+		write(2, p->cmd2[0],ft_strlen(p->cmd2[0]));
+		write(2, "command not found\n", 19);
+	}
+	if (p->in_fd == -1)
+		perror("");
+	if (p->out_fd == -1)
+		perror(""); */
 }
