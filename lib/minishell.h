@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 12:29:17 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 20:37:19 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,84 +81,88 @@ typedef struct s_sig
 	pid_t			pid;
 }					t_sig;
 
+/* utils */
+void	free_matrix(char **matrix);
+size_t	len_matrix(char **matrix);
+void	print_list(t_token *token);
+void	free_all(t_minishell *minishell);
 
-int					check_var(t_minishell *mini, char *str);
-size_t				len_matrix(char **matrix);
-void				free_matrix(char **matrix);
-void				free_token(t_token **token, int flag);
-t_token				*last_element(t_token *token);
-char				**init_env(char **env);
-void				inthandler(int sig);
-void				init_signal(void);
-void				make_list(t_minishell *minishell, char **env);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-void				ignore_signal_for_shell(void);
-void				process_input(char *input, t_minishell *minishell);
-char				**ft_lexer(char *str);
-void				ft_error_lexer(char *str);
-int					ft_quote(char *str);
-int					ft_token_counter(char *str);
-int					ft_token_start(char *str, char c);
-int					ft_token_len(char *str, char c);
-void				parser(t_minishell *minishell);
-char				*return_path(char *cmd, char **env);
-char				**ft_split(const char *s, char c);
-int					ft_strncmp(const char *str1, const char *str2, size_t n);
-char				*acces_command(char *cmd_name, char **paths);
-char				*ft_substr(char const *s, unsigned int start,
-						unsigned int len);
-void				*ft_calloc(size_t count, size_t size);
-char				*ft_strjoin(char *backup, char *buff);
-void				ft_bzero(void *s, size_t n);
-void				*ft_memset(void *b, int c, size_t len);
-char				*ft_get_line(char *backup);
-char				*get_next_line(int fd);
-char				*ft_get_line(char *backup);
-char				*ft_backup(char *backup);
-char				*ft_strchr(const char *s, int c);
-char				*ft_statstr(int fd, char *statstr);
-void				free_pipex(char **cmd, char *path);
-int					execute_command(t_minishell *minishell);
-void				ft_bzero(void *s, size_t n);
-void				*ft_memset(void *b, int c, size_t len);
-char				**ft_split(const char *s, char c);
-size_t				ft_strlcat(char *dest, const char *src, size_t size);
-size_t				ft_strlen_t(const char *str);
-char				*ft_substr(char const *s, unsigned int start,
-						unsigned int len);
-void				*ft_calloc(size_t count, size_t size);
-char				*get_next_line(int fd);
-char				*ft_statstr(int fd, char *statstr);
-char				*ft_strjoin(char *backup, char *buff);
-char				*ft_strchr(const char *str, int ch);
-char				*ft_backup(char *backup);
-char				*ft_get_line(char *backup);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*acces_command(char *cmd_name, char **paths);
-char				*my_getenv(char *name, char **env);
-void				free_command(char **tab);
-int					ft_strcmp(const char *s1, const char *s2);
-void				env_command(char **mini);
-bool				builtins(t_minishell *mini, t_token *token);
-void				pwd(void);
-void				echo(t_token **token);
-void				export(t_minishell *mini, t_token *token);
-void				env_var(t_minishell *mini);
-int					len_var_name(char *str);
-int					is_in_env(t_token *env_start, char *name);
-char				*add_quote(char *str);
-t_token				*find_var(t_token *token, char *str);
-void				add_to_env(t_token **env, char *str, int flag);
-int					ft_unset(t_token *token, t_token **env);
+/* token utils */
+t_token	*last_element(t_token *token);
+char	**token_to_matrix(t_token *token);
+t_token	*find_var(t_token *token, char *str);
+void	free_token(t_token **token, int flag);
 
+/* str utils */
+char	*add_quote(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
 
-/* EXECUTE COMMAND */
+/* env var */
+int		len_var_name(char *str);
+char	*print_var(char *str);
+void	env_var(t_minishell *mini);
+int		is_in_env(t_token *env_start, char *name);
 
-void				exe_command(t_minishell *mini);
-void				find_infile(t_minishell *mini);
-void				find_outfile(t_minishell *mini);
-char				*return_path(char *cmd, char **env);
-char				*acces_command(char *cmd_name, char **paths);
-void				set_exe(t_minishell *mini);
+/* input */
+void	process_input(char *input, t_minishell *minishell);
 
+/* signal */
+void	init_signal(void);
+void	inthandler(int sig);
+void	ignore_signal_for_shell(void);
+
+/* parser */
+void	parser(t_minishell *minishell);
+
+/* lexer */
+char	**ft_lexer(char *str);
+int		ft_quote(char *str);
+void	ft_error_lexer(char *str);
+int		ft_token_counter(char *str);
+int		ft_token_start(char *str, char c);
+int		ft_token_len(char *str, char c);
+
+/* env */
+int		check_var(t_minishell *mini, char *str);
+void	make_list(t_minishell *minishell, char **env);
+void	add_to_env(t_token **env, char *str, int flag);
+char	**init_env(char **envp);
+
+/* builtins */
+bool	builtins(t_minishell *mini, t_token *token);
+
+/* echo */
+void	echo(t_token **token);
+
+/* exit */
+void	exit_command(t_minishell *mini);
+
+/* env_command */
+void	env_command(char **mini);
+
+/* export */
+char	**sort(char **to_sort);
+void	print_sorted_env(t_minishell *mini);
+void	export(t_minishell *mini, t_token *token);
+
+/* pwd */
+void	pwd(void);
+
+/* unset */
+int		ft_unset(t_token *token, t_token **env);
+
+/* execute command */
+char	*return_path(char *cmd, t_token *env);
+void	exe_command(t_minishell *mini);
+void	find_infile(t_minishell *mini);
+void	find_outfile(t_minishell *mini);
+char	*acces_command(char *cmd_name, char **paths);
+void	set_exe(t_minishell *mini);
+void	check_arg(t_minishell *mini);
+void	close_pipes(t_ppbx *pipex);
+int		sub_dup2(int i, t_ppbx *p);
+int		count_cmd(t_token *token);
+void	exe_cmd(t_minishell *mini, int i);
+char	**parse_cmd(t_token *token, int n);
+char	**token_to_matrix(t_token *token);
 #endif

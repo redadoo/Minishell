@@ -6,33 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 16:37:47 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 20:21:01 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
 t_sig		g_sig;
-
-void	print_list(t_token *token)
-{
-	while (token)
-	{
-		printf("%s\n", token->str);
-		token = token->next;
-	}
-}
-
-void	free_all(t_minishell *minishell)
-{
-	printf("\33[0;33mlogout\33[0m\n");
-	free_matrix(minishell->env);
-	free_token(&minishell->start, 0);
-	free_token(&minishell->env_start, 1);
-	free(minishell->exe);
-	free(minishell);
-	exit(0);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -50,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	make_list(minishell, minishell->env);
 	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
 	i = 0;
-	while (i != 15)
+	while (i != 5)
 	{
 		init_signal();
 		ignore_signal_for_shell();

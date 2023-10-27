@@ -6,27 +6,11 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:02:09 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:12:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
-
-void	free_token(t_token **token, int flag)
-{
-	t_token	*tmp;
-
-	tmp = (*token);
-	while ((*token))
-	{
-		tmp = (*token);
-		(*token) = (*token)->next;
-		if (flag == 1)
-			free(tmp->str);
-		free(tmp);
-	}
-	free((*token));
-}
 
 void	free_matrix(char **matrix)
 {
@@ -54,25 +38,22 @@ size_t	len_matrix(char **matrix)
 	return (i);
 }
 
-t_token	*last_element(t_token *token)
-{
-	while (token->next)
-	{
-		token = token->next;
-	}
-	return (token);
-}
-
-t_token	*find_var(t_token *token, char *str)
+void	print_list(t_token *token)
 {
 	while (token)
 	{
-		if (strncmp(token->str, str, len_var_name(str)) == 0
-			&& len_var_name(str) == len_var_name(token->str))
-		{
-			return (token);
-		}
+		printf("%s\n", token->str);
 		token = token->next;
 	}
-	return (NULL);
+}
+
+void	free_all(t_minishell *minishell)
+{
+	printf("\33[0;33mlogout\33[0m\n");
+	free_matrix(minishell->env);
+	free_token(&minishell->start, 0);
+	free_token(&minishell->env_start, 1);
+	free(minishell->exe);
+	free(minishell);
+	exit(0);
 }

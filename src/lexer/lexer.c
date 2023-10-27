@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:51 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/23 20:03:57 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:08:09 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_quote(char *str)
 		return (i + 1);
 	}
 }
-
 
 char	**ft_lexer(char *str)
 {

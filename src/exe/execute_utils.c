@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 17:45:56 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:11:15 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	find_infile(t_minishell *mini)
 	{
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == INPUT)
 		{
-			mini->exe->filein = tmp->str;
+			mini->exe->filein = ft_strdup(tmp->str);
 			mini->exe->in_fd = open(tmp->str, O_RDONLY);
 			return ;
 		}
@@ -40,8 +40,9 @@ void	find_outfile(t_minishell *mini)
 	{
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == TRUNC)
 		{
-			mini->exe->fileout = tmp->str;
-			mini->exe->out_fd = open(tmp->str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+			mini->exe->fileout = ft_strdup(tmp->str);
+			mini->exe->out_fd = open(
+					tmp->str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
 			return ;
 		}
 		tmp = tmp->next;
@@ -50,18 +51,18 @@ void	find_outfile(t_minishell *mini)
 	mini->exe->out_fd = dup(STDOUT_FILENO);
 }
 
-char	*return_path(char *cmd, char **env)
+char	*return_path(char *cmd, t_token *env)
 {
 	int		i;
 	char	**paths;
 	char	*cmd_path;
-	char 	*tmp;
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
-		i++;
-	if (env[i] == NULL)
+	char	*tmp;
+
+	while (env && ft_strncmp(env->str, "PATH", 4) != 0)
+		env = env->next;
+	if (env == NULL)
 		return (NULL);
-	paths = ft_split(env[i] + 5, ':');
+	paths = ft_split(env->str + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -98,22 +99,7 @@ char	*acces_command(char *cmd_name, char **paths)
 	return (cmd_path);
 }
 
-void check_arg(t_minishell *mini)
+void	check_arg(t_minishell *mini)
 {
-/* 	if (access(mini->exe->cmd_path, F_OK) == -1)
-	{
-		p->status = 127;
-		write(2, p->cmd1[0],ft_strlen(p->cmd1[0]));
-		write(2, "command not found\n", 19);
-	}
-	if (access(p->cmd2_path, F_OK) == -1)
-	{
-		p->status = 127;
-		write(2, p->cmd2[0],ft_strlen(p->cmd2[0]));
-		write(2, "command not found\n", 19);
-	}
-	if (p->in_fd == -1)
-		perror("");
-	if (p->out_fd == -1)
-		perror(""); */
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 12:58:07 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 20:10:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	len_var_name(char *str)
 	int	i;
 
 	i = 0;
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == '=')
 			return (i);

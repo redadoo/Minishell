@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/18 00:33:10 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:28:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	builtins(t_minishell *mini, t_token *token)
 	else if (ft_strcmp("env", token->str) == 0)
 		env_command(mini->env);
 	else if (ft_strcmp("exit", token->str) == 0)
-		exit(1);
+		exit_command(mini);
 	else if (ft_strcmp("pwd", token->str) == 0)
 		pwd();
 	else if (ft_strcmp("echo", token->str) == 0)

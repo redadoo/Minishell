@@ -6,8 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 13:24:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/13 13:26:28 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:07:52 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+void	exit_command(t_minishell *mini)
+{
+	exit(1);
+}

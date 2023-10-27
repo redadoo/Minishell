@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 12:37:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:11:48 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,6 @@ static void	init_token(t_minishell *minishell, char **tokens)
 	}
 }
 
-static void	print_list(t_token *token)
-{
-	while (token->next)
-	{
-		printf("%s %d\n", token->str, token->type);
-		token = token->next;
-	}
-	printf("%s %d\n", token->str, token->type);
-	if (token->prev == NULL)
-		printf("tele\n");
-}
-
 void	process_input(char *input, t_minishell *minishell)
 {
 	extern t_sig	g_sig;
@@ -74,7 +62,6 @@ void	process_input(char *input, t_minishell *minishell)
 	init_token(minishell, tokens);
 	parser(minishell);
 	exe_command(minishell);
-/* 	print_list(minishell->start);*/	
 	free_token(&minishell->start, 0);
 	free_matrix(tokens);
 }

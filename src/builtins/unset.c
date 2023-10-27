@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/26 12:42:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/27 21:18:02 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,32 @@ static void	setvar(t_token *token, t_token **env)
 	{
 		tmp = find_var((*env), token->str)->next;
 		if (find_var((*env), token->str)->prev)
-		{
-			find_var((*env), token->str)->next->prev = find_var((*env),
-				token->str)->prev;
-		}
+			find_var((*env), token->str)->next->prev = find_var((*env), token->str)->prev;
 	}
 	if (find_var((*env), token->str)->prev)
-	{
 		find_var((*env), token->str)->prev->next = tmp;
-	}
 }
 
-	int ft_unset(t_token * token, t_token * *env)
-	{
-		t_token *start;
-		t_token *tmp;
+int ft_unset(t_token * token, t_token * *env)
+{
+	t_token *start;
+	t_token *tmp;
 
-		start = (*env);
-		if (!(token->next))
-			return (0);
-		token = token->next;
-		while (token && token->type == ARG)
-		{
-			(*env) = start;
-			tmp = NULL;
-			if (find_var((*env), token->str))
-			{
-				tmp = find_var((*env), token->str);
-				setvar(token, env);
-				free_node(&start, tmp);
-			}
-			token = token->next;
-		}
+	start = (*env);
+	if (!(token->next))
+		return (0);
+	token = token->next;
+	while (token && token->type == ARG)
+	{
 		(*env) = start;
+		tmp = NULL;
+		if (find_var((*env), token->str))
+		{
+			tmp = find_var((*env), token->str);
+			setvar(token, env);
+			free_node(&start, tmp);
+		}
+		token = token->next;
 	}
+	(*env) = start;
+}
