@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:33:25 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:09:37 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/28 00:39:18 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,27 @@ int	count_cmd(t_token *token)
 	return (i);
 }
 
-int	sub_dup2(int i, t_ppbx *p)
+int	sub_dup2(int i, t_ppbx *p,t_minishell * mini)
 {
 	if (i == 0)
 	{
-		if (dup2(p->in_fd, 0) == -1)
+		if (dup2(p->in_fd, STDIN_FILENO) == -1)
 			return (-1);
-		if (dup2(p->pipe[2 * i + 1], 1) == -1)
+		if (dup2(p->pipe[2 * i + 1],  STDOUT_FILENO) == -1)
 			return (-1);
 	}
 	else if (i == p->cmd_number - 1)
 	{
-		if (dup2(p->pipe[2 * i - 2], 0) == -1)
+		if (dup2(p->pipe[2 * i - 2],  STDIN_FILENO) == -1)
 			return (-1);
-		if (dup2(p->out_fd, 1) == -1)
+		if (dup2(p->out_fd,  STDOUT_FILENO) == -1)
 			return (-1);
 	}
 	else
 	{
-		if (dup2(p->pipe[2 * i - 2], 0) == -1)
+		if (dup2(p->pipe[2 * i - 2], STDIN_FILENO) == -1)
 			return (-1);
-		if (dup2(p->pipe[2 * i + 1], 1) == -1)
+		if (dup2(p->pipe[2 * i + 1],  STDOUT_FILENO) == -1)
 			return (-1);
 	}
 	return (0);

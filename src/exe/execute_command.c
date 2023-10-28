@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:22:44 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/28 00:49:37 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exe_cmd(t_minishell *p, int n)
 	p->exe->pid = fork();
 	if (!p->exe->pid)
 	{
-		if (sub_dup2(n, p->exe) == -1)
+		if (sub_dup2(n, p->exe, p) == -1)
 		{
 			free(p->exe->cmd_path);
 			free_matrix(p->exe->cmd);
@@ -68,6 +68,8 @@ void	exe_cmd(t_minishell *p, int n)
 			close_pipes(p->exe);
 			if (!p->exe->cmd)
 				exit(1);
+			printf("ciao %s\n",p->exe->filein);
+			printf("ciao %i\n",p->exe->in_fd);
 			execve(p->exe->cmd_path, p->exe->cmd,
 				token_to_matrix(p->env_start));
 		}

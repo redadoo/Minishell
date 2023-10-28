@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 20:37:19 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/28 00:24:59 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_ppbx
 
 typedef struct s_minishell
 {
+	int				std_in;
+	int				std_out;
 	int				lenght;
 	char			**env;
 	char			*pipe;
@@ -160,7 +162,7 @@ char	*acces_command(char *cmd_name, char **paths);
 void	set_exe(t_minishell *mini);
 void	check_arg(t_minishell *mini);
 void	close_pipes(t_ppbx *pipex);
-int		sub_dup2(int i, t_ppbx *p);
+int		sub_dup2(int i, t_ppbx *p, t_minishell *mini);
 int		count_cmd(t_token *token);
 void	exe_cmd(t_minishell *mini, int i);
 char	**parse_cmd(t_token *token, int n);
