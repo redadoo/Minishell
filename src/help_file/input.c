@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:11:48 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:49:33 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ static void	init_token(t_minishell *minishell, char **tokens)
 
 void	process_input(char *input, t_minishell *minishell)
 {
-	extern t_sig	g_sig;
 	char			**tokens;
+	extern t_sig	g_sig;
 
+	(void)g_sig;
 	if (input == NULL)
 		return ;
 	tokens = ft_lexer(input);

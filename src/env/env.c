@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/18 01:27:35 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/29 17:48:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	add_to_env(t_token **env, char *str, int flag)
 {
-	int		i;
 	char	*val;
 	t_token	*tmp;
 
@@ -42,7 +41,6 @@ int	check_var(t_minishell *mini, char *str)
 {
 	int		i;
 	int		j;
-	char	*tmp;
 	t_token	*token;
 
 	j = 0;

@@ -6,21 +6,11 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/29 14:57:17 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:50:08 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
-
-static size_t	env_size(t_token *env)
-{
-	size_t	i;
-
-	i = 0;
-	while (env->str[i] && env->str[i] != '=')
-		i++;
-	return (i);
-}
 
 static void	ft_memdel(void *str)
 {

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 15:01:43 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:47:21 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ char	*acces_command(char *cmd_name, char **paths)
 
 void	check_arg(t_minishell *mini)
 {
+	(void)mini;
 	return ;
 }

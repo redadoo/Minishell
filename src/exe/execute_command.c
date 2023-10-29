@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:56:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:46:56 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ static void	creat_pipes(t_ppbx *pipex)
 void	exe_command(t_minishell *mini)
 {
 	int		i;
-	t_token	*tmp;
 
 	i = -1;
-	tmp = mini->start;
 	set_exe(mini);
 	check_arg(mini);
 	mini->exe->cmd_number = count_cmd(mini->start) + 1;
@@ -58,7 +56,7 @@ void	exe_cmd(t_minishell *p, int n)
 	p->exe->pid = fork();
 	if (!p->exe->pid)
 	{
-		if (sub_dup2(n, p->exe, p) == -1)
+		if (sub_dup2(n, p->exe) == -1)
 		{
 			free(p->exe->cmd_path);
 			free_matrix(p->exe->cmd);

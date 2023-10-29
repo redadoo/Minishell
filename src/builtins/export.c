@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/17 17:04:02 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:50:21 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	**sort(char **to_sort)
 
 void	print_sorted_env(t_minishell *mini)
 {
-	int		i;
 	t_token	*tmp;
 	char	**sorted;
 

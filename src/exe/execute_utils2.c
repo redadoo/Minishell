@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:28:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 15:30:20 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:46:36 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int sub_dup2_util(t_ppbx *p)
 	return (0);
 } 
 
-int	sub_dup2(int i, t_ppbx *p, t_minishell *mini)
+int	sub_dup2(int i, t_ppbx *p)
 {
 	if (p->cmd_number - 1 == 1)
         sub_dup2_util(p);

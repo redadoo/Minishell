@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 21:31:55 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:46:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ char	*acces_command(char *cmd_name, char **paths);
 void	set_exe(t_minishell *mini);
 void	check_arg(t_minishell *mini);
 void	close_pipes(t_ppbx *pipex);
-int		sub_dup2(int i, t_ppbx *p, t_minishell *mini);
+int		sub_dup2(int i, t_ppbx *p);
 int		count_cmd(t_token *token);
 void	exe_cmd(t_minishell *mini, int i);
 char	**parse_cmd(t_token *token, int n);
