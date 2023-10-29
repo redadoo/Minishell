@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:55:53 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 15:01:43 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	find_infile(t_minishell *mini)
 		{
 			mini->exe->filein = ft_strdup(tmp->str);
 			mini->exe->in_fd = open(tmp->str, O_RDONLY);
-			/* 			printf("forza huva %s\n",mini->exe->filein );
-						printf("forza huva1 %i\n",mini->exe->in_fd ); */
 			return ;
 		}
 		tmp = tmp->next;

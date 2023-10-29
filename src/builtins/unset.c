@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/29 14:54:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 14:57:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ int	ft_unset(t_token *token, t_token **env)
 		token = token->next;
 	}
 	(*env) = start;
+	return (0);
 }
