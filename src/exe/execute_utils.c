@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 20:49:37 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 14:55:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	find_infile(t_minishell *mini)
 		{
 			mini->exe->filein = ft_strdup(tmp->str);
 			mini->exe->in_fd = open(tmp->str, O_RDONLY);
-/* 			printf("forza huva %s\n",mini->exe->filein );
-			printf("forza huva1 %i\n",mini->exe->in_fd ); */
+			/* 			printf("forza huva %s\n",mini->exe->filein );
+						printf("forza huva1 %i\n",mini->exe->in_fd ); */
 			return ;
 		}
 		tmp = tmp->next;
@@ -43,8 +43,8 @@ void	find_outfile(t_minishell *mini)
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == TRUNC)
 		{
 			mini->exe->fileout = ft_strdup(tmp->str);
-			mini->exe->out_fd = open(
-					tmp->str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+			mini->exe->out_fd = open(tmp->str, O_TRUNC | O_CREAT | O_RDWR,
+					0000644);
 			return ;
 		}
 		tmp = tmp->next;
