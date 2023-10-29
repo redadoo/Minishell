@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 19:12:58 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/28 21:31:55 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_token	*last_element(t_token *token);
 char	**token_to_matrix(t_token *token);
 t_token	*find_var(t_token *token, char *str);
 void	free_token(t_token **token, int flag);
+t_token *return_cmd(t_token *token, int index);
 
 /* str utils */
 char	*add_quote(char *str);

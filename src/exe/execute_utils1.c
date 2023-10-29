@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:33:25 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 00:39:18 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 14:45:09 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ int	count_cmd(t_token *token)
 
 int	sub_dup2(int i, t_ppbx *p,t_minishell * mini)
 {
+	if (p->cmd_number - 1 == 1)
+	{
+		if (dup2(p->in_fd, STDIN_FILENO) == -1)
+			return (-1);
+		if (dup2(p->out_fd, STDOUT_FILENO) == -1)
+			return (-1);
+		return (0);
+	}
 	if (i == 0)
 	{
 		if (dup2(p->in_fd, STDIN_FILENO) == -1)
@@ -51,7 +59,7 @@ int	sub_dup2(int i, t_ppbx *p,t_minishell * mini)
 		if (dup2(p->pipe[2 * i + 1],  STDOUT_FILENO) == -1)
 			return (-1);
 	}
-	else if (i == p->cmd_number - 1)
+	else if (i == p->cmd_number - 2)
 	{
 		if (dup2(p->pipe[2 * i - 2],  STDIN_FILENO) == -1)
 			return (-1);
@@ -80,8 +88,9 @@ char	**parse_cmd(t_token *token, int n)
 	tmp = token;
 	while (token)
 	{
-		if (token->type == CMD)
-			count++;
+/* 		printf("n : %i\n", n);
+		printf("count : %i\n", count);
+		printf("type : %i\n", token->type); */
 		if (token->type == CMD && count == n)
 		{
 			tmp = token;
@@ -102,6 +111,8 @@ char	**parse_cmd(t_token *token, int n)
 			tab[arg] = NULL;
 			break ;
 		}
+		if (token->type == CMD)
+			count++;
 		token = token->next;
 	}
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:09:36 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:12:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/28 21:38:39 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,23 @@ void	free_token(t_token **token, int flag)
 		free(tmp);
 	}
 	free((*token));
+}
+
+t_token *return_cmd(t_token *token, int index)
+{
+	int count;
+
+	count = 0;
+
+	while (token)
+	{
+		if (token->type == CMD && count == index)
+		{
+			return (token);
+		}
+		if (token->type == CMD)
+			count++;
+		token = token->next;
+	}
+	return (token);
 }

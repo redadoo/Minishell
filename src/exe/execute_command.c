@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 19:13:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 14:47:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exe_command(t_minishell *mini)
 	int		i;
 	t_token	*tmp;
 
-	i = 0;
+	i = -1;
 	tmp = mini->start;
 	set_exe(mini);
 	check_arg(mini);
@@ -43,8 +43,10 @@ void	exe_command(t_minishell *mini)
 	mini->exe->pipe = (int *)malloc(sizeof(int)
 			* 2 * (mini->exe->cmd_number - 1));
 	creat_pipes(mini->exe);
-	while (++i < mini->exe->cmd_number)
+	while (++i < mini->exe->cmd_number - 1)
+	{
 		exe_cmd(mini, i);
+	}
 	close_pipes(mini->exe);
 	waitpid(-1, NULL, 0);
 }
@@ -68,10 +70,9 @@ void	exe_cmd(t_minishell *p, int n)
 			close_pipes(p->exe);
 			if (!p->exe->cmd)
 				exit(1);
-/* 			printf("ciao %s\n",p->exe->filein);
-			printf("ciao %i\n",p->exe->in_fd); */
-			execve(p->exe->cmd_path, p->exe->cmd,
-				token_to_matrix(p->env_start));
+			if (builtins(p,return_cmd(p->start,n)) == false)
+				execve(p->exe->cmd_path, p->exe->cmd,
+					token_to_matrix(p->env_start));
 		}
 	}
 	free(p->exe->cmd_path);
