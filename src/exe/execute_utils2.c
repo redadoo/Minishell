@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:28:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/30 17:12:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 17:39:40 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	sub_dup2(int i, t_ppbx *p)
 		if (dup2(p->pipe[2 * i + 1], STDOUT_FILENO) == -1)
 			return (-1);
 	}
-	else if (i == p->cmd_number - 2)
+	else if (i == p->cmd_number - 1)
 	{
 		if (dup2(p->pipe[2 * i - 2], STDIN_FILENO) == -1)
 			return (-1);
