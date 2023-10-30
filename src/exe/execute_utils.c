@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 17:47:21 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:09:55 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ void	find_outfile(t_minishell *mini)
 	mini->exe->out_fd = dup(STDOUT_FILENO);
 }
 
-char	*return_path(char *cmd, t_token *env)
+char	*return_path(char *cmd, char **env)
 {
 	int		i;
 	char	**paths;
 	char	*cmd_path;
 	char	*tmp;
 
-	while (env && ft_strncmp(env->str, "PATH", 4) != 0)
-		env = env->next;
-	if (env == NULL)
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
+		i++;
+	if (env[i] == NULL)
 		return (NULL);
-	paths = ft_split(env->str + 5, ':');
+	paths = ft_split(env[i] + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -73,10 +74,7 @@ char	*return_path(char *cmd, t_token *env)
 		free(tmp);
 	}
 	cmd_path = acces_command(cmd, paths);
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
+	free_matrix(paths);
 	return (cmd_path);
 }
 

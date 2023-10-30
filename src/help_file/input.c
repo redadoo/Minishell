@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 17:49:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:14:35 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_util(t_minishell *minishell, char *tokens)
 	t_token	*tmp;
 
 	tmp = (t_token *)malloc(sizeof(t_token));
-	tmp->str = tokens;
+	tmp->str = ft_strdup(tokens);
 	tmp->next = NULL;
 	tmp->prev = last_element(minishell->start);
 	tmp->type = 0;
@@ -34,7 +34,7 @@ static void	init_token(t_minishell *minishell, char **tokens)
 		if (minishell->start == NULL)
 		{
 			minishell->start = (t_token *)malloc(sizeof(t_token));
-			minishell->start->str = tokens[i];
+			minishell->start->str = ft_strdup(tokens[i]);
 			minishell->start->next = NULL;
 			minishell->start->prev = NULL;
 			minishell->start->type = 0;
@@ -49,9 +49,7 @@ static void	init_token(t_minishell *minishell, char **tokens)
 void	process_input(char *input, t_minishell *minishell)
 {
 	char			**tokens;
-	extern t_sig	g_sig;
 
-	(void)g_sig;
 	if (input == NULL)
 		return ;
 	tokens = ft_lexer(input);
@@ -63,6 +61,6 @@ void	process_input(char *input, t_minishell *minishell)
 	init_token(minishell, tokens);
 	parser(minishell);
 	exe_command(minishell);
-	free_token(&minishell->start, 0);
+	free_token(&minishell->start, 1);
 	free_matrix(tokens);
 }

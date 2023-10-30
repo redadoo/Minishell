@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:33:25 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 15:36:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:06:58 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	close_pipes(t_ppbx *pipex)
 		i++;
 	}
 	free(pipex->pipe);
-	free(pipex->filein);
-	free(pipex->fileout);
 	pipex->pipe = NULL;
 }
 
@@ -42,11 +40,11 @@ int	count_cmd(t_token *token)
 	return (i);
 }
 
-static char **parse_cmd_util(int arg,int count, t_token	*tmp)
+static char	**parse_cmd_util(int arg, int count, t_token *tmp)
 {
 	char	**tab;
-	
-	tab = (char **)malloc(sizeof(char *) * arg + 1);
+
+	tab = (char **)malloc(sizeof(char *) * (arg + 1));
 	count = 0;
 	while (count < arg)
 	{
@@ -78,7 +76,7 @@ char	**parse_cmd(t_token *token, int n)
 				arg++;
 				token = token->next;
 			}
-			return (parse_cmd_util(arg,count,tmp));
+			return (parse_cmd_util(arg, count, tmp));
 		}
 		if (token->type == CMD)
 			count++;

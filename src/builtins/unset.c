@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/29 17:50:08 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 09:23:29 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,17 @@ static void	free_node(t_token **env_start, t_token *env)
 static void	setvar(t_token *token, t_token **env)
 {
 	t_token	*tmp;
+	t_token	*tmp1;
 
 	tmp = NULL;
 	if (find_var((*env), token->str)->next)
 	{
 		tmp = find_var((*env), token->str)->next;
 		if (find_var((*env), token->str)->prev)
-			find_var((*env), token->str)->next->prev = find_var((*env),
-				token->str)->prev;
+		{
+			tmp1 = find_var((*env), token->str)->prev;
+			find_var((*env), token->str)->next->prev = tmp1;
+		}
 	}
 	if (find_var((*env), token->str)->prev)
 		find_var((*env), token->str)->prev->next = tmp;

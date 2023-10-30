@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 17:46:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:03:55 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_token	*last_element(t_token *token);
 char	**token_to_matrix(t_token *token);
 t_token	*find_var(t_token *token, char *str);
 void	free_token(t_token **token, int flag);
-t_token *return_cmd(t_token *token, int index);
+t_token	*return_cmd(t_token *token, int index);
 
 /* str utils */
 char	*add_quote(char *str);
@@ -155,7 +155,7 @@ void	pwd(void);
 int		ft_unset(t_token *token, t_token **env);
 
 /* execute command */
-char	*return_path(char *cmd, t_token *env);
+char	*return_path(char *cmd, char **env);
 void	exe_command(t_minishell *mini);
 void	find_infile(t_minishell *mini);
 void	find_outfile(t_minishell *mini);
