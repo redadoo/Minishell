@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:21:21 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/31 13:47:42 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:55:16 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_token	*find_var_n(t_token *token, char *str, int n)
 }
 static char	*dollar_var(char *str, t_token *env)
 {
-	char	*tmp;
 	char	*tmp2;
 	int		i;
 	int		j;
@@ -59,12 +58,13 @@ static char	*token_expander(char **matrix)
 	char	*tmp;
 	char	*tmp2;
 
-	i = 0;
+	i = -1;
 	tmp = NULL;
 	tmp2 = NULL;
-	while (matrix[i])
+	while (matrix[++i])
 	{
 		if (matrix[i][0])
+		{
 			if (!tmp)
 				tmp = ft_strdup(matrix[i]);
 			else
@@ -74,14 +74,14 @@ static char	*token_expander(char **matrix)
 				tmp = ft_strjoin(tmp2, matrix[i]);
 				free(tmp2);
 			}
-		i++;
+		}
 	}
 	if(tmp)
 		return (tmp);
 	return (ft_strdup(""));
 }
 
-static void	*uncheck_dollar(char *tmp)
+static void	uncheck_dollar(char *tmp)
 {
 	char	*str;
 

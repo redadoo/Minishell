@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 18:52:41 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:55:44 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,9 @@ char	*ft_get_envar(char *str)
 {
 	int		i;
 	int		j;
-	int		count;
 	char	*new_str;
 
 	i = 0;
-	count = 0;
 	while (str[i] != '=')
 		i++;
 	j = i;
