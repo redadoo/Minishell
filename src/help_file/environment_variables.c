@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 20:10:31 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 18:52:41 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,29 @@ void	env_var(t_minishell *mini)
 			break ;
 		}
 	}
+}
+
+char	*ft_get_envar(char *str)
+{
+	int		i;
+	int		j;
+	int		count;
+	char	*new_str;
+
+	i = 0;
+	count = 0;
+	while (str[i] != '=')
+		i++;
+	j = i;
+	while (str[j])
+		j++;
+	new_str = (char *)malloc(sizeof(char) * (j - i + 1));
+	j = 0;
+	while (str[i++])
+	{
+		new_str[j] = str[i];
+		j++;
+	}
+	new_str[j + 1] = '\0';
+	return (new_str);
 }

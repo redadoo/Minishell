@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:11:48 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 16:07:31 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_util(t_minishell *minishell, char *tokens)
 	t_token	*tmp;
 
 	tmp = (t_token *)malloc(sizeof(t_token));
-	tmp->str = tokens;
+	tmp->str = ft_strdup(tokens);
 	tmp->next = NULL;
 	tmp->prev = last_element(minishell->start);
 	tmp->type = 0;
@@ -34,7 +34,7 @@ static void	init_token(t_minishell *minishell, char **tokens)
 		if (minishell->start == NULL)
 		{
 			minishell->start = (t_token *)malloc(sizeof(t_token));
-			minishell->start->str = tokens[i];
+			minishell->start->str = ft_strdup(tokens[i]);
 			minishell->start->next = NULL;
 			minishell->start->prev = NULL;
 			minishell->start->type = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/26 17:42:15 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 19:45:38 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	echo(t_token **token)
 	}
 	while (tmp && tmp->type == ARG)
 	{
-		ft_putstr_fd(tmp->str, 1);
+		if (tmp->str)
+			ft_putstr_fd(tmp->str, 1);
 		if (tmp->next && tmp->next->str != NULL)
 			write(1, " ", 1);
 		tmp = tmp->next;
