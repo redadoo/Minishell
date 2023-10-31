@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:34:27 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/31 17:45:38 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:30:20 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*get_env_path(t_token *env, const char *var, size_t len)
 					oldpwd[j++] = env->str[i];
 			}
 			oldpwd[j] = '\0';
+			printf("%s\n", oldpwd);
 			return (oldpwd);
 		}
 		env = env->next;
@@ -97,10 +98,10 @@ int	cd(t_token *tokens, t_token *env)
 {
 	int cd_ret;
 
-	if (!(tokens->next) || tokens->next->type != 2)
+	if (!(tokens->next) || tokens->next->type != ARG)
 		return (go_to_path(0, env));
 	tokens = tokens->next;
-	if (tokens->next && tokens->next->type == 2)
+	if (tokens->next && tokens->next->type == ARG)
 		ft_putendl_fd("minishell : cd: Too many arguments", 2);
 	if (ft_strcmp(tokens->str, "-") == 0)
 		cd_ret = go_to_path(1, env);

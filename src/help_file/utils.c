@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 17:51:24 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:29:45 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_list(t_token *token)
 {
 	while (token)
 	{
-		printf("%s\n", token->str);
+		printf("%s, %d\n", token->str, token->type);
 		token = token->next;
 	}
 	printf("\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 17:48:38 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 17:52:10 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	exe_cmd(t_minishell *p, int n)
 			close_pipes(p->exe);
 			exit(1);
 		}
-		if (access(p->exe->cmd_path, F_OK) == -1 && ft_strcmp(p->exe->cmd[0],"exit") != 0 &&  ft_strcmp(p->exe->cmd[0],"cd") != 0)
+		if (access(p->exe->cmd_path, F_OK) == -1 && ft_strcmp(p->exe->cmd[0],
+				"exit") != 0 && ft_strcmp(p->exe->cmd[0], "cd") != 0)
 		{
 			write(2, p->exe->cmd[0], ft_strlen(p->exe->cmd[0]));
 			write(2, " command not found\n", 20);
@@ -79,7 +80,7 @@ void	exe_cmd(t_minishell *p, int n)
 				exit(1);
 			if (builtins(p, return_cmd(p->start, n)) == false)
 				execve(p->exe->cmd_path, p->exe->cmd, env);
-			else 
+			else
 				exit(1);
 		}
 	}

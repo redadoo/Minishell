@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 17:32:03 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 18:29:12 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	process_input(char *input, t_minishell *minishell)
 	init_token(minishell, tokens);
 	parser(minishell);
 	free_matrix(tokens);
+	print_list(minishell->start);
 	exe_command(minishell);
 	free_token(&minishell->start, 1);
 }
