@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/30 17:58:23 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:36:30 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ void	exe_cmd(t_minishell *p, int n)
 	{
 		if (sub_dup2(n, p->exe) == -1)
 		{
+			free(p->exe->cmd_path);
+			free_matrix(p->exe->cmd);
+			close_pipes(p->exe);
+			exit(1);
+		}
+		if (access(p->exe->cmd_path, F_OK) == -1)
+		{
+			write(2, p->exe->cmd[0], ft_strlen(p->exe->cmd[0]));
+			write(2, " command not found\n", 20);
 			free(p->exe->cmd_path);
 			free_matrix(p->exe->cmd);
 			close_pipes(p->exe);
