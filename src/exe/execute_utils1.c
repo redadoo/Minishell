@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:33:25 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/30 17:59:02 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:35:34 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	close_pipes(t_ppbx *pipex)
 		close(pipex->pipe[i]);
 		i++;
 	}
-	free(pipex->pipe);
-	pipex->pipe = NULL;
 }
 
 int	count_cmd(t_token *token)

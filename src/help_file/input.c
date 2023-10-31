@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 14:49:07 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:32:03 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	init_token(t_minishell *minishell, char **tokens)
 
 void	process_input(char *input, t_minishell *minishell)
 {
-	char			**tokens;
+	char	**tokens;
 
 	if (input == NULL)
 		return ;
@@ -60,7 +60,7 @@ void	process_input(char *input, t_minishell *minishell)
 	}
 	init_token(minishell, tokens);
 	parser(minishell);
+	free_matrix(tokens);
 	exe_command(minishell);
 	free_token(&minishell->start, 1);
-	free_matrix(tokens);
 }
