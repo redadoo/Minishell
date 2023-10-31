@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:34:27 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/31 18:30:20 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:46:20 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	*get_env_path(t_token *env, const char *var, size_t len)
 		if (ft_strncmp(env->str, var, len) == 0)
 		{
 			s_alloc = ft_strlen(env->str) - len;
-			if (!(oldpwd = malloc(sizeof(char) * s_alloc + 1)))
-				return (NULL);
+			oldpwd = malloc(sizeof(char) * s_alloc
+					+ 1) if (!oldpwd) return (NULL);
 			i = 0;
 			j = 0;
 			while (env->str[i++])
@@ -42,7 +42,6 @@ static char	*get_env_path(t_token *env, const char *var, size_t len)
 					oldpwd[j++] = env->str[i];
 			}
 			oldpwd[j] = '\0';
-			printf("%s\n", oldpwd);
 			return (oldpwd);
 		}
 		env = env->next;
@@ -57,7 +56,8 @@ static int	update_oldpwd(t_token *env)
 
 	if (getcwd(cwd, PATH_MAX) == NULL)
 		return (1);
-	if (!(oldpwd = ft_strjoin("OLDPWD=", cwd)))
+	oldpwd = ft_strjoin("OLDPWD=", cwd);
+	if (!oldpwd)
 		return (1);
 	if (is_in_env(env, oldpwd) == 0)
 		add_to_env(&env, oldpwd, 1);
@@ -96,7 +96,7 @@ static int	go_to_path(int option, t_token *env)
 
 int	cd(t_token *tokens, t_token *env)
 {
-	int cd_ret;
+	int	cd_ret;
 
 	if (!(tokens->next) || tokens->next->type != ARG)
 		return (go_to_path(0, env));
