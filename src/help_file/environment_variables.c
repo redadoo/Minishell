@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:05:58 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 14:55:44 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:11:35 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,6 @@ char	*ft_get_envar(char *str)
 		new_str[j] = str[i];
 		j++;
 	}
-	new_str[j + 1] = '\0';
+	new_str[j] = '\0';
 	return (new_str);
 }

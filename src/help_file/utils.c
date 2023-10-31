@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/27 21:12:31 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:39:05 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	print_list(t_token *token)
 		printf("%s\n", token->str);
 		token = token->next;
 	}
+	printf("\n");
 }
 
 void	free_all(t_minishell *minishell)

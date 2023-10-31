@@ -7,9 +7,18 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${workspaceFolder}/src/*.c",
+                "${workspaceFolder}/ft_libft/*.c",
+                "${workspaceFolder}/src/env/*.c",
+                "${workspaceFolder}/src/lexer/*.c",
+                "${workspaceFolder}/src/parser/*.c",
+                "${workspaceFolder}/src/signals/*.c",
+                "${workspaceFolder}/src/builtins/*.c",
+                "${workspaceFolder}/src/help_file/*.c",
+                "${workspaceFolder}/src/exe/*.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lreadline"
             ],
             "options": {
                 "cwd": "${fileDirname}"
