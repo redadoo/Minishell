@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:54:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/14 19:23:47 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 18:19:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	inthandler(int sig)
 	extern t_sig	g_sig;
 
 	(void)sig;
-	ft_putstr_fd("\b\b  ", 2);
-	ft_putstr_fd("\n", 2);
-	ft_putstr_fd(PROMPT, 2);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 	g_sig.exit_status = 130;
 }
 
