@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:04:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 16:07:31 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:49:07 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	init_token(t_minishell *minishell, char **tokens)
 
 void	process_input(char *input, t_minishell *minishell)
 {
-	extern t_sig	g_sig;
 	char			**tokens;
 
 	if (input == NULL)
@@ -62,6 +61,6 @@ void	process_input(char *input, t_minishell *minishell)
 	init_token(minishell, tokens);
 	parser(minishell);
 	exe_command(minishell);
-	free_token(&minishell->start, 0);
+	free_token(&minishell->start, 1);
 	free_matrix(tokens);
 }

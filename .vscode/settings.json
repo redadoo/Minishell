@@ -14,7 +14,8 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "unistd.h": "c",
-        "termios.h": "c"
+        "termios.h": "c",
+        "*.tcc": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

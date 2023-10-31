@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:56:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:36:30 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,43 @@ static void	creat_pipes(t_ppbx *pipex)
 
 void	exe_command(t_minishell *mini)
 {
-	int		i;
-	t_token	*tmp;
+	int	i;
 
 	i = -1;
-	tmp = mini->start;
 	set_exe(mini);
 	check_arg(mini);
-	mini->exe->cmd_number = count_cmd(mini->start) + 1;
-	mini->exe->cmd_path = NULL;
-	mini->exe->cmd = NULL;
-	mini->exe->pipe = (int *)malloc(sizeof(int) * 2 * (mini->exe->cmd_number
-				- 1));
+	mini->exe->cmd_number = count_cmd(mini->start);
+	mini->exe->pipe = (int *)malloc(sizeof(int) * 2 * (mini->exe->cmd_number));
 	creat_pipes(mini->exe);
-	while (++i < mini->exe->cmd_number - 1)
-	{
+	while (++i < mini->exe->cmd_number)
 		exe_cmd(mini, i);
-	}
 	close_pipes(mini->exe);
 	waitpid(-1, NULL, 0);
+	free(mini->exe->filein);
+	free(mini->exe->fileout);
 }
 
 void	exe_cmd(t_minishell *p, int n)
 {
+	char	**env;
+
+	env = token_to_matrix(p->env_start);
 	p->exe->cmd = parse_cmd(p->start, n);
-	p->exe->cmd_path = return_path(p->exe->cmd[0], p->env_start);
+	p->exe->cmd_path = return_path(p->exe->cmd[0], env);
 	p->exe->pid = fork();
 	if (!p->exe->pid)
 	{
-		if (sub_dup2(n, p->exe, p) == -1)
+		if (sub_dup2(n, p->exe) == -1)
 		{
+			free(p->exe->cmd_path);
+			free_matrix(p->exe->cmd);
+			close_pipes(p->exe);
+			exit(1);
+		}
+		if (access(p->exe->cmd_path, F_OK) == -1)
+		{
+			write(2, p->exe->cmd[0], ft_strlen(p->exe->cmd[0]));
+			write(2, " command not found\n", 20);
 			free(p->exe->cmd_path);
 			free_matrix(p->exe->cmd);
 			close_pipes(p->exe);
@@ -71,12 +78,12 @@ void	exe_cmd(t_minishell *p, int n)
 			if (!p->exe->cmd)
 				exit(1);
 			if (builtins(p, return_cmd(p->start, n)) == false)
-				execve(p->exe->cmd_path, p->exe->cmd,
-					token_to_matrix(p->env_start));
+				execve(p->exe->cmd_path, p->exe->cmd, env);
 		}
 	}
 	free(p->exe->cmd_path);
 	free_matrix(p->exe->cmd);
+	free_matrix(env);
 }
 
 void	set_exe(t_minishell *mini)

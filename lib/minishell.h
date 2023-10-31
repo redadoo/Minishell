@@ -6,7 +6,7 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 19:29:01 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:47:15 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_token	*last_element(t_token *token);
 char	**token_to_matrix(t_token *token);
 t_token	*find_var(t_token *token, char *str);
 void	free_token(t_token **token, int flag);
-t_token *return_cmd(t_token *token, int index);
+t_token	*return_cmd(t_token *token, int index);
 
 /* str utils */
 char	*add_quote(char *str);
@@ -157,7 +157,7 @@ void	pwd(void);
 int		ft_unset(t_token *token, t_token **env);
 
 /* execute command */
-char	*return_path(char *cmd, t_token *env);
+char	*return_path(char *cmd, char **env);
 void	exe_command(t_minishell *mini);
 void	find_infile(t_minishell *mini);
 void	find_outfile(t_minishell *mini);
@@ -165,7 +165,7 @@ char	*acces_command(char *cmd_name, char **paths);
 void	set_exe(t_minishell *mini);
 void	check_arg(t_minishell *mini);
 void	close_pipes(t_ppbx *pipex);
-int		sub_dup2(int i, t_ppbx *p, t_minishell *mini);
+int		sub_dup2(int i, t_ppbx *p);
 int		count_cmd(t_token *token);
 void	exe_cmd(t_minishell *mini, int i);
 char	**parse_cmd(t_token *token, int n);

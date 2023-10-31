@@ -6,7 +6,7 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/17 16:40:27 by edoardo          ###   ########.fr        #
+#    Updated: 2023/10/29 17:44:24 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJ = *.o
 
 CC = gcc
 
-CFLAGS = -lreadline #-Wall -Wextra -Werror
+CFLAGS = -lreadline -Wall -Wextra -Werror
 
 RM = rm -rf
 

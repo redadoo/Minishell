@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:09:36 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:55:37 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:08:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**token_to_matrix(t_token *token)
 		token = token->next;
 		i++;
 	}
-	matrix[i + 1] = NULL;
+	matrix[i] = NULL;
 	return (matrix);
 }
 

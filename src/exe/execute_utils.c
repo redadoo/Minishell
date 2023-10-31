@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:55:53 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:26:27 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	find_infile(t_minishell *mini)
 		{
 			mini->exe->filein = ft_strdup(tmp->str);
 			mini->exe->in_fd = open(tmp->str, O_RDONLY);
-			/* 			printf("forza huva %s\n",mini->exe->filein );
-						printf("forza huva1 %i\n",mini->exe->in_fd ); */
 			return ;
 		}
 		tmp = tmp->next;
@@ -53,18 +51,19 @@ void	find_outfile(t_minishell *mini)
 	mini->exe->out_fd = dup(STDOUT_FILENO);
 }
 
-char	*return_path(char *cmd, t_token *env)
+char	*return_path(char *cmd, char **env)
 {
 	int		i;
 	char	**paths;
 	char	*cmd_path;
 	char	*tmp;
 
-	while (env && ft_strncmp(env->str, "PATH", 4) != 0)
-		env = env->next;
-	if (env == NULL)
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
+		i++;
+	if (env[i] == NULL)
 		return (NULL);
-	paths = ft_split(env->str + 5, ':');
+	paths = ft_split(env[i] + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -75,10 +74,7 @@ char	*return_path(char *cmd, t_token *env)
 		free(tmp);
 	}
 	cmd_path = acces_command(cmd, paths);
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
+	free_matrix(paths);
 	return (cmd_path);
 }
 
@@ -103,5 +99,8 @@ char	*acces_command(char *cmd_name, char **paths)
 
 void	check_arg(t_minishell *mini)
 {
-	return ;
+	if (mini->exe->in_fd == -1)
+		perror("");
+	if (mini->exe->out_fd == -1)
+		perror("");
 }

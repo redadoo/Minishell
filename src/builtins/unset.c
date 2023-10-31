@@ -6,21 +6,11 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:07:00 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/29 14:54:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 09:23:29 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
-
-static size_t	env_size(t_token *env)
-{
-	size_t	i;
-
-	i = 0;
-	while (env->str[i] && env->str[i] != '=')
-		i++;
-	return (i);
-}
 
 static void	ft_memdel(void *str)
 {
@@ -58,14 +48,17 @@ static void	free_node(t_token **env_start, t_token *env)
 static void	setvar(t_token *token, t_token **env)
 {
 	t_token	*tmp;
+	t_token	*tmp1;
 
 	tmp = NULL;
 	if (find_var((*env), token->str)->next)
 	{
 		tmp = find_var((*env), token->str)->next;
 		if (find_var((*env), token->str)->prev)
-			find_var((*env), token->str)->next->prev = find_var((*env),
-				token->str)->prev;
+		{
+			tmp1 = find_var((*env), token->str)->prev;
+			find_var((*env), token->str)->next->prev = tmp1;
+		}
 	}
 	if (find_var((*env), token->str)->prev)
 		find_var((*env), token->str)->prev->next = tmp;
@@ -93,4 +86,5 @@ int	ft_unset(t_token *token, t_token **env)
 		token = token->next;
 	}
 	(*env) = start;
+	return (0);
 }

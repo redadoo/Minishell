@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 14:53:17 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/30 15:39:54 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	input = NULL;
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
-/* 	minishell->std_in = dup(STDIN_FILENO);
-	minishell->std_out =  dup(STDOUT_FILENO);
-	dup2(minishell->std_out,STDOUT_FILENO);
-	dup2(minishell->std_in,STDIN_FILENO); */
-	minishell->env_start = NULL;
 	minishell->start = NULL;
+	minishell->env_start = NULL;
 	minishell->env = init_env(envp);
 	make_list(minishell, minishell->env);
 	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
 	i = 0;
-	while (i != 4)
+	while (i != 10)
 	{
 		init_signal();
 		ignore_signal_for_shell();
