@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/28 21:31:55 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/29 19:29:01 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	ignore_signal_for_shell(void);
 
 /* parser */
 void	parser(t_minishell *minishell);
+void	set_envariable(t_token *token, t_token *env);
 
 /* lexer */
 char	**ft_lexer(char *str);
@@ -130,6 +131,7 @@ int		check_var(t_minishell *mini, char *str);
 void	make_list(t_minishell *minishell, char **env);
 void	add_to_env(t_token **env, char *str, int flag);
 char	**init_env(char **envp);
+char	*ft_get_envar(char *str);
 
 /* builtins */
 bool	builtins(t_minishell *mini, t_token *token);
