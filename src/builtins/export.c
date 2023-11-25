@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/29 17:50:21 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/10/31 19:15:59 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	change_env(t_minishell *mini, char *str)
 	if (tmp == NULL)
 		return ;
 	free(tmp->str);
-	tmp->str = (add_quote(str));
+	tmp->str = ft_strdup(str);
 }
 
 static int	count_arg(t_token *token)
@@ -75,7 +75,8 @@ void	print_sorted_env(t_minishell *mini)
 	while (tmp)
 	{
 		printf("declare -x ");
-		printf("%s\n", tmp->str);
+		printf("%s",tmp->str);
+		printf("\"\n");
 		tmp = tmp->next;
 	}
 	free(sorted);
