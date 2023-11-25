@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 19:05:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/11/25 17:59:24 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exe_command(t_minishell *mini)
 	while (++i < mini->exe->cmd_number)
 	{
 		exe_cmd(mini, i);
-	waitpid(-1, NULL, 0);
+		waitpid(-1, NULL, 0);
 	}
 	close_pipes(mini->exe);
 	free(mini->exe->filein);
@@ -65,9 +65,7 @@ void	exe_cmd(t_minishell *p, int n)
 			close_pipes(p->exe);
 			exit(1);
 		}
-		if(builtins(p, return_cmd(p->start, n)) == true)
-			exit(1);	
-		else if (access(p->exe->cmd_path, F_OK) == -1)
+		if (access(p->exe->cmd_path, F_OK) == -1 && builtins(p, return_cmd(p->start, n)) == false)
 		{
 			write(2, p->exe->cmd[0], ft_strlen(p->exe->cmd[0]));
 			write(2, " command not found\n", 20);
@@ -79,11 +77,10 @@ void	exe_cmd(t_minishell *p, int n)
 		else
 		{
 			close_pipes(p->exe);
+			if (!p->exe->cmd)
+				exit(1);
 			execve(p->exe->cmd_path, p->exe->cmd, env);
-			exit(1);
 		}
-		exit(1);
-		perror("sange");
 	}
 	free_matrix(p->exe->cmd);
 	free(p->exe->cmd_path);
