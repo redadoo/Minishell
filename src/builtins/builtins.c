@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 18:08:48 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:59:25 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	builtins(t_minishell *mini, t_token *token)
 {
-	extern t_sig	g_sig;
+	char			cwd[4096];
 
 	if (ft_strcmp("export", token->str) == 0)
 		export(mini, token);
@@ -28,7 +28,6 @@ bool	builtins(t_minishell *mini, t_token *token)
 		echo(&token);
 	else if (ft_strcmp("cd", token->str) == 0)
 	{
-		char cwd[4096];
 		cd(token, mini->env_start);
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
@@ -38,6 +37,5 @@ bool	builtins(t_minishell *mini, t_token *token)
 		env_var(mini);
 	else
 		return (false);
-	g_sig.exit_status = 0;
 	return (true);
 }

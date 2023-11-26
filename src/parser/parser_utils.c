@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:21:21 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/31 14:55:16 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:56:46 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_token	*find_var_n(t_token *token, char *str, int n)
 	}
 	return (NULL);
 }
+
+// forse questo leakka
 static char	*dollar_var(char *str, t_token *env)
 {
 	char	*tmp2;
@@ -40,7 +42,7 @@ static char	*dollar_var(char *str, t_token *env)
 	{
 		if (str[i])
 			tmp2 = ft_strjoin(ft_get_envar(find_var_n(env, str, i)->str),
-					ft_substr(str, i, (j - i + 1))); //forse questo leakka
+					ft_substr(str, i, (j - i + 1)));
 		else
 			tmp2 = ft_get_envar(find_var_n(env, str, i)->str);
 	}
@@ -76,7 +78,7 @@ static char	*token_expander(char **matrix)
 			}
 		}
 	}
-	if(tmp)
+	if (tmp)
 		return (tmp);
 	return (ft_strdup(""));
 }

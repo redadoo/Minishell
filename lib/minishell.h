@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/10/31 17:46:22 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:53:08 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void				pwd(void);
 int					ft_unset(t_token *token, t_token **env);
 
 /* cd */
-int	cd(t_token *tokens, t_token *env);
+int					cd(t_token *tokens, t_token *env);
 
 /* execute command */
 char				*return_path(char *cmd, char **env);

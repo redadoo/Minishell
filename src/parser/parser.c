@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:50:54 by fborroto          #+#    #+#             */
-/*   Updated: 2023/10/30 14:26:12 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/11/25 20:47:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	remove_quotes(t_token *token)
 	}
 	while (token->str[++i] && check)
 	{
-		if (token->str[i] == '$' && token->str[i + 1] && (ft_isalnum(token->str[i
-				+ 1]) || token->str[i + 1] == '_'))
+		if (token->str[i] == '$' && token->str[i + 1]
+			&& (ft_isalnum(token->str[i + 1]) || token->str[i + 1] == '_'))
 			token->type = 2;
 	}
 }
