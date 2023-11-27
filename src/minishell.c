@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 		init_signal();
 		ignore_signal_for_shell();
 		input = readline(PROMPT);
+		add_history(input);
 		process_input(input, minishell);
 		free(input);
 	}
