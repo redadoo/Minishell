@@ -6,7 +6,7 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/10/29 17:44:24 by edoardo          ###   ########.fr        #
+#    Updated: 2023/11/26 21:11:22 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = $(MAIN_SRC) $(LIBFT_SRC) $(LEXER_SRC) $(SIGNALS_SRC) $(PIPEX_SRC) $(BUILT
 
 MAIN_SRC = src/*.c
 
-LIBFT_SRC = ft_libft/*.c
+LIBFT_SRC = lib/libft/*.c
 
 ENV_SRC = src/env/*.c
 

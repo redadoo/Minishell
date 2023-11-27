@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:47:10 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/11/26 21:12:04 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ int	main(int argc, char **argv, char **envp)
 	minishell->env = init_env(envp);
 	make_list(minishell, minishell->env);
 	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
+	rl_clear_history();
 	while (true)
 	{
 		init_signal();
 		ignore_signal_for_shell();
 		input = readline(PROMPT);
 		process_input(input, minishell);
+		add_history(input);
 		free(input);
 	}
 	free_all(minishell);

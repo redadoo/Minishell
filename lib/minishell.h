@@ -6,14 +6,14 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:53:08 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/11/26 21:10:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../ft_libft/libft.h"
+# include "libft/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
