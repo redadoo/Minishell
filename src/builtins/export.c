@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:49:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/11/28 01:47:10 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_sorted_env(t_minishell *mini)
 	while (tmp)
 	{
 		printf("declare -x ");
-		printf("%s", tmp->str);
+		printf("\"%s", tmp->str);
 		printf("\"\n");
 		tmp = tmp->next;
 	}

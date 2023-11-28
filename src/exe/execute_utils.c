@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:48:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/11/28 01:46:20 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	find_infile(t_minishell *mini)
 	tmp = mini->start;
 	while (tmp)
 	{
+		if (tmp->type == ARG && tmp->prev && tmp->prev->type == STOP)
+		{
+			mini->exe->filein = ft_strdup(tmp->str);
+			mini->exe->in_fd = open(tmp->str, O_RDONLY);
+			return ;
+		}
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == INPUT)
 		{
 			mini->exe->filein = ft_strdup(tmp->str);
@@ -38,6 +44,13 @@ void	find_outfile(t_minishell *mini)
 	tmp = mini->start;
 	while (tmp)
 	{
+		if (tmp->type == ARG && tmp->prev && tmp->prev->type == APPEND)
+		{
+			mini->exe->fileout = ft_strdup(tmp->str);
+			mini->exe->out_fd = open(tmp->str, O_APPEND | O_CREAT | O_RDWR,
+					0000644);
+			return ;
+		}
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == TRUNC)
 		{
 			mini->exe->fileout = ft_strdup(tmp->str);
