@@ -36,7 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		add_history(input);
 		process_input(input, minishell);
-		add_history(input);
 		free(input);
 	}
 	free_all(minishell);

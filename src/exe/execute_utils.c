@@ -34,7 +34,7 @@ void	find_infile(t_minishell *mini)
 		tmp = tmp->next;
 	}
 	mini->exe->filein = ft_strdup("");
-	mini->exe->in_fd = dup(STDIN_FILENO);
+	mini->exe->in_fd = STDIN_FILENO;
 }
 
 void	find_outfile(t_minishell *mini)
@@ -61,7 +61,7 @@ void	find_outfile(t_minishell *mini)
 		tmp = tmp->next;
 	}
 	mini->exe->fileout = ft_strdup("");
-	mini->exe->out_fd = dup(STDOUT_FILENO);
+	mini->exe->out_fd = STDOUT_FILENO;
 }
 
 char	*return_path(char *cmd, char **env)

@@ -80,4 +80,7 @@ clean:
 
 fclean: clean
 	@${RM} ${NAME}
+
 re: fclean all
+
+.PHONY: all minishell exe leaks leaks1 clean fclean re 

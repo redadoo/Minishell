@@ -39,13 +39,11 @@ void	exe_command(t_minishell *mini)
 	mini->exe->pipe = (int *)malloc(sizeof(int) * 2 * (mini->exe->cmd_number));
 	creat_pipes(mini->exe);
 	while (++i < mini->exe->cmd_number)
-	{
 		exe_cmd(mini, i);
-		waitpid(-1, NULL, 0);
-	}
 	close_pipes(mini->exe);
 	free(mini->exe->filein);
 	free(mini->exe->fileout);
+	waitpid(0, NULL, 0);
 }
 
 void	exe_cmd(t_minishell *p, int n)
