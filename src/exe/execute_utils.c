@@ -19,12 +19,6 @@ void	find_infile(t_minishell *mini)
 	tmp = mini->start;
 	while (tmp)
 	{
-		if (tmp->type == ARG && tmp->prev && tmp->prev->type == STOP)
-		{
-			mini->exe->filein = ft_strdup(tmp->str);
-			mini->exe->in_fd = open(tmp->str, O_RDONLY);
-			return ;
-		}
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == INPUT)
 		{
 			mini->exe->filein = ft_strdup(tmp->str);

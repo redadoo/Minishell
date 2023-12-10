@@ -22,7 +22,7 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-#define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 
 typedef struct s_list
 {
@@ -47,7 +47,7 @@ void		*ft_memchr(const void *str, int c, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 char		*strchr(const char *str, int ch);
-char		*ft_strjoin(char  *s1, char  *s2);
+char		*ft_strjoin(char *s1, char *s2);
 const char	*ft_strnstr(const char *X, const char *Y, size_t len);
 char		*ft_strrchr(const char *str, int c);
 char		*ft_strchr(const char *str, int ch);

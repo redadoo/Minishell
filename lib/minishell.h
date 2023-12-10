@@ -34,7 +34,7 @@
 typedef enum TYPE
 {
 	EMPTY = 0,
-	STOP = 1,
+	STOP = 8,
 	TRUNC = 2,
 	APPEND = 3,
 	INPUT = 4,
@@ -136,7 +136,7 @@ char				**init_env(char **envp);
 char				*ft_get_envar(char *str);
 
 /* builtins */
-bool				builtins(t_minishell *mini, t_token *token);
+int					builtins(t_minishell *mini, t_token *token);
 
 /* echo */
 void				echo(t_token **token);
@@ -175,4 +175,5 @@ int					count_cmd(t_token *token);
 void				exe_cmd(t_minishell *mini, int i);
 char				**parse_cmd(t_token *token, int n);
 char				**token_to_matrix(t_token *token);
+void				redirect_input_until(char *del);
 #endif

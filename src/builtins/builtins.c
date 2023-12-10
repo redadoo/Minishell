@@ -12,10 +12,8 @@
 
 #include "../../lib/minishell.h"
 
-bool	builtins(t_minishell *mini, t_token *token)
+int	builtins(t_minishell *mini, t_token *token)
 {
-	char			cwd[4096];
-
 	if (ft_strcmp("export", token->str) == 0)
 		export(mini, token);
 	else if (ft_strcmp("env", token->str) == 0)
@@ -27,15 +25,12 @@ bool	builtins(t_minishell *mini, t_token *token)
 	else if (ft_strcmp("echo", token->str) == 0)
 		echo(&token);
 	else if (ft_strcmp("cd", token->str) == 0)
-	{
 		cd(token, mini->env_start);
-		printf("%s\n", getcwd(cwd, sizeof(cwd)));
-	}
 	else if (ft_strcmp("unset", token->str) == 0)
 		ft_unset(token, &mini->env_start);
 	else if (token->str[0] == '$')
 		env_var(mini);
 	else
-		return (false);
-	return (true);
+		return (1);
+	return (0);
 }

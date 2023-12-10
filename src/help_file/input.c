@@ -60,6 +60,7 @@ void	process_input(char *input, t_minishell *minishell)
 	}
 	init_token(minishell, tokens);
 	parser(minishell);
+	print_list(minishell->start);
 	free_matrix(tokens);
 	exe_command(minishell);
 	free_token(&minishell->start, 1);

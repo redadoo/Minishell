@@ -12,6 +12,26 @@
 
 #include "../../lib/minishell.h"
 
+void	redirect_input_until(char *del)
+{
+	char	*buff;
+	int		fd[2];
+
+	pipe(fd);
+	while (1)
+	{
+		buff = readline("> ");
+		if (ft_strcmp(del, buff) == 0)
+		{
+			break ;
+		}
+		ft_putendl_fd(buff, fd[1]);
+	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+}
+
 int	sub_dup2(int i, t_ppbx *p)
 {
 	if (p->cmd_number == 1)

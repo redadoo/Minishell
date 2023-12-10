@@ -4,6 +4,7 @@
         "*.tcc": "c",
         "atomic": "c",
         "history.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "minishell.h": "c"
     }
 }

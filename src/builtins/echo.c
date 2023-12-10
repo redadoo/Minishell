@@ -24,8 +24,15 @@ void	echo(t_token **token)
 		option = 1;
 		tmp = tmp->next;
 	}
-	while (tmp && tmp->type == ARG)
+	while (tmp && (tmp->type == ARG || tmp->type == STOP))
 	{
+		if (tmp->type == STOP)
+		{
+			if (tmp->next->next)
+				tmp = tmp->next->next;
+			else
+				break ;
+		}
 		if (tmp->str)
 			ft_putstr_fd(tmp->str, 1);
 		if (tmp->next && tmp->next->str != NULL)
