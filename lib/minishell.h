@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/26 21:10:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:09:14 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,5 @@ void				exe_cmd(t_minishell *mini, int i);
 char				**parse_cmd(t_token *token, int n);
 char				**token_to_matrix(t_token *token);
 void				redirect_input_until(char *del);
+int					is_path(char *str);
 #endif

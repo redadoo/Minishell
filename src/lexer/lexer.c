@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:00:51 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:47:35 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 14:50:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_error_lexer(char *str)
 {
 	printf("%s\n", str);
-	exit(0);
 }
 
 int	ft_quote(char *str)
@@ -43,7 +42,7 @@ int	ft_quote(char *str)
 			if (str[i] != '"' && str[i + 1] == 0)
 				ft_error_lexer("Error: unclosed double quotes");
 		}
-		return (i + 1);
+		return (i);
 	}
 }
 
