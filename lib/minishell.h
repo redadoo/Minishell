@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:09:14 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:33:45 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_minishell
 	int				std_in;
 	int				std_out;
 	int				lenght;
+	int				s_exit;
 	char			**env;
 	char			*pipe;
 	t_token			*env_start;

@@ -6,11 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:16:01 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 16:43:50 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+extern t_sig	g_sig;
 
 static void	find_delimiter(t_minishell *mini)
 {
@@ -47,7 +49,7 @@ static void	creat_pipes(t_ppbx *pipex)
 
 void	exe_command(t_minishell *mini)
 {
-	int	i;
+	int				i;
 
 	i = -1;
 	set_exe(mini);
@@ -57,7 +59,15 @@ void	exe_command(t_minishell *mini)
 	creat_pipes(mini->exe);
 	while (++i < mini->exe->cmd_number)
 	{
-		exe_cmd(mini, i);
+		if (ft_strcmp(mini->start->str,"exit") == 0)
+		{
+			free_all(mini);
+			exit(1);
+		}
+		else if (ft_strcmp(mini->start->str,"$?") == 0)
+			printf("%d\n",g_sig.exit_status);
+		else
+			exe_cmd(mini, i);
 	}
 	close_pipes(mini->exe);
 	free(mini->exe->filein);
@@ -67,7 +77,7 @@ void	exe_command(t_minishell *mini)
 
 void	exe_cmd(t_minishell *p, int n)
 {
-	char	**env;
+	char			**env;
 
 	env = token_to_matrix(p->env_start);
 	p->exe->cmd = parse_cmd(p->start, n);
@@ -75,7 +85,6 @@ void	exe_cmd(t_minishell *p, int n)
 	p->exe->pid = fork();
 	if (p->exe->pid == 0)
 	{
-
 		if (sub_dup2(n, p->exe) == -1)
 		{
 			free(p->exe->cmd_path);
@@ -93,9 +102,10 @@ void	exe_cmd(t_minishell *p, int n)
 		else
 		{
 			close_pipes(p->exe);
-			if (!p->exe->cmd)
+			if (!p->exe->cmd || !p->exe->cmd_path)
 				exit(1);
 			execve(p->exe->cmd_path, p->exe->cmd, env);
+			g_sig.exit_status = 127;
 		}
 	}
 	free_matrix(p->exe->cmd);

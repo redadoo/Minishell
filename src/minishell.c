@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 14:45:24 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 16:49:38 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	input = NULL;
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
+	minishell->s_exit = 0;
 	minishell->start = NULL;
 	minishell->env_start = NULL;
 	minishell->env = init_env(envp);

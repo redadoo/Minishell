@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 13:24:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:49:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:34:09 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	exit_command(t_minishell *mini)
 {
-	free_all(mini);
+	mini->s_exit = 1;
 	exit(1);
 }

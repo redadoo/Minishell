@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:50:54 by fborroto          #+#    #+#             */
-/*   Updated: 2023/11/25 20:47:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:41:26 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static void	type_arg(t_token *token)
 {
-	if (ft_strcmp(token->str, "") == 0)
-		token->type = EMPTY;
-	else if (ft_strcmp(token->str, ">") == 0)
+	if (ft_strcmp(token->str, ">") == 0)
 		token->type = TRUNC;
 	else if (ft_strcmp(token->str, ">>") == 0)
 		token->type = APPEND;

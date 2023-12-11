@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:59:25 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:47:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	builtins(t_minishell *mini, t_token *token)
 {
 	if (ft_strcmp("export", token->str) == 0)
 		export(mini, token);
-	else if (ft_strcmp("env", token->str) == 0)
+	else if (ft_strcmp("env", token->str) == 0 && !token->next)
 		env_command(mini->env);
 	else if (ft_strcmp("exit", token->str) == 0)
 		exit_command(mini);
