@@ -6,23 +6,17 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:54:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/27 23:31:37 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:55 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void	ignore_signal_for_shell(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, inthandler);
-}
+extern t_sig	g_sig;
 
-void	inthandler(int sig)
+void	dismiss_signal(int signum)
 {
-	extern t_sig	g_sig;
-
-	if (sig == SIGINT)
+	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
@@ -32,12 +26,24 @@ void	inthandler(int sig)
 	}
 }
 
+void	child_signals(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		g_sig.exit_status = 130;
+		exit(130);
+	}
+}
+
 void	init_signal(void)
 {
-	extern t_sig	g_sig;
+	struct sigaction	sa;
 
-	(void)g_sig;
-	g_sig.sigint = 0;
-	g_sig.sigquit = 0;
-	g_sig.exit_status = 0;
+	sa.sa_handler = &dismiss_signal;
+	sa.sa_flags = SA_RESTART;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGINT);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }

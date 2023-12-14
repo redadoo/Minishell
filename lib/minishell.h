@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:33:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:27 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_sig
 
 /* utils */
 void				free_matrix(char **matrix);
-size_t				len_matrix(char **matrix);
 void				print_list(t_token *token);
 void				free_all(t_minishell *minishell);
 void				*ft_memdele(void *ptr);
@@ -114,9 +113,9 @@ void				process_input(char *input, t_minishell *minishell);
 
 /* signal */
 void				init_signal(void);
-void				inthandler(int sig);
+void				sig_handler(int sig);
 void				ignore_signal_for_shell(void);
-
+void				child_signals(int signum);
 /* parser */
 void				parser(t_minishell *minishell);
 void				set_envariable(t_token *token, t_token *env);
@@ -131,14 +130,14 @@ int					ft_token_len(char *str, char c);
 
 /* env */
 int					check_var(t_minishell *mini, char *str);
-void				make_list(t_minishell *minishell, char **env);
+void				env_to_list(t_minishell *minishell, char **env);
 void				add_to_env(t_token **env, char *str, int flag);
 char				**init_env(char **envp);
 char				*ft_get_envar(char *str);
 
 /* builtins */
 int					builtins(t_minishell *mini, t_token *token);
-
+int					is_builtin(char *str);
 /* echo */
 void				echo(t_token **token);
 

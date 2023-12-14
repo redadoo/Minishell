@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:44:28 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 19:19:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,34 @@ char	**sort(char **to_sort)
 
 void	print_sorted_env(t_minishell *mini)
 {
+	int		i;
+	int		j;
 	t_token	*tmp;
 	char	**sorted;
 
+	i = 0;
+	j = 0;
 	sorted = sort(mini->env);
 	tmp = mini->env_start;
 	while (tmp)
 	{
 		printf("declare -x ");
-		printf("\"%s", tmp->str);
-		printf("\"\n");
+		while (tmp->str[i])
+		{
+			printf("%c", tmp->str[i]);
+			if (tmp->str[i] == '=')
+			{
+				printf("\"");			
+				j = 1;
+			}
+			i++;
+		}
+		if (j == 1)
+			printf("\"\n");
+		else 
+			printf("\n");
+		i = 0;
+		j = 0;
 		tmp = tmp->next;
 	}
 	free(sorted);

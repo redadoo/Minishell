@@ -6,13 +6,23 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 16:49:38 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 17:05:17 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
 t_sig	g_sig;
+
+static void init_minishell(t_minishell *minishell, char **envp)
+{
+	minishell->s_exit = 0;
+	minishell->start = NULL;
+	minishell->env_start = NULL;
+	minishell->env = init_env(envp);
+	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
+	env_to_list(minishell, minishell->env);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,24 +31,18 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	input = NULL;
 	minishell = (t_minishell *)malloc(sizeof(t_minishell));
-	minishell->s_exit = 0;
-	minishell->start = NULL;
-	minishell->env_start = NULL;
-	minishell->env = init_env(envp);
-	make_list(minishell, minishell->env);
-	minishell->exe = (t_ppbx *)malloc(sizeof(t_ppbx));
+	init_minishell(minishell, envp);
 	rl_clear_history();
+	init_signal();
 	while (true)
 	{
-		init_signal();
-		ignore_signal_for_shell();
 		input = readline(PROMPT);
-		if (ft_strcmp(input,"") != 0)
-		{
-			add_history(input);
-		}
+		if (input == NULL)
+			free_all(minishell);
+		if (ft_strcmp(input,"") == 0)
+			continue ;
+		add_history(input);
 		process_input(input, minishell);
 		free(input);
 		waitpid(-1, NULL, 0);

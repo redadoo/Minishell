@@ -6,7 +6,7 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 01:55:20 by edoardo           #+#    #+#              #
-#    Updated: 2023/11/26 21:11:22 by edoardo          ###   ########.fr        #
+#    Updated: 2023/12/12 13:25:47 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,4 +83,4 @@ fclean: clean
 
 re: fclean all
 
-#.PHONY: all minishell exe leaks leaks1 clean fclean re 
+.PHONY: all minishell exe leaks leaks1 clean fclean re 

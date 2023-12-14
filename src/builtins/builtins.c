@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:47:49 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 15:59:23 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,29 @@ int	builtins(t_minishell *mini, t_token *token)
 		ft_unset(token, &mini->env_start);
 	else if (token->str[0] == '$')
 		env_var(mini);
+	else
+		return (1);
+	return (0);
+}
+
+int is_builtin(char *str)
+{
+	if (ft_strcmp("export", str) == 0)
+		return (0);
+	else if (ft_strcmp("env", str) == 0)
+		return (0);
+	else if (ft_strcmp("exit", str) == 0)
+		return (0);
+	else if (ft_strcmp("pwd", str) == 0)
+		return (0);
+	else if (ft_strcmp("echo", str) == 0)
+		return (0);
+	else if (ft_strcmp("cd", str) == 0)
+		return (0);
+	else if (ft_strcmp("unset", str) == 0)
+		return (0);
+	else if (str[0] == '$')
+		return (0);
 	else
 		return (1);
 	return (0);

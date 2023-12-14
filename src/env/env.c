@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:09:17 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 17:12:23 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/13 13:23:12 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*set_shlvl(char **env, int i)
 	return (str1);
 }
 
-void	make_list(t_minishell *minishell, char **env)
+void	env_to_list(t_minishell *minishell, char **env)
 {
 	int		i;
 	t_token	*tmp;
