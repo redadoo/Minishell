@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/13 15:59:23 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/15 19:17:57 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	builtins(t_minishell *mini, t_token *token)
 		cd(token, mini->env_start);
 	else if (ft_strcmp("unset", token->str) == 0)
 		ft_unset(token, &mini->env_start);
-	else if (token->str[0] == '$')
-		env_var(mini);
 	else
 		return (1);
 	return (0);

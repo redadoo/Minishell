@@ -6,24 +6,27 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/14 15:29:01 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/15 20:44:30 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-static void	find_delimiter(t_minishell *mini)
+static void	find_delimiter(t_minishell *mini, int n)
 {
- 	(void)mini;
-	t_token *tmp = mini->start;
+	int		i;
+	t_token *tmp;
+	
+	tmp = mini->start;
+	i = -1;
 	while (tmp)
 	{
-		if (tmp->type == STOP)
+		if (tmp->type == CMD)
+			i++;
+		if (tmp->type == STOP && i == n && tmp->next)
 		{
-			if (tmp->next && tmp->next->type == ARG && tmp->next->str)
-			{
-				redirect_input_until(tmp->next->str);
-			}
+			redirect_input_until(tmp->next->str);
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -75,6 +78,7 @@ void	exe_cmd(t_minishell *p, int n)
 	p->exe->pid = fork();
 	if (p->exe->pid == 0)
 	{
+		find_delimiter(p,n);
 		signal(SIGINT, child_signals);
 		if (sub_dup2(n, p->exe) == -1)
 		{
@@ -94,13 +98,10 @@ void	exe_cmd(t_minishell *p, int n)
 		else
 			builtins(p,return_cmd(p->start, n));
 	}
-	free_matrix(p->exe->cmd);
-	free(p->exe->cmd_path);
 }
 
 void	set_exe(t_minishell *mini)
 {
 	find_infile(mini);
 	find_outfile(mini);
-	find_delimiter(mini);
 }

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:28:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/27 23:51:09 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:59:15 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ void	redirect_input_until(char *del)
 	{
 		buff = readline("> ");
 		if (ft_strcmp(del, buff) == 0)
-		{
 			break ;
-		}
 		ft_putendl_fd(buff, fd[1]);
 	}
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
+	free(buff);
 }
 
 int	sub_dup2(int i, t_ppbx *p)

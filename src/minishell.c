@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/13 17:05:17 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/15 20:46:01 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline(PROMPT);
 		if (input == NULL)
+		{
+/* 			printf("tettete\n");	 */		
 			free_all(minishell);
+		}
 		if (ft_strcmp(input,"") == 0)
 			continue ;
 		add_history(input);
