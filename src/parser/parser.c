@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:50:54 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/11 15:41:26 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/14 22:56:11 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,71 @@ static void	type_arg(t_token *token)
 		token->type = ARG;
 }
 
-static void	remove_quotes(t_token *token)
+static int	quote_count(char *str)
 {
-	int		i;
-	int		check;
-	char	*tmp;
+	int	i;
+	int	check;
+
+	check = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+		{
+			i ++;
+			check++;
+			while (str[i] != '\'')
+				i++;
+		}
+		else if (str[i] == '"')
+		{
+			i ++;
+			check++;
+			while (str[i] != '"')
+				i++;
+		}
+		i++;
+	}
+	return (i - (check * 2) + 1);
+}
+
+static char	*new_str(char *tmp, char *str)
+{
+	int	i;
+	int	j;
 
 	i = -1;
-	check = 1;
-	if (token->str[0] == '\"')
+	j = 0;
+	while (str[++i])
 	{
-		tmp = ft_substr(token->str, 1, ft_strlen(token->str) - 2);
-		free(token->str);
-		token->str = tmp;
+		if (str[i] == '\'')
+		{
+			while (str[++i] != '\'')
+				tmp[j++] = str[i];
+		}
+		else if (str[i] == '"')
+		{
+			while (str[++i] != '"')
+				tmp[j++] = str[i];
+		}
+		else
+			tmp[j++] = str[i];
 	}
-	else if (token->str[0] == '\'')
+	tmp[quote_count(str) - 1] = 0;
+	free(str);
+	return (tmp);
+}
+
+static void	remove_quotes(t_token *token)
+{
+	char	*tmp;
+
+	if ((strchr(token->str, '\'') || strchr(token->str, '"')))
 	{
-		tmp = ft_substr(token->str, 1, ft_strlen(token->str) - 2);
-		free(token->str);
-		token->str = tmp;
-		check = 0;
-	}
-	while (token->str[++i] && check)
-	{
-		if (token->str[i] == '$' && token->str[i + 1]
-			&& (ft_isalnum(token->str[i + 1]) || token->str[i + 1] == '_'))
-			token->type = 2;
+		tmp = (char *)malloc(sizeof(char) * quote_count(token->str));
+		if (!tmp)
+			return ;
+		token->str = new_str(tmp, token->str);
 	}
 }
 
@@ -67,9 +106,8 @@ void	parser(t_minishell *minishell)
 	token = minishell->start;
 	while (token)
 	{
+		set_envariable(token, minishell->env_start);
 		remove_quotes(token);
-		if (token->type == 2)
-			set_envariable(token, minishell->env_start);
 		type_arg(token);
 		token = token->next;
 	}
