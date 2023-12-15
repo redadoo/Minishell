@@ -6,13 +6,13 @@
 /*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:21:21 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/15 18:19:07 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/12/15 19:12:41 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-/* 
+/*
 static char	*dollar_var(char *str, t_token *env)
 {
 	char	*tmp2;
@@ -79,7 +79,6 @@ static void	uncheck_dollar(char *tmp)
 	tmp = ft_strdup(str);
 	free(str);
 } */
-
 // QUELLE NUOVE
 t_token	*find_var_n(t_token *env, char *str, int n)
 {
@@ -94,23 +93,31 @@ t_token	*find_var_n(t_token *env, char *str, int n)
 	return (NULL);
 }
 
-static void envariable_expand(char *expanded, char *str, t_token *env, int *index)
+static int	sig_expand(char *expanded, int *index)
 {
-	int	i;
-	char *tmp;
-	
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	tmp = ft_itoa(999); //into sig
+	while (tmp[i])
+	{
+		expanded[i] = tmp[i];
+		i++;
+	}
+	*index = *index + 1;
+	return (i);
+}
+
+static int	envariable_expand(char *expanded, char *str, t_token *env,
+		int *index)
+{
+	int		i;
+	char	*tmp;
+
 	i = 0;
 	if (str[i] == '?')
-	{
-		tmp = ft_itoa(999);
-		while(tmp[i])
-		{
-			expanded[i] = tmp[i];
-			i ++;
-		}
-		*index = *index + 1;
-		return ;
-	}
+		return (sig_expand(expanded, index));
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	*index += i;
@@ -118,10 +125,12 @@ static void envariable_expand(char *expanded, char *str, t_token *env, int *inde
 	{
 		tmp = ft_get_envar(find_var_n(env, str, i)->str);
 		i = -1;
-		while(tmp[++i])
+		while (tmp[++i])
 			expanded[i] = tmp[i];
 		free(tmp);
+		return (i);
 	}
+	return (0);
 }
 
 static void	expanded_str(char *tmp, char *str, t_token *env)
@@ -136,24 +145,17 @@ static void	expanded_str(char *tmp, char *str, t_token *env)
 	while (str[++i])
 	{
 		if (str[i] == '"')
-		{
 			flag++;
-			printf("ayo");
-			tmp[j++] = str[i];
-
-		}
-		else if (str[i] == '\'' && !(flag % 2))
+		if (str[i] == '\'' && !(flag % 2))
 		{
 			tmp[j++] = str[i];
-			while (str[++i] != '\'')
+			while (str[++i] && str[i] != '\'')
 				tmp[j++] = str[i];
+			tmp[j++] = str[i];
 		}
 		else if (str[i] && str[i] == '$' && str[i + 1] && ((ft_isalnum(str[i
 						+ 1]) || str[i + 1] == '_') || str[i + 1] == '?'))
-						{
-			envariable_expand(&tmp[j], &str[i + 1], env, &i);
-						printf("ayo2");	
-						}
+			j += envariable_expand(&tmp[j], &str[i + 1], env, &i);
 		else
 			tmp[j++] = str[i];
 	}
