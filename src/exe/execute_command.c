@@ -12,17 +12,23 @@
 
 #include "../../lib/minishell.h"
 
-static void	find_delimiter(t_minishell *mini)
+static void	find_delimiter(t_minishell *mini, int n)
 {
- 	(void)mini;
+ 	int i = -1;
+
 	t_token *tmp = mini->start;
+	
 	while (tmp)
 	{
+		if (tmp->type == CMD)
+			i++;
+
 		if (tmp->type == STOP)
 		{
-			if (tmp->next && tmp->next->type == ARG && tmp->next->str)
+			if (i == n && tmp->next && tmp->next->type == ARG && tmp->next->str)
 			{
 				redirect_input_until(tmp->next->str);
+				return ;
 			}
 		}
 		tmp = tmp->next;
@@ -75,6 +81,7 @@ void	exe_cmd(t_minishell *p, int n)
 	p->exe->pid = fork();
 	if (p->exe->pid == 0)
 	{
+		find_delimiter(p,n);
 		signal(SIGINT, child_signals);
 		if (sub_dup2(n, p->exe) == -1)
 		{
@@ -92,7 +99,9 @@ void	exe_cmd(t_minishell *p, int n)
 			printf("%s command not found\n",return_cmd(p->start, n)->str);		
 		}
 		else
+		{
 			builtins(p,return_cmd(p->start, n));
+		}
 	}
 	free_matrix(p->exe->cmd);
 	free(p->exe->cmd_path);
@@ -102,5 +111,4 @@ void	set_exe(t_minishell *mini)
 {
 	find_infile(mini);
 	find_outfile(mini);
-	find_delimiter(mini);
 }
