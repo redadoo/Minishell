@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:21:54 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:22:48 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:19:25 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	echo_util(t_token *tmp)
 	}
 }
 
-void	echo(t_token **token)
+int	echo(t_token **token)
 {
 	t_token	*tmp;
 	int		option;
@@ -46,4 +46,5 @@ void	echo(t_token **token)
 	echo_util(tmp);
 	if (option == 0)
 		write(1, "\n", 1);
+	return (0);
 }

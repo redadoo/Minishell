@@ -6,16 +6,17 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 01:58:41 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/15 20:49:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:11:19 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-t_sig	g_sig;
+extern int sig_exit_status;
 
 static void init_minishell(t_minishell *minishell, char **envp)
 {
+	sig_exit_status = 0;
 	minishell->s_exit = 0;
 	minishell->start = NULL;
 	minishell->env_start = NULL;
@@ -40,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		if (input == NULL)
 		{
-/* 			printf("tettete\n");	 */		
 			free_all(minishell);
 		}
 		if (ft_strcmp(input,"") == 0)

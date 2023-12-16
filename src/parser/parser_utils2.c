@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:06:06 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/15 00:05:11 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:31:22 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+extern int sig_exit_status;
 
 static int	envariable_is_sig(void)
 {
 	int		len;
 	char	*tmp;
 
-	tmp = ft_itoa(999);
+	tmp = ft_itoa(sig_exit_status);
 	len = ft_strlen(tmp);
 	free(tmp);
 	return (len);

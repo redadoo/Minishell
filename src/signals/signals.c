@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:54:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/13 17:06:55 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:11:21 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-extern t_sig	g_sig;
+extern int sig_exit_status;
 
 void	dismiss_signal(int signum)
 {
@@ -22,7 +22,7 @@ void	dismiss_signal(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_sig.exit_status = 130;
+		sig_exit_status = 130;
 	}
 }
 
@@ -31,7 +31,7 @@ void	child_signals(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
-		g_sig.exit_status = 130;
+		sig_exit_status = 130;
 		exit(130);
 	}
 }

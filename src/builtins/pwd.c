@@ -6,15 +6,16 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:37:44 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:49:52 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:24:19 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void	pwd(void)
+int	pwd(void)
 {
 	char	cwd[4096];
 
 	printf("%s\n", getcwd(cwd, sizeof(cwd)));
+	return (0);
 }

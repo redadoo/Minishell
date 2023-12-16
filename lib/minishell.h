@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/14 21:33:19 by fborroto         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:23:45 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,7 @@ typedef struct s_minishell
 	t_ppbx			*exe;
 }					t_minishell;
 
-typedef struct s_sig
-{
-	int				sigint;
-	int				sigquit;
-	int				exit_status;
-	pid_t			pid;
-}					t_sig;
+extern int sig_exit_status;
 
 /* utils */
 void				free_matrix(char **matrix);
@@ -141,21 +135,21 @@ char				*ft_get_envar(char *str);
 int					builtins(t_minishell *mini, t_token *token);
 int					is_builtin(char *str);
 /* echo */
-void				echo(t_token **token);
+int					echo(t_token **token);
 
 /* exit */
-void				exit_command(t_minishell *mini);
+int					exit_command(t_minishell *mini);
 
 /* env_command */
-void				env_command(char **mini);
+int					env_command(char **mini);
 
 /* export */
 char				**sort(char **to_sort);
 void				print_sorted_env(t_minishell *mini);
-void				export(t_minishell *mini, t_token *token);
+int					export(t_minishell *mini, t_token *token);
 
 /* pwd */
-void				pwd(void);
+int					pwd(void);
 
 /* unset */
 int					ft_unset(t_token *token, t_token **env);

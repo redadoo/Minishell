@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:32:07 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:45:44 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:24:26 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-void	env_command(char **mini)
+int	env_command(char **mini)
 {
 	int	i;
 
@@ -23,4 +23,5 @@ void	env_command(char **mini)
 		ft_putstr_fd("\n", 1);
 		i++;
 	}
+	return (0);
 }

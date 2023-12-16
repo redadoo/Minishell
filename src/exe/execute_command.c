@@ -6,11 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 17:55:11 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:58:38 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
+
+extern int sig_exit_status;
 
 static void	find_delimiter(t_minishell *mini, int n)
 {
@@ -22,10 +24,10 @@ static void	find_delimiter(t_minishell *mini, int n)
 			i++;
 		if (tmp->type == STOP)
 		{
-			if (tmp->next && tmp->next->type == ARG && tmp->next->str)
+			if (i == n && tmp->next && tmp->next->type == ARG && tmp->next->str)
 			{
 				redirect_input_until(tmp->next->str);
-				return ;	
+				return ;
 			}
 		}
 		tmp = tmp->next;
@@ -50,7 +52,7 @@ static void	creat_pipes(t_ppbx *pipex)
 
 void	exe_command(t_minishell *mini)
 {
-	int				i;
+	int	i;
 
 	i = -1;
 	set_exe(mini);
@@ -93,7 +95,8 @@ void	exe_cmd(t_minishell *p, int n)
 			if (!p->exe->cmd || !p->exe->cmd_path)
 				exit(1);
 			execve(p->exe->cmd_path, p->exe->cmd, token_to_matrix(p->env_start));
-			printf("%s command not found\n",return_cmd(p->start, n)->str);		
+			sig_exit_status = 127;
+			printf("%s: command not found\n",p->start->str);		
 		}
 		else
 		{

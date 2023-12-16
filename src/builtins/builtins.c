@@ -6,28 +6,30 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/15 19:17:57 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:24:13 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
+extern int sig_exit_status;
+
 int	builtins(t_minishell *mini, t_token *token)
 {
 	if (ft_strcmp("export", token->str) == 0)
-		export(mini, token);
+		sig_exit_status = export(mini, token);
 	else if (ft_strcmp("env", token->str) == 0 && !token->next)
-		env_command(mini->env);
+		sig_exit_status = env_command(mini->env);
 	else if (ft_strcmp("exit", token->str) == 0)
-		exit_command(mini);
+		sig_exit_status = exit_command(mini);
 	else if (ft_strcmp("pwd", token->str) == 0)
-		pwd();
+		sig_exit_status = pwd();
 	else if (ft_strcmp("echo", token->str) == 0)
-		echo(&token);
+		sig_exit_status = echo(&token);
 	else if (ft_strcmp("cd", token->str) == 0)
-		cd(token, mini->env_start);
+		sig_exit_status = cd(token, mini->env_start);
 	else if (ft_strcmp("unset", token->str) == 0)
-		ft_unset(token, &mini->env_start);
+		sig_exit_status = ft_unset(token, &mini->env_start);
 	else
 		return (1);
 	return (0);

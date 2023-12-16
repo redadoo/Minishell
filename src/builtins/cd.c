@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:34:27 by fborroto          #+#    #+#             */
-/*   Updated: 2023/11/25 20:57:46 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:34:42 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,10 @@ int	cd(t_token *tokens, t_token *env)
 		return (go_to_path(0, env));
 	tokens = tokens->next;
 	if (tokens->next && tokens->next->type == ARG)
+	{
 		ft_putendl_fd("minishell : cd: Too many arguments", 2);
+		return (1);
+	}
 	if (ft_strcmp(tokens->str, "-") == 0)
 		cd_ret = go_to_path(1, env);
 	else
@@ -114,7 +117,10 @@ int	cd(t_token *tokens, t_token *env)
 		if (cd_ret < 0)
 			cd_ret *= -1;
 		if (cd_ret != 0)
+		{
 			print_error(tokens);
+			return (1);
+		}
 	}
-	return (cd_ret);
+	return (0);
 }
