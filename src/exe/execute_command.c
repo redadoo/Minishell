@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 17:54:07 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 17:55:11 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 static void	find_delimiter(t_minishell *mini, int n)
 {
- 	(void)mini;
+	int i = -1;
 	t_token *tmp = mini->start;
 	while (tmp)
 	{
+		if (tmp->type == CMD)
+			i++;
 		if (tmp->type == STOP)
 		{
 			if (tmp->next && tmp->next->type == ARG && tmp->next->str)
 			{
 				redirect_input_until(tmp->next->str);
+				return ;	
 			}
 		}
 		tmp = tmp->next;
