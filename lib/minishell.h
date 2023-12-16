@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fborroto <fborroto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/13 17:06:27 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/14 21:33:19 by fborroto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ void				ignore_signal_for_shell(void);
 void				child_signals(int signum);
 /* parser */
 void				parser(t_minishell *minishell);
+int					envstr_len(char *str, t_token *env);
 void				set_envariable(t_token *token, t_token *env);
+t_token				*find_var_n(t_token *env, char *str, int n);
 
 /* lexer */
 char				**ft_lexer(char *str);

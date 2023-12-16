@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/15 20:57:06 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 17:54:07 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 static void	find_delimiter(t_minishell *mini, int n)
 {
-	int		i;
-	t_token *tmp;
-	
-	tmp = mini->start;
-	i = -1;
+ 	(void)mini;
+	t_token *tmp = mini->start;
 	while (tmp)
 	{
-		if (tmp->type == CMD)
-			i++;
-		if (tmp->type == STOP && i == n && tmp->next)
+		if (tmp->type == STOP)
 		{
-			redirect_input_until(tmp->next->str);
-			return ;
+			if (tmp->next && tmp->next->type == ARG && tmp->next->str)
+			{
+				redirect_input_until(tmp->next->str);
+			}
 		}
 		tmp = tmp->next;
 	}
@@ -96,7 +93,9 @@ void	exe_cmd(t_minishell *p, int n)
 			printf("%s command not found\n",return_cmd(p->start, n)->str);		
 		}
 		else
+		{
 			builtins(p,return_cmd(p->start, n));
+		}
 	}
 }
 
