@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/13 15:04:28 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 19:10:57 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_list(t_token *token)
 	printf("\n");
 }
 
-void	free_all(t_minishell *minishell)
+void	free_all(t_minishell *minishell, int status)
 {
 	printf("\33[0;33mlogout\33[0m\n");
 	free_matrix(minishell->env);
@@ -43,7 +43,7 @@ void	free_all(t_minishell *minishell)
 	free_token(&minishell->env_start, 1);
 	free(minishell->exe);
 	free(minishell);
-	exit(0);
+	exit(status);
 }
 
 void	*ft_memdele(void *ptr)

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 18:23:45 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 19:10:35 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ extern int sig_exit_status;
 /* utils */
 void				free_matrix(char **matrix);
 void				print_list(t_token *token);
-void				free_all(t_minishell *minishell);
+void				free_all(t_minishell *minishell, int status);
 void				*ft_memdele(void *ptr);
 
 /* token utils */
@@ -138,7 +138,7 @@ int					is_builtin(char *str);
 int					echo(t_token **token);
 
 /* exit */
-int					exit_command(t_minishell *mini);
+int					exit_command(t_minishell *mini, t_token *status);
 
 /* env_command */
 int					env_command(char **mini);

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 18:58:38 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 19:12:06 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	exe_command(t_minishell *mini)
 	while (++i < mini->exe->cmd_number)
 	{
 		if (ft_strcmp(mini->start->str,"exit") == 0)
-			free_all(mini);
+			free_all(mini,ft_atoi(mini->start->next->str));
 		else
 			exe_cmd(mini, i);
 	}

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:32:19 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 18:24:13 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 19:11:44 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	builtins(t_minishell *mini, t_token *token)
 		sig_exit_status = export(mini, token);
 	else if (ft_strcmp("env", token->str) == 0 && !token->next)
 		sig_exit_status = env_command(mini->env);
-	else if (ft_strcmp("exit", token->str) == 0)
-		sig_exit_status = exit_command(mini);
 	else if (ft_strcmp("pwd", token->str) == 0)
 		sig_exit_status = pwd();
 	else if (ft_strcmp("echo", token->str) == 0)
