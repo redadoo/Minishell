@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:06:06 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/16 18:31:22 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:15:35 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-extern int sig_exit_status;
+extern long long sig_exit_status;
 
 static int	envariable_is_sig(void)
 {
@@ -20,6 +20,7 @@ static int	envariable_is_sig(void)
 	char	*tmp;
 
 	tmp = ft_itoa(sig_exit_status);
+	/* printf("%d\n",sig_exit_status); */
 	len = ft_strlen(tmp);
 	free(tmp);
 	return (len);

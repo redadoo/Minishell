@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:07:52 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 18:24:02 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 19:56:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ int	export(t_minishell *mini, t_token *token)
 		token = token->next;
 		while (token)
 		{
+			if (!is_valid_id(token->str) == 1)
+			{
+				return(export_bad_identifier(token->str));
+			}
 			if (check_var(mini, token->str) == 2)
 				add_to_env(&mini->env_start, token->str, 2);
 			else if (check_var(mini, token->str) == 1)

@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:54:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 18:11:21 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:15:39 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-extern int sig_exit_status;
+extern long long sig_exit_status;
 
 void	dismiss_signal(int signum)
 {

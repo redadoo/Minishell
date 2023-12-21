@@ -6,13 +6,13 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:21:21 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/16 18:31:33 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:15:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-int sig_exit_status;
+extern long long sig_exit_status;
 
 t_token	*find_var_n(t_token *env, char *str, int n)
 {
@@ -33,7 +33,7 @@ static int	sig_expand(char *expanded, int *index)
 	char	*tmp;
 
 	i = 0;
-	tmp = ft_itoa(sig_exit_status); //into sig
+	tmp = ft_itoa(sig_exit_status);
 	while (tmp[i])
 	{
 		expanded[i] = tmp[i];

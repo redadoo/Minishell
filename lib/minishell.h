@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 19:10:35 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/21 04:22:03 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_minishell
 	int				std_in;
 	int				std_out;
 	int				lenght;
-	int				s_exit;
 	char			**env;
 	char			*pipe;
 	t_token			*env_start;
@@ -77,24 +76,28 @@ typedef struct s_minishell
 	t_ppbx			*exe;
 }					t_minishell;
 
-extern int sig_exit_status;
+extern long long sig_exit_status;
 
 /* utils */
 void				free_matrix(char **matrix);
 void				print_list(t_token *token);
-void				free_all(t_minishell *minishell, int status);
+void				free_all(t_minishell *minishell, char *status);
 void				*ft_memdele(void *ptr);
-
+int					export_bad_identifier(char *identifier);
 /* token utils */
 t_token				*last_element(t_token *token);
 char				**token_to_matrix(t_token *token);
 t_token				*find_var(t_token *token, char *str);
 void				free_token(t_token **token, int flag);
 t_token				*return_cmd(t_token *token, int index);
-
+int					len_list(t_token *token);
+int					have_pipe(t_token *token);
 /* str utils */
 char				*add_quote(char *str);
 int					ft_strcmp(const char *s1, const char *s2);
+bool				is_valid_id(char *str);
+int					is_num(char *str);
+bool				streq(char *str1, char *str2);
 
 /* env var */
 int					len_var_name(char *str);
@@ -138,8 +141,7 @@ int					is_builtin(char *str);
 int					echo(t_token **token);
 
 /* exit */
-int					exit_command(t_minishell *mini, t_token *status);
-
+void				ft_exit(t_minishell *mini);
 /* env_command */
 int					env_command(char **mini);
 
@@ -169,8 +171,13 @@ void				close_pipes(t_ppbx *pipex);
 int					sub_dup2(int i, t_ppbx *p);
 int					count_cmd(t_token *token);
 void				exe_cmd(t_minishell *mini, int i);
-char				**parse_cmd(t_token *token, int n);
+char				**parse_cmd(t_token *token);
 char				**token_to_matrix(t_token *token);
 void				redirect_input_until(char *del);
 int					is_path(char *str);
+void				init_exe(t_minishell *mini);
+void				find_delimiter(t_minishell *mini, int n);
+void				exe(t_minishell *minishell,  t_token * token);
+void				set_null(t_token *token);
+int					have_empty(t_token *token);
 #endif

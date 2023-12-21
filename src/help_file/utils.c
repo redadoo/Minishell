@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:41:40 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 19:10:57 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/18 16:54:08 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,14 @@ void	print_list(t_token *token)
 	printf("\n");
 }
 
-void	free_all(t_minishell *minishell, int status)
+void	free_all(t_minishell *minishell, char *str)
 {
-	printf("\33[0;33mlogout\33[0m\n");
+	int	status;
+
+	if (is_num(str) == 1)
+		status = 2;
+	else
+		status = ft_atoi(str);
 	free_matrix(minishell->env);
 	free_token(&minishell->start, 0);
 	free_token(&minishell->env_start, 1);
@@ -54,4 +59,12 @@ void	*ft_memdele(void *ptr)
 		ptr = NULL;
 	}
 	return (NULL);
+}
+
+int	export_bad_identifier(char *identifier)
+{
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(identifier, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+	return (EXIT_FAILURE);
 }

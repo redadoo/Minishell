@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:28:29 by evocatur          #+#    #+#             */
-/*   Updated: 2023/09/19 13:55:02 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:05:04 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 int			ft_atoi(const char *nptr);
+long long	ft_atoll(const char *str);
 char		*ft_itoa(int temp);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isalpha(int c);

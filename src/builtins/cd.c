@@ -6,18 +6,18 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:34:27 by fborroto          #+#    #+#             */
-/*   Updated: 2023/12/16 18:34:42 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/16 20:01:20 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-static void	print_error(t_token *token)
+static void	print_error()
 {
 	ft_putstr_fd("cd: ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(token->str, 2);
+	ft_putendl_fd("No such file or directory", 2);
 }
 
 static char	*get_env_path(t_token *env, const char *var, size_t len)
@@ -105,7 +105,7 @@ int	cd(t_token *tokens, t_token *env)
 	tokens = tokens->next;
 	if (tokens->next && tokens->next->type == ARG)
 	{
-		ft_putendl_fd("minishell : cd: Too many arguments", 2);
+		ft_putendl_fd("minishell : cd: too many arguments", 2);
 		return (1);
 	}
 	if (ft_strcmp(tokens->str, "-") == 0)
@@ -118,7 +118,7 @@ int	cd(t_token *tokens, t_token *env)
 			cd_ret *= -1;
 		if (cd_ret != 0)
 		{
-			print_error(tokens);
+			print_error();
 			return (1);
 		}
 	}

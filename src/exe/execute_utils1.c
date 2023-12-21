@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:33:25 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:06:25 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/21 02:03:48 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	**parse_cmd_util(int arg, int count, t_token *tmp)
 	return (tab);
 }
 
-char	**parse_cmd(t_token *token, int n)
+char	**parse_cmd(t_token *token)
 {
 	int		arg;
 	int		count;
@@ -65,7 +65,7 @@ char	**parse_cmd(t_token *token, int n)
 	tmp = token;
 	while (token)
 	{
-		if (token->type == CMD && count == n)
+		if (token->type == CMD)
 		{
 			tmp = token;
 			token = token->next;

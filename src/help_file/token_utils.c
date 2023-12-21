@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:09:36 by edoardo           #+#    #+#             */
-/*   Updated: 2023/11/25 20:48:00 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/21 04:21:44 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,65 @@ t_token	*return_cmd(t_token *token, int index)
 		token = token->next;
 	}
 	return (token);
+}
+
+int len_list(t_token *token)
+{
+	int i;
+
+	i = 0;
+	while (token)
+	{
+		if (token->type == CMD)
+			i++;
+		token = token->next;
+	}
+	return (i);
+}
+
+int have_pipe(t_token *token)
+{
+	if (token->next)
+		token = token->next;
+	else 
+		return (0);
+	while (token)
+	{
+		if (token->type == CMD)
+			return (0);
+		if (token->type == PIPE)
+			return (1);
+		token = token->next;
+	}
+	return (0);
+}
+
+void set_null(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == PIPE)
+		{
+			token->type = EMPTY;
+			return ;
+		}
+		token = token->next;
+	}
+}
+
+int have_empty(t_token *token)
+{
+	if (token->next)
+		token = token->next;
+	else 
+		return (0);
+	while (token)
+	{
+		if (token->type == CMD)
+			return (0);
+		if (token->type == EMPTY)
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }

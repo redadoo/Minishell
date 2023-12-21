@@ -6,107 +6,109 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/16 19:12:06 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/21 04:22:31 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-extern int sig_exit_status;
-
-static void	find_delimiter(t_minishell *mini, int n)
+static void exe_red(t_minishell *minishell, t_token *token)
 {
-	int i = -1;
-	t_token *tmp = mini->start;
-	while (tmp)
-	{
-		if (tmp->type == CMD)
-			i++;
-		if (tmp->type == STOP)
-		{
-			if (i == n && tmp->next && tmp->next->type == ARG && tmp->next->str)
-			{
-				redirect_input_until(tmp->next->str);
-				return ;
-			}
-		}
-		tmp = tmp->next;
-	}
+	
 }
 
-static void	creat_pipes(t_ppbx *pipex)
+static void	left_side(t_minishell *minishell, int pdes[2], t_token *token)
 {
-	int	i;
-
-	i = 0;
-	while (i < pipex->cmd_number - 1)
-	{
-		if (pipe(pipex->pipe + 2 * i) < 0)
-		{
-			perror("PIPE ERR");
-			exit(0);
-		}
-		i++;
-	}
+	close(STDOUT_FILENO);
+	dup(pdes[1]);
+	close(pdes[0]);
+	close(pdes[1]);
+	exe(minishell, token);
 }
 
-void	exe_command(t_minishell *mini)
+static void	right_side(t_minishell *minishell, int pdes[2], t_token *token)
 {
-	int	i;
-
-	i = -1;
-	set_exe(mini);
-	check_arg(mini);
-	mini->exe->cmd_number = count_cmd(mini->start);
-	mini->exe->pipe = (int *)malloc(sizeof(int) * 2 * (mini->exe->cmd_number));
-	creat_pipes(mini->exe);
-	while (++i < mini->exe->cmd_number)
-	{
-		if (ft_strcmp(mini->start->str,"exit") == 0)
-			free_all(mini,ft_atoi(mini->start->next->str));
-		else
-			exe_cmd(mini, i);
-	}
-	close_pipes(mini->exe);
-	free(mini->exe->filein);
-	free(mini->exe->fileout);
-	waitpid(-1,NULL,0);
+	close(STDIN_FILENO);
+	dup(pdes[0]);
+	close(pdes[0]);
+	close(pdes[1]);
+	token = token->next;
+	while (token && token->type != CMD)
+		token = token->next;
+	exe(minishell, token);
 }
 
-void	exe_cmd(t_minishell *p, int n)
+static void	exec_executables(t_minishell *minishell, t_token *token)
 {
-	p->exe->cmd = parse_cmd(p->start, n);
-	p->exe->cmd_path = return_path(p->exe->cmd[0], token_to_matrix(p->env_start));
-	p->exe->pid = fork();
-	if (p->exe->pid == 0)
+	if (builtins(minishell,token) != 3)
+		return ;
+	minishell->exe->cmd = parse_cmd(token);
+	minishell->exe->cmd_path = return_path(minishell->exe->cmd[0], token_to_matrix(minishell->env_start));
+	execve(minishell->exe->cmd_path, minishell->exe->cmd, token_to_matrix(minishell->env_start));
+	sig_exit_status = 127;
+	printf("%s: command not found\n", token->str);
+	exit(sig_exit_status);
+}
+
+static void exe_pipe(t_minishell * minishell, t_token *token)
+{
+	int		temp_status;
+	int		pipedes[2];
+	pid_t	cpid;
+
+	set_null(token);
+	if (pipe(pipedes) == -1)
+		free_all(minishell,"1");
+	cpid = fork();
+	if (cpid == -1)
+		free_all(minishell,"1");
+	if (cpid == 0)
+		left_side(minishell,pipedes,token);
+	right_side(minishell,pipedes,token);
+	close(pipedes[0]);
+	close(pipedes[1]);
+	waitpid(cpid, &temp_status, 0);
+	sig_exit_status = temp_status >> 8;
+}
+
+void exe(t_minishell *minishell, t_token * token)
+{
+	signal(SIGINT, child_signals);
+	if (have_pipe(token) == 1)
+		exe_pipe(minishell,token);
+	else
+		exec_executables(minishell, token);
+	else
+		
+	exit(sig_exit_status);
+}
+
+void exe_command(t_minishell *minishell)
+{
+	int tmp;
+	int status;
+
+	if (len_list(minishell->start) == 1)
 	{
-		find_delimiter(p,n);
-		signal(SIGINT, child_signals);
-		if (sub_dup2(n, p->exe) == -1)
+		minishell->exe->cmd = parse_cmd(minishell->start);
+		minishell->exe->cmd_path = return_path(minishell->exe->cmd[0], token_to_matrix(minishell->env_start));
+		tmp = builtins(minishell,return_cmd(minishell->start, 0));
+		if(tmp == 3 && fork() == 0)
 		{
-			free(p->exe->cmd_path);
-			free_matrix(p->exe->cmd);
-			close_pipes(p->exe);
-			exit(1);
-		}
-		if (is_builtin(return_cmd(p->start, n)->str) == 1)
-		{
-			close_pipes(p->exe);
-			if (!p->exe->cmd || !p->exe->cmd_path)
-				exit(1);
-			execve(p->exe->cmd_path, p->exe->cmd, token_to_matrix(p->env_start));
+			signal(SIGINT, child_signals);
+			execve(minishell->exe->cmd_path, minishell->exe->cmd, token_to_matrix(minishell->env_start));
 			sig_exit_status = 127;
-			printf("%s: command not found\n",p->start->str);		
+			printf("%s: command not found\n", minishell->start->str);
+			exit(sig_exit_status);
 		}
+		else if(tmp != 3)
+			sig_exit_status = tmp;
 		else
-		{
-			builtins(p,return_cmd(p->start, n));
-		}
+			sig_exit_status = 127; 
 	}
-}
-
-void	set_exe(t_minishell *mini)
-{
-	find_infile(mini);
-	find_outfile(mini);
+	else if(fork() == 0)
+		exe(minishell, minishell->start);
+	waitpid(-1, &status, 0);
+	if (!WTERMSIG(status))
+		sig_exit_status = status >> 8;
 }
