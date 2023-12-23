@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:09:36 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/21 04:21:44 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/23 14:45:23 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,4 +154,53 @@ int have_empty(t_token *token)
 		token = token->next;
 	}
 	return (0);
+}
+
+int have_red(t_minishell *minishell,t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = minishell->start;
+	while (tmp->next->next && (tmp->next->next != token))
+		tmp = tmp->next;
+	while (tmp)
+	{
+		if (tmp->type == CMD)
+			return (0);
+		if (tmp->type == TRUNC)
+			return (1);
+		if (tmp->type == APPEND)
+			return (2);
+		if (tmp->type == STOP)
+			return (3);
+		if (tmp->type == INPUT)
+			return (4);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+
+t_token *start_pars_red(t_minishell *minishell,t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = minishell->start;
+	while (tmp->next->next && (tmp->next->next != token))
+		tmp = tmp->next;
+	while (tmp)
+	{
+		if (tmp->type == CMD)
+			return (NULL);
+		if (tmp->type == TRUNC)
+			return (tmp);
+		if (tmp->type == APPEND)
+			return (tmp);
+		if (tmp->type == STOP)
+			return (tmp);
+		if (tmp->type == INPUT)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

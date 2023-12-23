@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:38:42 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/21 04:22:03 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/23 14:52:53 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,4 +180,8 @@ void				find_delimiter(t_minishell *mini, int n);
 void				exe(t_minishell *minishell,  t_token * token);
 void				set_null(t_token *token);
 int					have_empty(t_token *token);
+int					have_red(t_minishell *minishell,t_token *token);
+t_token 			*start_pars_red(t_minishell *minishell,t_token *token);
+void				redirect_output(t_minishell *minishell, t_token *token);
+void				redirect_input(t_minishell *minishell, t_token *token);
 #endif

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:50:04 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/11 15:13:56 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/23 14:55:51 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	find_outfile(t_minishell *mini)
 		if (tmp->type == ARG && tmp->prev && tmp->prev->type == TRUNC)
 		{
 			mini->exe->fileout = ft_strdup(tmp->str);
-			mini->exe->out_fd = open(tmp->str, O_TRUNC | O_CREAT | O_RDWR,
-					0000644);
+			mini->exe->out_fd = open(tmp->str, O_TRUNC | O_CREAT | O_RDWR,0000644);
 			return ;
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:28:38 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/19 16:10:40 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/23 14:59:43 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,20 @@ void	redirect_input_until(char *del)
 	free(buff);
 }
 
-int	sub_dup2(int i, t_ppbx *p)
+void redirect_output(t_minishell *minishell, t_token *token)
 {
-	if (p->cmd_number == 1)
-	{
-		if (dup2(p->in_fd, STDIN_FILENO) == -1)
-			return (-1);
-		if (dup2(p->out_fd, STDOUT_FILENO) == -1)
-			return (-1);
-	}
-	else if (i == 0)
-	{
-		if (dup2(p->in_fd, STDIN_FILENO) == -1)
-			return (-1);
-		if (dup2(p->pipe[2 * i + 1], STDOUT_FILENO) == -1)
-			return (-1);
-	}
-	else if (i == p->cmd_number - 1)
-	{
-		if (dup2(p->pipe[2 * i - 2], STDIN_FILENO) == -1)
-			return (-1);
-		if (dup2(p->out_fd, STDOUT_FILENO) == -1)
-			return (-1);
-	}
+	int	fd;
+
+	(void)minishell;
+	if (token->type == TRUNC)
+		fd = open(token->next->str, O_TRUNC | O_CREAT | O_RDWR,0000644);
 	else
-	{
-		if (dup2(p->pipe[2 * i - 2], STDIN_FILENO) == -1)
-			return (-1);
-		if (dup2(p->pipe[2 * i + 1], STDOUT_FILENO) == -1)
-			return (-1);
-	}
-	return (0);
+		fd = open(token->next->str, O_APPEND | O_CREAT | O_RDWR, 0000644);
+	dup2(fd,STDOUT_FILENO);
+}
+
+void redirect_input(t_minishell *minishell, t_token *token)
+{
+	(void)minishell;
+	(void)token;
 }

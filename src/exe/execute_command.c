@@ -6,16 +6,12 @@
 /*   By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:16:45 by edoardo           #+#    #+#             */
-/*   Updated: 2023/12/21 04:22:31 by edoardo          ###   ########.fr       */
+/*   Updated: 2023/12/23 15:09:49 by edoardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/minishell.h"
 
-static void exe_red(t_minishell *minishell, t_token *token)
-{
-	
-}
 
 static void	left_side(t_minishell *minishell, int pdes[2], t_token *token)
 {
@@ -71,15 +67,47 @@ static void exe_pipe(t_minishell * minishell, t_token *token)
 	sig_exit_status = temp_status >> 8;
 }
 
+static void exe_red(t_minishell *minishell, t_token *token)
+{
+	t_token *tmp;
+	t_token *command;
+
+	tmp = start_pars_red(minishell, token);
+	command = NULL;
+	while (tmp)
+	{
+		if (tmp->type == CMD)
+			command = tmp;
+		if (!tmp->next || tmp->next->type == PIPE)
+			break;
+		if (tmp->type == TRUNC)
+			redirect_output(minishell,tmp);
+		if (tmp->type == APPEND)
+			redirect_output(minishell,tmp);
+		if (tmp->type == STOP)
+			redirect_input(minishell,tmp);
+		if (tmp->type == INPUT)
+			redirect_input(minishell,tmp);
+		tmp = tmp->next;
+	}
+	printf("aaaa %s\n",command->str);
+	if (have_pipe(token) == 1 && command != NULL)
+		exe_pipe(minishell, command);
+	else if (command != NULL)
+		exec_executables(minishell, command);
+}
+
 void exe(t_minishell *minishell, t_token * token)
 {
 	signal(SIGINT, child_signals);
 	if (have_pipe(token) == 1)
 		exe_pipe(minishell,token);
+	else if(have_red(minishell,token) != 0)
+	{
+		exe_red(minishell, token);
+	}
 	else
 		exec_executables(minishell, token);
-	else
-		
 	exit(sig_exit_status);
 }
 
@@ -104,7 +132,7 @@ void exe_command(t_minishell *minishell)
 		else if(tmp != 3)
 			sig_exit_status = tmp;
 		else
-			sig_exit_status = 127; 
+			sig_exit_status = 127;
 	}
 	else if(fork() == 0)
 		exe(minishell, minishell->start);
