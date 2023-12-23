@@ -40,7 +40,8 @@ void redirect_output(t_minishell *minishell, t_token *token)
 		fd = open(token->next->str, O_TRUNC | O_CREAT | O_RDWR,0000644);
 	else
 		fd = open(token->next->str, O_APPEND | O_CREAT | O_RDWR, 0000644);
-	dup2(fd,STDOUT_FILENO);
+	close(STDOUT_FILENO);	
+	dup(fd);
 }
 
 void redirect_input(t_minishell *minishell, t_token *token)

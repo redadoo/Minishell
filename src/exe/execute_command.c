@@ -20,6 +20,7 @@ static void	left_side(t_minishell *minishell, int pdes[2], t_token *token)
 	close(pdes[0]);
 	close(pdes[1]);
 	exe(minishell, token);
+	
 }
 
 static void	right_side(t_minishell *minishell, int pdes[2], t_token *token)
@@ -72,14 +73,18 @@ static void exe_red(t_minishell *minishell, t_token *token)
 	t_token *tmp;
 	t_token *command;
 
+	(void)command;
 	tmp = start_pars_red(minishell, token);
 	command = NULL;
+	printf("%s\n",tmp->str);
 	while (tmp)
 	{
+		if (tmp->type == PIPE)
+			break;
+		if (tmp->type == EMPTY)
+			break;
 		if (tmp->type == CMD)
 			command = tmp;
-		if (!tmp->next || tmp->next->type == PIPE)
-			break;
 		if (tmp->type == TRUNC)
 			redirect_output(minishell,tmp);
 		if (tmp->type == APPEND)
@@ -90,11 +95,10 @@ static void exe_red(t_minishell *minishell, t_token *token)
 			redirect_input(minishell,tmp);
 		tmp = tmp->next;
 	}
-	printf("aaaa %s\n",command->str);
-	if (have_pipe(token) == 1 && command != NULL)
-		exe_pipe(minishell, command);
-	else if (command != NULL)
-		exec_executables(minishell, command);
+	if (command != NULL)
+		printf("pazzo");
+	/* exe(minishell,command); */
+	/* print_list(command); */
 }
 
 void exe(t_minishell *minishell, t_token * token)

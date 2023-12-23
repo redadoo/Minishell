@@ -160,13 +160,22 @@ int have_red(t_minishell *minishell,t_token *token)
 {
 	t_token	*tmp;
 
+	printf(" para %s\n",token->str);
 	tmp = minishell->start;
-	while (tmp->next->next && (tmp->next->next != token))
-		tmp = tmp->next;
+	if (token != tmp)
+	{
+		while (tmp->next->next && (tmp->next != token))
+			tmp = tmp->next;
+	}
 	while (tmp)
 	{
-		if (tmp->type == CMD)
+		printf("%s\n",tmp->str);
+
+		if (tmp->type == PIPE || !tmp->next)
+		{
+			printf("aaasaasddasnasdoasdndsoinoidnoindoiasd\n");
 			return (0);
+		}
 		if (tmp->type == TRUNC)
 			return (1);
 		if (tmp->type == APPEND)
@@ -177,6 +186,7 @@ int have_red(t_minishell *minishell,t_token *token)
 			return (4);
 		tmp = tmp->next;
 	}
+	printf("homis\n");
 	return (0);
 }
 
@@ -186,12 +196,15 @@ t_token *start_pars_red(t_minishell *minishell,t_token *token)
 	t_token	*tmp;
 
 	tmp = minishell->start;
-	while (tmp->next->next && (tmp->next->next != token))
+	(void)token;
+	while ((tmp) && (tmp->type != EMPTY || tmp->type != EMPTY))
 		tmp = tmp->next;
 	while (tmp)
 	{
-		if (tmp->type == CMD)
-			return (NULL);
+		if (tmp->type == EMPTY)
+			return (tmp->next);
+		if (tmp->type == PIPE)
+			return (tmp->next);
 		if (tmp->type == TRUNC)
 			return (tmp);
 		if (tmp->type == APPEND)
