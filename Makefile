@@ -6,7 +6,7 @@
 #    By: edoardo <edoardo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 11:58:27 by edoardo           #+#    #+#              #
-#    Updated: 2024/03/27 21:14:23 by edoardo          ###   ########.fr        #
+#    Updated: 2024/04/27 18:19:12 by edoardo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ YELLOW			="\033[1;33"
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
+	@echo $(CURSIVE) $(GRAY) "     - Compiling libft library ..." $(NONE)
+	@cd lib/libft  && make > /dev/null 2>&1 && make clean > /dev/null 2>&1
 	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
 	@echo $(CURSIVE) $(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@$(CC)  $(FLAGS) $(OBJ) $(OPTS) -o $(NAME) -Llib/libft/ -lft -lreadline
